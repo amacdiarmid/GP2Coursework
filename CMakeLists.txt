@@ -19,11 +19,13 @@ add_executable(GP2Coursework
 				src/Graphics.cpp
 				src/Shader.cpp
 				src/Texture.cpp
+				src/SDL2.cpp
 				include/Common.h
 				include/Graphics.h
 				include/Vertex.h
 				include/Shader.h
-				include/Texture.h )
+				include/Texture.h
+				include/SDL2.h )
 include_directories(GP2Coursework include/ 
 					${SDL2_INCLUDE_DIR}
 					${OPENGL_INCLUDE_DIRS}

@@ -3,6 +3,7 @@
 #include "Vertex.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "SDL2.h"
 
 Vertex verts[] = {
 	//front
@@ -207,27 +208,9 @@ int main(int argc, char * arg[])
 {
 	bool run = true;
 
-	//init everything - SDL, if it is nonZero we have a problem
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
-	{
-		std::cout << "ERROR SDL_Init " << SDL_GetError() << std::endl;
-
-		return -1;
-	}
-
-	//init SDL image
-	int imageInitFlags = IMG_INIT_JPG | IMG_INIT_PNG;
-	int returnInitFlags = IMG_Init(imageInitFlags);
-	if (((returnInitFlags) & (imageInitFlags)) != imageInitFlags)
-	{
-		cout << "Error SDL_Image Init " << IMG_GetError() << endl;
-	}
-
-	//init SDL font
-	if (TTF_Init() == -1)
-	{
-		cout << "ERROR TTF_Init: " << TTF_GetError();
-	}
+	initSDL2();
+	initSDL2Image();
+	initSDL2TTF();
 
 	//ask for version 4.2 of openGL
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
