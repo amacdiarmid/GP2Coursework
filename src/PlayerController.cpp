@@ -5,7 +5,7 @@ PlayerController::PlayerController()
 {
 	PlayerController::movementVec = vec3(0, 0, 0);
 	PlayerController::lookAtPoint = vec3(0, 0, 0);
-	PlayerController::worldPoint = vec3(0, 0, 0);
+	PlayerController::worldPoint = vec3(0, 0, 10);
 }
 
 	void PlayerController::MoveForward()
@@ -62,6 +62,6 @@ PlayerController::PlayerController()
 
 	void PlayerController::Update()
 	{
-		viewMatrix = lookAt(PlayerController::worldPoint, PlayerController::lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
+		PlayerController::viewMatrix = lookAt(PlayerController::worldPoint, PlayerController::lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
 	}
 

@@ -16,11 +16,15 @@ add_executable(GP2Coursework
 				src/Graphics.cpp
 				src/Shader.cpp
 				src/Texture.cpp
+				src/InputManager.cpp
+				src/PlayerController.cpp
 				include/Common.h
 				include/Graphics.h
 				include/Vertex.h
 				include/Shader.h
-				include/Texture.h )
+				include/Texture.h 
+				include/InputManager.h
+				include/PlayerController.h)
 include_directories(GP2Coursework include/ 
 					${SDL2_INCLUDE_DIR}
 					${OPENGL_INCLUDE_DIRS}

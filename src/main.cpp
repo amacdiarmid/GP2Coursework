@@ -67,8 +67,10 @@ GLuint fontTexture;
 mat4 projMatrix;
 mat4 worldMatrix;
 mat4 MVPMatrix;
+mat4 viewMatrix;
 
-
+vec3 worldPoint = vec3(0.0f, 0.0f, 10.0f);
+vec3 lookAtPoint = vec3(0.0f, 0.0f, 0.0f);
 
 InputManager *input;
 PlayerController player;
