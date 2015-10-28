@@ -1,4 +1,4 @@
-#include "Graphics.h"
+#include "OpenGL.h"
 #include "Common.h"
 
 //function to initalise OpenGL

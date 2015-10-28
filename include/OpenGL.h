@@ -1,5 +1,5 @@
-#ifndef _GRAPHICS_H
-#define _GRAPHICS_H
+#ifndef _OpenGL_H
+#define _OpenGL_H
 
 void initOpenGL();
 

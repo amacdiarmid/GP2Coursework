@@ -16,16 +16,22 @@ find_package(SDL2_ttf REQUIRED)
 
 add_executable(GP2Coursework 
 				src/main.cpp 
-				src/Graphics.cpp
+				src/OpenGL.cpp
 				src/Shader.cpp
 				src/Texture.cpp
 				src/SDL2.cpp
+				src/Window.cpp
+				src/Game.cpp
+				src/Scene.cpp
 				include/Common.h
-				include/Graphics.h
+				include/OpenGL.h
 				include/Vertex.h
 				include/Shader.h
 				include/Texture.h
-				include/SDL2.h )
+				include/SDL2.h
+				include/Window.h
+				include/Game.h
+				include/Scene.h )
 include_directories(GP2Coursework include/ 
 					${SDL2_INCLUDE_DIR}
 					${OPENGL_INCLUDE_DIRS}
