@@ -3,6 +3,8 @@
 #include "Vertex.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "InputManager.h"
+#include "PlayerController.h"
 
 Vertex verts[] = {
 	//front
@@ -62,17 +64,16 @@ GLuint textureMap;
 GLuint fontTexture;
 
 //matrices
-mat4 viewMatrix;
 mat4 projMatrix;
 mat4 worldMatrix;
 mat4 MVPMatrix;
+mat4 viewMatrix;
 
-//move object
-vec3 movementVec = vec3(0.0f, 0.0f, 0.0f);
-//move camera 
 vec3 worldPoint = vec3(0.0f, 0.0f, 10.0f);
 vec3 lookAtPoint = vec3(0.0f, 0.0f, 0.0f);
 
+InputManager *input;
+PlayerController player;
 
 void render()
 {
@@ -93,7 +94,7 @@ void render()
 	
 	//get the uniform for the movementVec
 	GLint moveVecLocation = glGetUniformLocation(shaderProgram, "movementVec");
-	glUniform3fv(moveVecLocation, 1, value_ptr(movementVec));
+	glUniform3fv(moveVecLocation, 1, value_ptr(player.GetMovementVec()));
 	
 	//get the uniform for the texture coords
 	GLint texture0Location = glGetUniformLocation(shaderProgram, "texture0");
@@ -110,9 +111,8 @@ void render()
 void update()
 {
 	projMatrix = perspective(45.0f, 640.0f / 480.0f, 0.1f, 100.0f);
-	viewMatrix = lookAt(worldPoint, lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
 	worldMatrix = translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f));
-	MVPMatrix = projMatrix*viewMatrix*worldMatrix;
+	MVPMatrix = projMatrix*player.GetViewMatrix()*worldMatrix;
 }
 
 void initScene()
@@ -267,52 +267,9 @@ int main(int argc, char * arg[])
 				//set our bool which controls the loop to false
 				run = false;
 			}
-			if (event.type == SDL_KEYDOWN)
-			{
-				switch (event.key.keysym.sym)
-				{
-				case SDLK_UP:
-					movementVec.y += 0.5;
-					cout << "up arrow " << endl;
-					break;
-				case SDLK_DOWN:
-					movementVec.y += -0.5f;
-					cout << "down arrow " << endl;
-					break;
-				case SDLK_RIGHT:
-					movementVec.x += 0.5f;
-					cout << "right arrow " << endl;
-					break;
-				case SDLK_LEFT:
-					movementVec.x += -0.5f;
-					cout << "left arrow " << endl;
-					break;
-				case SDLK_w:
-					worldPoint.z += -1.0f;
-					lookAtPoint.z += -1.0f;
-					cout << "w key " << endl;
-					break;
-				case SDLK_s:
-					worldPoint.z += 1.0f;
-					lookAtPoint.z += 1.0f;
-					cout << "s key " << endl;
-					break;
-				case SDLK_a:
-					worldPoint.x += -1.0f;
-					lookAtPoint.x += -1.0f;
-					cout << "s key " << endl;
-					break;
-				case SDLK_d:
-					worldPoint.x += 1.0f;
-					lookAtPoint.x += 1.0f;
-					cout << "s key " << endl;
-					break;
-				default:
-					break;
-				}
-			}
+			input->KeyBoardPress(event, &player);
 		}
-
+		player.Update();
 		//update 
 		update();
 		//then draw
