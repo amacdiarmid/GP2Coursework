@@ -13,6 +13,7 @@ find_package(GLEW REQUIRED)
 find_package(GLM REQUIRED)
 find_package(SDL2_Image REQUIRED)
 find_package(SDL2_ttf REQUIRED)
+find_package(FBX REQUIRED)
 
 add_executable(GP2Coursework 
 				src/main.cpp 
@@ -23,6 +24,10 @@ add_executable(GP2Coursework
 				src/Window.cpp
 				src/Game.cpp
 				src/Scene.cpp
+				src/InputManager.cpp
+				src/PlayerController.cpp
+				src/FileSystem.cpp
+				src/FBXLoader.cpp
 				include/Common.h
 				include/OpenGL.h
 				include/Vertex.h
@@ -31,21 +36,28 @@ add_executable(GP2Coursework
 				include/SDL2.h
 				include/Window.h
 				include/Game.h
-				include/Scene.h )
+				include/Scene.h
+				include/InputManager.h
+				include/PlayerController.h
+				include/FileSystem.h
+				include/Mesh.h
+				include/FBXLoader.h )
 include_directories(GP2Coursework include/ 
 					${SDL2_INCLUDE_DIR}
 					${OPENGL_INCLUDE_DIRS}
 					${GLEW_INCLUDE_DIRS}
 					${GLM_INCLUDE_DIRS}
 					${SDL2IMAGE_INCLUDE_DIR}
-					${SDL2_TTF_INCLUDE_DIR} )
+					${SDL2_TTF_INCLUDE_DIR}
+					${FBX_INCLUDE_DIR} )
 target_link_libraries(GP2Coursework 
 						${SDL2_LIBRARY}
 						${SDL2MAIN_LIBRARY}
 						${OPENGL_LIBRARIES}
 						${GLEW_LIBRARIES}
 						${SDL2IMAGE_LIBRARY}
-						${SDL2_TTF_LIBRARIES} )
+						${SDL2_TTF_LIBRARIES}
+						${FBX_LIBRARY} )
 add_custom_command(TARGET GP2Coursework POST_BUILD COMMAND
 					${CMAKE_COMMAND} -E copy_directory
 					${CMAKE_SOURCE_DIR}/assets

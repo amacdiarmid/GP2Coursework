@@ -3,12 +3,15 @@
 #include "SDL2.h"
 #include "OpenGL.h"
 #include "Game.h"
+#include "FileSystem.h"
 
 SDL_Window *window;
 SDL_GLContext glContext;
 
 void createWindow()
 {
+	ChangeWorkingDirectory();
+
 	initSDL2();
 	initSDL2Image();
 	initSDL2TTF();

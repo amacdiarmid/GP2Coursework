@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
@@ -15,15 +16,16 @@ using namespace std;
 #include <SDL_ttf.h>
 
 //maths headers
-#include <glm/glm.hpp>
+#include <glm.hpp>
 
 using namespace glm;
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 
 const string ASSET_PATH = "assets";
 const string SHADER_PATH = "/shaders";
 const string TEXTURE_PATH = "/textures";
 const string FONT_PATH = "/fonts";
+const string MODEL_PATH = "/models";
 
 #endif
