@@ -16,11 +16,11 @@ using namespace std;
 #include <SDL_ttf.h>
 
 //maths headers
-#include <glm.hpp>
+#include <glm/glm.hpp>
 
 using namespace glm;
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 const string ASSET_PATH = "assets";
 const string SHADER_PATH = "/shaders";
