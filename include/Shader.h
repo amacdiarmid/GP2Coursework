@@ -14,4 +14,20 @@ GLuint loadShaderFromFile(const std::string& filename, SHADER_TYPE shaderType);
 bool checkForCompilerErrors(GLuint shaderProgram);
 bool checkForLinkErrors(GLuint program);
 
+class Shader
+{
+public:
+	Shader();
+	~Shader();
+
+	void attatchVertexShader(string shaderPath);
+	void attatchFragmentShader(string shaderPath);
+	void createShader();
+	GLuint getShader();
+	void cleanUp();
+
+private:
+
+};
+
 #endif
