@@ -6,7 +6,6 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "FBXLoader.h"
-#include <vector>
 
 class Object
 {
@@ -20,8 +19,7 @@ public:
 	GLuint getVBO();
 	GLuint getEBO();
 	GLuint getVAO();
-	GLuint getTexture();
-	vector<string> *getAttribsList();
+	GLuint *getTexture();
 	MeshData *getMesh();
 
 private:

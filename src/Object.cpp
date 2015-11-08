@@ -92,9 +92,9 @@ GLuint Object::getVAO()
 	return VAO;
 }
 
-GLuint Object::getTexture()
+GLuint *Object::getTexture()
 {
-	return textureMap;
+	return &textureMap;
 }
 
 MeshData *Object::getMesh()

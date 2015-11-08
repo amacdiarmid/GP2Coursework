@@ -8,6 +8,10 @@
 #include "Mesh.h"
 #include "FBXLoader.h"
 #include "Object.h"
+#include "GameObject.h"
+//add a .h file with all the components
+#include "Components\BaseComponent.h"
+#include "Components\RenderComponent.h"
 
 class Scene
 {
