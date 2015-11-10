@@ -32,7 +32,6 @@ private:
 class Component:public IComponent
 {
 public:
-	GameObject *owner;
 
 	Component(){ type = BASE_COMPONENT; };
 	virtual ~Component(){};
@@ -46,6 +45,8 @@ public:
 
 protected:
 	Components type;
+	GameObject *owner;
+
 };
 
 #endif

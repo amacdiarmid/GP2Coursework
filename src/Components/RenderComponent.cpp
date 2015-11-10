@@ -3,7 +3,6 @@
 
 Renderer::Renderer()
 {
-	cout << "added render Comp to " << owner->getName() << endl;
 	type = RENDER_COMPONENT;
 }
 

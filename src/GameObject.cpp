@@ -33,7 +33,7 @@ void GameObject::addComponent(Components type)
 {
 	if (type == RENDER_COMPONENT)
 	{
-		cout << "added render Comp to " << name << endl;
+		cout << "adding render Comp to " << name << endl;
 		Renderer renderer = Renderer();
 		renderer.setOwner(this);
 		components.push_back(renderer);
