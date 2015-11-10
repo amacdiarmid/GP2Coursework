@@ -33,7 +33,19 @@ public:
 	void getChildern();
 	void getComponents();
 private:
+	string name;
+	GameObject *parent;
+	bool world;
+	vector<GameObject> children;
+	vector<Component> components;
+	Object *model;
+	GLuint *texture;
+	Shader *shader;
 
+	//the world position 
+	vec3 worldPosition = vec3(0.0f, 0.0f, 0.0f);
+	//the distance from the parent world position
+	vec3 localPosition = vec3(0.0f, 0.0f, 0.0f);
 };
 
 #endif

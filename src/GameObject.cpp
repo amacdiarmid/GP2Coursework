@@ -1,19 +1,5 @@
 #include "GameObject.h";
 
-string name;
-GameObject *parent;
-bool world;
-vector<GameObject> children;
-vector<Component> components;
-Object *model;
-GLuint *texture;
-Shader *shader;
-
-//the world position 
-vec3 worldPosition = vec3(0.0f, 0.0f, 0.0f);
-//the distance from the parent world position
-vec3 localPosition = vec3(0.0f, 0.0f, 0.0f);
-
 GameObject::GameObject()
 {
 }
@@ -47,6 +33,7 @@ void GameObject::addComponent(Components type)
 {
 	if (type == RENDER_COMPONENT)
 	{
+		cout << "added render Comp to " << name << endl;
 		Renderer renderer = Renderer();
 		renderer.setOwner(this);
 		components.push_back(renderer);
@@ -59,6 +46,7 @@ void GameObject::addComponent(Components type)
 
 void GameObject::update()
 {
+	cout << name << " update" << endl;
 	if (world == false)
 	{
 		worldPosition = localPosition + parent->getPosition();
@@ -81,6 +69,7 @@ void GameObject::update()
 
 void GameObject::render()
 {
+	cout << name << " update" << endl;
 	for each (Component var in components)
 	{
 		var.render();
