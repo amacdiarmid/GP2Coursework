@@ -7,8 +7,9 @@
 class InputManager
 {
 private:
+	SDL_Event event;
 public:
-	void KeyBoardPress(SDL_Event event, PlayerController *player);
+	void KeyBoardPress(PlayerController *player);
 };
 
 

@@ -24,6 +24,9 @@ void initOpenGL()
 	//turn on best perspective correction
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
+	//Need to normalize the normal vectors for lighting calculations
+	glEnable(GL_NORMALIZE);
+
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
 	{
