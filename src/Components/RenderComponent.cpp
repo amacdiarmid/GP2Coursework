@@ -3,7 +3,7 @@
 
 Renderer::Renderer()
 {
-	type = RENDER_COMPONENT;
+	type = "render component";
 }
 
 Renderer::~Renderer()
@@ -39,5 +39,5 @@ void Renderer::render()
 
 string Renderer::getType()
 {
-	return "render";
+	return type;
 }

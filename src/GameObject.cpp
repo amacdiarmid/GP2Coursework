@@ -8,8 +8,8 @@ GameObject::GameObject(string tempName)
 {
 	world = true;
 	name = tempName;
-	children.clear();
-	components.clear();
+	childrenList.clear();
+	componentsList.clear();
 }
 
 GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempModel, GLuint *tempTexture, Shader *tempShader)
@@ -20,8 +20,8 @@ GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempMode
 	model = tempModel;
 	texture = tempTexture;
 	shader = tempShader;
-	children.clear();
-	components.clear();
+	childrenList.clear();
+	componentsList.clear();
 }
 
 GameObject::~GameObject()
@@ -36,7 +36,7 @@ void GameObject::addComponent(Components type)
 		cout << "adding render Comp to " << name << endl;
 		Renderer renderer = Renderer();
 		renderer.setOwner(this);
-		components.push_back(renderer);
+		componentsList.insert(pair<Components, Component*>(type, &renderer));
 	}
 	else
 	{
@@ -51,32 +51,26 @@ void GameObject::update()
 	{
 		worldPosition = localPosition + parent->getPosition();
 	}
-	if (!components.empty())
+	for (auto i = componentsList.begin(); i != componentsList.end(); i++)
 	{
-		for each (Component var in components)
-		{
-			var.update();
-		}
+		i->second->update();
 	}
-	if (!children.empty())
+	for (auto i = childrenList.begin(); i != childrenList.end(); i++)
 	{
-		for each (GameObject var in children)
-		{
-			var.update();
-		}
+		i->second->update();
 	}
 }
 
 void GameObject::render()
 {
 	cout << name << " update" << endl;
-	for each (Component var in components)
+	for (auto i = componentsList.begin(); i != componentsList.end(); i++)
 	{
-		var.render();
+		i->second->render();
 	}
-	for each (GameObject var in children)
+	for (auto i = childrenList.begin(); i != childrenList.end(); i++)
 	{
-		var.render();
+		i->second->render();
 	}
 }
 
@@ -87,7 +81,7 @@ vec3 GameObject::getPosition()
 
 void GameObject::addChild(GameObject *tempChild)
 {
-	children.push_back(*tempChild);
+	childrenList.insert(pair<string, GameObject*>(tempChild->getName(), tempChild));
 }
 
 Object *GameObject::getModel()
@@ -105,9 +99,9 @@ GLuint *GameObject::getTexture()
 	return texture;
 }
 
-GameObject *GameObject::getLastChild()
+GameObject *GameObject::getChild(string tempName)
 {
-	return &children.back();
+	return childrenList[tempName];
 }
 
 void GameObject::setPosition(vec3 tempPos)
@@ -128,19 +122,21 @@ string GameObject::getName()
 void GameObject::getChildern()
 {
 	cout << "\t";
-	for each (GameObject var in children)
+
+	for (auto i = childrenList.begin(); i != childrenList.end(); i++)
 	{
-		cout << "object: " << var.getName() << " components ";
-		var.getComponents();
-		var.getChildern();
+		cout << "object: " << i->second->getName() << " components ";
+		i->second->getComponents();
+		i->second->getChildern();
 	}
 }
 
 void GameObject::getComponents()
 {
-	for each (Component var in components)
+	cout << " " << componentsList.size() << endl;
+	for (auto i = componentsList.begin(); i != componentsList.end(); i++)
 	{
-		cout << var.getType() << " ";
+		cout << i->second->getType() << " ";
 	}
 	cout << endl;
 }

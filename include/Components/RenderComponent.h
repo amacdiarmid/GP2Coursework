@@ -1,8 +1,7 @@
 #ifndef _RENDERCOMPONENT_H
 #define _RENDERCOMPONENT_H
 
-#pragma once
-
+#include "Common.h"
 #include "BaseComponent.h"
 #include "Object.h"
 

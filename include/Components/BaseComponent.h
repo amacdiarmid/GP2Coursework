@@ -1,8 +1,6 @@
 #ifndef _BASECOMPONENT_H
 #define _BASECOMPONENT_H
 
-#pragma once
-
 #include "Common.h"
 
 enum Components
@@ -24,7 +22,6 @@ public:
 	virtual void render() = 0;
 	virtual string getType() = 0;
 
-
 private:
 
 };
@@ -33,7 +30,7 @@ class Component:public IComponent
 {
 public:
 
-	Component(){ type = BASE_COMPONENT; };
+	Component(){ type = "Base component"; };
 	virtual ~Component(){};
 
 	void setOwner(GameObject *tempOwner){ owner = tempOwner; };
@@ -41,10 +38,10 @@ public:
 	virtual void init(){};
 	virtual void update(){};
 	virtual void render(){};
-	virtual string getType(){ return "wrong function"; };
+	virtual string getType(){ return type; };
 
 protected:
-	Components type;
+	string type;
 	GameObject *owner;
 
 };

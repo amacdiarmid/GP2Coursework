@@ -8,7 +8,7 @@
 #include "Components\RenderComponent.h"
 #include "Shader.h"
 #include "Object.h"
-#include <vector>
+#include <map>
 
 class GameObject
 {
@@ -26,7 +26,7 @@ public:
 	Object *getModel();
 	Shader *getShader();
 	GLuint *getTexture();
-	GameObject *getLastChild();
+	GameObject *getChild(string tempName);
 	void setPosition(vec3 TempPos);
 	void changePosition(vec3 tempPos);
 	string getName();
@@ -36,8 +36,8 @@ private:
 	string name;
 	GameObject *parent;
 	bool world;
-	vector<GameObject> children;
-	vector<Component> components;
+	map<string, GameObject*> childrenList;
+	map<Components, Component*> componentsList;
 	Object *model;
 	GLuint *texture;
 	Shader *shader;

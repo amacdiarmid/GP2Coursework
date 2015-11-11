@@ -54,9 +54,11 @@ void Scene::createScene()
 	mainShader->attatchFragmentShader("/textureFS.glsl");
 	mainShader->createShader();
 
+	//create player/debug cam
+
 	//add scene graph. this could be an external file or another function but it is here for now 
 	worldObject->addChild(new GameObject("sun", worldObject, teapot, teapot->getTexture(), mainShader));
-	worldObject->getLastChild()->addComponent(RENDER_COMPONENT);
+	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->getComponents();
