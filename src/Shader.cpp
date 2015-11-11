@@ -83,3 +83,57 @@ bool checkForLinkErrors(GLuint program)
 	}
 	return false;
 }
+
+GLuint vertexShader = 0;
+GLuint fragmentShader = 0;
+GLuint finalShader = 0;
+
+Shader::Shader()
+{
+}
+
+Shader::~Shader()
+{
+}
+
+void Shader::attatchVertexShader(string ShaderPath)
+{
+	string Path = ASSET_PATH + SHADER_PATH + ShaderPath;
+	vertexShader = loadShaderFromFile(Path, VERTEX_SHADER);
+	checkForCompilerErrors(vertexShader);
+}
+
+void Shader::attatchFragmentShader(string ShaderPath)
+{
+	string Path = ASSET_PATH + SHADER_PATH + ShaderPath;
+	fragmentShader = loadShaderFromFile(Path, FRAGMENT_SHADER);
+	checkForCompilerErrors(fragmentShader);
+}
+
+void Shader::createShader()
+{
+	finalShader = glCreateProgram();
+	glAttachShader(finalShader, vertexShader);
+	glAttachShader(finalShader, fragmentShader);
+
+	glBindAttribLocation(finalShader, 0, "vertexPosition");
+	glBindAttribLocation(finalShader, 1, "vertexColour");
+	glBindAttribLocation(finalShader, 2, "vertexTexCoords");
+	glBindAttribLocation(finalShader, 3, "vertexNormal");
+
+	glLinkProgram(finalShader);
+	checkForLinkErrors(finalShader);
+
+	glDeleteShader(fragmentShader);
+	glDeleteShader(vertexShader);
+}
+
+GLuint Shader::getShader()
+{
+	return finalShader;
+}
+
+void Shader::cleanUp()
+{
+	glDeleteProgram(finalShader);
+}

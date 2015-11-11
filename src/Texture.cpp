@@ -77,3 +77,35 @@ GLuint convertSDLSurfaceToTexture(SDL_Surface* surface)
 
 	return textureID;
 }
+
+Texture::Texture()
+{
+}
+
+Texture::~Texture()
+{
+}
+
+void Texture::createTexture(string texturePath)
+{
+	//load texture & bind
+	string Path = ASSET_PATH + TEXTURE_PATH + texturePath;
+	textureMap = loadTextureFromFile(Path);
+
+	glBindTexture(GL_TEXTURE_2D, textureMap);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+	glGenerateMipmap(GL_TEXTURE_2D);
+}
+
+void Texture::cleanUp()
+{
+	glDeleteTextures(1, &textureMap);
+}
+
+GLuint *Texture::getTexture()
+{
+	return &textureMap;
+}

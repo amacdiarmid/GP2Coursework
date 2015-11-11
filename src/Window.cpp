@@ -72,7 +72,6 @@ bool windowLoop()
 			return false;
 		}
 	}
-	
 	gameLoop();
 
 	//call swap so that our GL back buffer is displayed

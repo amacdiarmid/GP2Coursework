@@ -28,6 +28,9 @@ add_executable(GP2Coursework
 				src/PlayerController.cpp
 				src/FileSystem.cpp
 				src/FBXLoader.cpp
+				src/GameObject.cpp
+				src/Object.cpp
+				src/Components/RenderComponent.cpp
 				include/Common.h
 				include/OpenGL.h
 				include/Vertex.h
@@ -41,7 +44,11 @@ add_executable(GP2Coursework
 				include/PlayerController.h
 				include/FileSystem.h
 				include/Mesh.h
-				include/FBXLoader.h )
+				include/FBXLoader.h
+				include/GameObject.h
+				include/Object.h
+				include/Components/BaseComponent.h
+				include/Components/RenderComponent.h )
 include_directories(GP2Coursework include/ 
 					${SDL2_INCLUDE_DIR}
 					${OPENGL_INCLUDE_DIRS}
