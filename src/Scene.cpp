@@ -37,8 +37,8 @@ void Scene::update()
 	MVPMatrix = projMatrix*viewMatrix*worldMatrix;
 
 	worldObject->getChild("sun")->changePosition(vec3(0.01f, 0.0f, 0.0f));
-	worldObject->getChild("earth")->changePosition(vec3(0.0f, 0.01f, 0.0f));
-	worldObject->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
+	worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(0.0f, 0.01f, 0.0f));
+	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
 
 
 	worldObject->update();
@@ -51,8 +51,12 @@ void Scene::createScene()
 	teapotObj->createBuffer("/utah-teapot.fbx");
 
 	//create textures
-	teapotText = new Texture();
-	teapotText->createTexture("/Texture.png");
+	sunText = new Texture();
+	sunText->createTexture("/SunTexture.png");
+	earthText = new Texture();
+	earthText->createTexture("/EarthTexture.png");
+	moonText = new Texture();
+	moonText->createTexture("/MoonTexture.png");
 
 	//create shaders
 	mainShader = new Shader();
@@ -63,14 +67,14 @@ void Scene::createScene()
 	//create player/debug cam
 
 	//add scene graph. this could be an external file or another function but it is here for now 
-	worldObject->addChild(new GameObject("sun", worldObject, teapotObj, teapotText->getTexture(), mainShader));
+	worldObject->addChild(new GameObject("sun", worldObject, teapotObj, sunText->getTexture(), mainShader));
 	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	worldObject->addChild(new GameObject("earth", worldObject, teapotObj, teapotText->getTexture(), mainShader));
-	worldObject->getChild("earth")->addComponent(RENDER_COMPONENT);
+	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, teapotObj, earthText->getTexture(), mainShader));
+	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
 
-	worldObject->addChild(new GameObject("moon", worldObject, teapotObj, teapotText->getTexture(), mainShader));
-	worldObject->getChild("moon")->addComponent(RENDER_COMPONENT);
+	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, teapotObj, moonText->getTexture(), mainShader));
+	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->getComponents();

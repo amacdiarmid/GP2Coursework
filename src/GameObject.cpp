@@ -129,7 +129,7 @@ void GameObject::getChildern()
 
 void GameObject::getComponents()
 {
-	cout << " " << componentsList.size() << endl;
+	cout << " " << componentsList.size() << " ";
 	for (auto i = componentsList.begin(); i != componentsList.end(); i++)
 	{
 		cout << i->second->getType() << " ";

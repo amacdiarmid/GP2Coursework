@@ -37,10 +37,17 @@ private:
 	vec3 worldPoint = vec3(0.0f, 0.0f, 10.0f);
 	vec3 lookAtPoint = vec3(0.0f, 0.0f, 0.0f);
 
-
+	//main gameobject 
 	GameObject *worldObject = new GameObject("world Object");
+	//game obejcts
 	Object *teapotObj;
-	Texture *teapotText;
+	
+	//textures 
+	Texture *sunText;
+	Texture *earthText;
+	Texture *moonText;
+	
+	//shaders
 	Shader *mainShader;
 
 };
