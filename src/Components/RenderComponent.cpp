@@ -6,6 +6,12 @@ Renderer::Renderer()
 	type = "render component";
 }
 
+Renderer::Renderer(GameObject *tempOwner)
+{
+	type = "render component";
+	owner = tempOwner;
+}
+
 Renderer::~Renderer()
 {
 }
@@ -39,5 +45,5 @@ void Renderer::render()
 
 string Renderer::getType()
 {
-	return type;
+	return "render comp";
 }

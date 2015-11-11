@@ -33,10 +33,9 @@ void GameObject::addComponent(Components type)
 {
 	if (type == RENDER_COMPONENT)
 	{
-		cout << "adding render Comp to " << name << endl;
-		Renderer renderer = Renderer();
-		renderer.setOwner(this);
-		componentsList.insert(pair<Components, Component*>(type, &renderer));
+		cout << "adding render Comp to " << name <<  endl;
+		componentsList.insert(pair<Components, Component*>(type, new Renderer(this)));
+		cout << componentsList[type]->getType()<< endl;
 	}
 	else
 	{

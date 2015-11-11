@@ -35,10 +35,10 @@ public:
 
 	void setOwner(GameObject *tempOwner){ owner = tempOwner; };
 	GameObject *getOwner(){ return owner; };
-	virtual void init(){};
-	virtual void update(){};
-	virtual void render(){};
-	virtual string getType(){ return type; };
+	 void init(){};
+	 void update(){};
+	 void render(){};
+	 string getType(){ return "base comp"; };
 
 protected:
 	string type;

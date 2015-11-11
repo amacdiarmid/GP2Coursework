@@ -9,12 +9,13 @@ class Renderer:public Component
 {
 public:
 	Renderer();
+	Renderer(GameObject *tempOwner);
 	~Renderer();
 
-	void init();
-	void update();
-	void render();
-	string getType();
+	void init() override;
+	void update() override;
+	void render() override;
+	string getType() override;
 private:
 
 };
