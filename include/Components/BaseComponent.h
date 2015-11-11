@@ -38,7 +38,7 @@ public:
 	 void init(){};
 	 void update(){};
 	 void render(){};
-	 string getType(){ return "base comp"; };
+	 string getType(){ return type; };
 
 protected:
 	string type;

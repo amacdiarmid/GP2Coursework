@@ -13,16 +13,19 @@ public:
 	Object();
 	~Object();
 
-	void createTexture(string texturePath);
 	void createBuffer(string modelPath);
 	void cleanUp();
 	GLuint getVBO();
 	GLuint getEBO();
 	GLuint getVAO();
-	GLuint *getTexture();
 	MeshData *getMesh();
 
 private:
+	MeshData *currentMesh;
+
+	GLuint VBO;
+	GLuint EBO;
+	GLuint VAO;
 
 };
 

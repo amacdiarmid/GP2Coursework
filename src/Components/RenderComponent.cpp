@@ -45,5 +45,5 @@ void Renderer::render()
 
 string Renderer::getType()
 {
-	return "render comp";
+	return type;
 }

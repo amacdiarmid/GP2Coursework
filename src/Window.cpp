@@ -71,11 +71,8 @@ bool windowLoop()
 			//set our bool which controls the loop to false
 			return false;
 		}
-
-		gameLoop();
-
 	}
-	
+	gameLoop();
 
 	//call swap so that our GL back buffer is displayed
 	SDL_GL_SwapWindow(window);

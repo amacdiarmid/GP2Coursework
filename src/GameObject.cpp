@@ -35,7 +35,6 @@ void GameObject::addComponent(Components type)
 	{
 		cout << "adding render Comp to " << name <<  endl;
 		componentsList.insert(pair<Components, Component*>(type, new Renderer(this)));
-		cout << componentsList[type]->getType()<< endl;
 	}
 	else
 	{
@@ -45,7 +44,6 @@ void GameObject::addComponent(Components type)
 
 void GameObject::update()
 {
-	cout << name << " update" << endl;
 	if (world == false)
 	{
 		worldPosition = localPosition + parent->getPosition();
@@ -62,7 +60,6 @@ void GameObject::update()
 
 void GameObject::render()
 {
-	cout << name << " update" << endl;
 	for (auto i = componentsList.begin(); i != componentsList.end(); i++)
 	{
 		i->second->render();

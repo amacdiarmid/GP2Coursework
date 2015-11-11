@@ -1,33 +1,11 @@
 #include "Object.h"
 
-MeshData *currentMesh;
-
-GLuint VBO;
-GLuint EBO;
-GLuint VAO;
-
-GLuint textureMap;
-
 Object::Object()
 {
 }
 
 Object::~Object()
 {
-}
-
-void Object::createTexture(string texturePath)
-{
-	//load texture & bind
-	string Path = ASSET_PATH + TEXTURE_PATH + texturePath;
-	textureMap = loadTextureFromFile(Path);
-
-	glBindTexture(GL_TEXTURE_2D, textureMap);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-	glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 void Object::createBuffer(string modelPath)
@@ -71,7 +49,6 @@ void Object::createBuffer(string modelPath)
 
 void Object::cleanUp()
 {
-	glDeleteTextures(1, &textureMap);
 	glDeleteBuffers(1, &EBO);
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
@@ -90,11 +67,6 @@ GLuint Object::getEBO()
 GLuint Object::getVAO()
 {
 	return VAO;
-}
-
-GLuint *Object::getTexture()
-{
-	return &textureMap;
 }
 
 MeshData *Object::getMesh()

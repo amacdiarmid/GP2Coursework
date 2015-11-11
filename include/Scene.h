@@ -39,7 +39,8 @@ private:
 
 
 	GameObject *worldObject = new GameObject("world Object");
-	Object *teapot;
+	Object *teapotObj;
+	Texture *teapotText;
 	Shader *mainShader;
 
 };
