@@ -4,8 +4,7 @@
 #pragma once
 
 #include "Common.h"
-#include "Components\BaseComponent.h"
-#include "Components\RenderComponent.h"
+#include "Components\Components.h"
 #include "Shader.h"
 #include "Object.h"
 #include <map>
@@ -36,6 +35,7 @@ private:
 	string name;
 	GameObject *parent;
 	bool world;
+	bool active;
 	map<string, GameObject*> childrenList;
 	map<Components, Component*> componentsList;
 	Object *model;

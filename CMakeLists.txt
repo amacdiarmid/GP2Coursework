@@ -30,6 +30,7 @@ add_executable(GP2Coursework
 				src/FBXLoader.cpp
 				src/GameObject.cpp
 				src/Object.cpp
+				src/Editor.cpp
 				src/Components/RenderComponent.cpp
 				include/Common.h
 				include/OpenGL.h
@@ -47,6 +48,8 @@ add_executable(GP2Coursework
 				include/FBXLoader.h
 				include/GameObject.h
 				include/Object.h
+				include/Editor.h
+				include/Components/Components.h
 				include/Components/BaseComponent.h
 				include/Components/RenderComponent.h )
 include_directories(GP2Coursework include/ 

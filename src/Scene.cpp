@@ -2,6 +2,7 @@
 
 Scene::Scene()
 {
+	debugMode = false;
 }
 
 Scene::~Scene()
@@ -31,15 +32,37 @@ void Scene::render()
 
 void Scene::update()
 {
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.key.keysym.sym)
+		{
+		case SDLK_p:
+			if (debugMode)
+			{
+				debugMode = false;
+			}
+			else
+			{
+				debugMode = true;
+			}
+		case SDLK_BACKQUOTE:
+			readCommand();
+		default:
+			break;
+		}
+	}
+
 	projMatrix = perspective(45.0f, 640.0f / 480.0f, 0.1f, 100.0f);
 	viewMatrix = lookAt(worldPoint, lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
 	worldMatrix = translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f));
 	MVPMatrix = projMatrix*viewMatrix*worldMatrix;
 
+	/*
 	worldObject->getChild("sun")->changePosition(vec3(0.01f, 0.0f, 0.0f));
 	worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(0.0f, 0.01f, 0.0f));
 	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
-
+	*/
 
 	worldObject->update();
 }
@@ -67,6 +90,7 @@ void Scene::createScene()
 	//create player/debug cam
 
 	//add scene graph. this could be an external file or another function but it is here for now 
+	/*
 	worldObject->addChild(new GameObject("sun", worldObject, teapotObj, sunText->getTexture(), mainShader));
 	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
@@ -79,6 +103,7 @@ void Scene::createScene()
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->getComponents();
 	worldObject->getChildern();
+	*/
 }
 
 void Scene::destroyScene()

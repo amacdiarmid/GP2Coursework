@@ -9,9 +9,9 @@
 #include "FBXLoader.h"
 #include "Object.h"
 #include "GameObject.h"
-//add a .h file with all the components
-#include "Components\BaseComponent.h"
-#include "Components\RenderComponent.h"
+#include "Components\Components.h"
+#include "Editor.h"
+#include "SDL2.h"
 
 class Scene
 {
@@ -23,6 +23,13 @@ public:
 	void createScene();
 	void destroyScene();
 	void SceneLoop();
+
+	//debug stuff
+	GameObject *getGameObject(string command);
+	Object *getObject(string command);
+	Texture *getTexture(string command);
+	Shader *getShader(string command);
+
 
 private:
 	//matrices
@@ -49,6 +56,9 @@ private:
 	
 	//shaders
 	Shader *mainShader;
+
+	//debug mode stuff
+	bool debugMode;
 
 };
 
