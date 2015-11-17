@@ -2,7 +2,7 @@
 #include "InputManager.h"
 
 
-void InputManager::KeyBoardPress(SDL_Event event, PlayerController *player)
+void InputManager::KeyBoardPress(PlayerController *player)
 {
 	if (event.type == SDL_KEYDOWN)
 	{
