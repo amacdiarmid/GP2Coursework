@@ -2,6 +2,7 @@
 #define _GAME_H
 
 #include "Scene.h"
+#include "Window.h"
 
 void createGame();
 void destroyGame();

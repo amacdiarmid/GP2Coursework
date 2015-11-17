@@ -1,12 +1,9 @@
 #include "Common.h"
 #include "Window.h"
-#include "SDL2.h"
-#include "OpenGL.h"
-#include "Game.h"
-#include "FileSystem.h"
 
 SDL_Window *window;
 SDL_GLContext glContext;
+IkeyboardListener *keyboard;
 
 void createWindow()
 {
@@ -71,7 +68,38 @@ bool windowLoop()
 			//set our bool which controls the loop to false
 			return false;
 		}
+		if (event.type == SDL_KEYDOWN)
+		{
+
+			keyboard->onKeyDown(event.key.keysym.sym);
+		//	switch (event.key.keysym.sym)
+		//	{
+		//	case SDLK_p:
+		//		cout << "Debug Mode" << endl;
+		//		break;
+		//		/*
+		//		if (debugMode)
+		//		{
+		//			cout << "debug mode off" << endl;
+		//			debugMode = false;
+		//		}
+		//		else
+		//		{
+		//			cout << "debug mode on" << endl;
+		//			debugMode = true;
+		//		}*/
+		//	case SDLK_l:
+		//		cout << "read commands" << endl;
+		//		break;
+		//		//if (debugMode)
+		//		//{
+		//		//	editor->readCommand();
+		//		//}
+		//	default:
+		//		break;
+		}
 	}
+
 	gameLoop();
 
 	//call swap so that our GL back buffer is displayed

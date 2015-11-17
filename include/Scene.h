@@ -12,8 +12,11 @@
 #include "Components\Components.h"
 #include "Editor.h"
 #include "SDL2.h"
+#include "KeyboardListener.h"
 
-class Scene
+
+
+class Scene : public IkeyboardListener
 {
 public:
 	Scene();
@@ -30,7 +33,8 @@ public:
 	Texture *getTexture(string command);
 	Shader *getShader(string command);
 
-
+	void onKeyDown(SDL_Keycode key);
+	void onkeyUp(SDL_Keycode key);
 private:
 	//matrices
 	mat4 viewMatrix;
@@ -58,6 +62,7 @@ private:
 	Shader *mainShader;
 
 	//debug mode stuff
+	Editor *editor;
 	bool debugMode;
 
 };

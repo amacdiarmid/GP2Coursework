@@ -1,29 +1,49 @@
 #include "Editor.h"
+#include "Scene.h"
 
-Scene *curScene;
-string curName;
-GameObject *curGameObject;
-Object *curObject;
-GLuint *curTexture;
-Shader *curShader;
-
-void readCommand()
+Editor::Editor()
 {
+
+}
+
+Editor::Editor(Scene *tempScene)
+{
+	curScene = tempScene;
+}
+
+Editor::~Editor()
+{
+
+}
+
+void Editor::readCommand()
+{
+	cout << "insert command" << endl;
 	string com;
 	cin >> com;
-	if (com == "spawn")
+	if (com == "assignObjectName")
 	{
-		cout << "command: Spawn" << endl;
-		cout << "set name" << endl;
-		string name;
-		cout << "set gameObject" << endl;
-		string gameObject;
-		cout << "set object" << endl;
-		string object;
-		cout << "set texture" << endl;
-		string texture;
-		cout << "set shader" << endl;
-		string shader;
+		assignName();
+	}
+	else if (com == "assignGameObject")
+	{
+		assignGameObject();
+	}
+	else if (com == "assignObject")
+	{
+		assignObject();
+	}
+	else if (com == "assignTexture")
+	{
+		assignTexture();
+	}
+	else if (com == "assignShader")
+	{
+		assignShader();
+	}
+	else if (com == "spawnObject")
+	{
+		spawnObject();
 	}
 	else
 	{
@@ -31,27 +51,51 @@ void readCommand()
 	}
 }
 
-void assignGameObject()
+void Editor::assignName()
 {
+	cout << "game object name" << endl;
+	string com;
+	cin >> com;
+	curName = com;
+}
+
+void Editor::assignGameObject()
+{
+	cout << "get gameObject name" << endl;
+	string com;
+	cin >> com;
+	curScene->getGameObject(com);
+}
+
+void Editor::assignObject()
+{
+	cout << "get object name" << endl;
+	string com;
+	cin >> com;
+	curScene->getObject(com);
 
 }
 
-void assignObject()
+void Editor::assignTexture()
 {
+	cout << "get texture name" << endl;
+	string com;
+	cin >> com;
+	curScene->getTexture(com);
 
 }
 
-void assignTexture()
+void Editor::assignShader()
 {
+	cout << "get shader name" << endl;
+	string com;
+	cin >> com;
+	curScene->getShader(com);
 
 }
 
-void assignShader()
+void Editor::spawnObject()
 {
-
-}
-
-void spawnObject()
-{
+	cout << "spawning object" << endl;
 	curGameObject->addChild(new GameObject(curName, curGameObject, curObject, curTexture, curShader));
 }
