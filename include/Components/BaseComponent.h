@@ -3,12 +3,6 @@
 
 #include "Common.h"
 
-enum Components
-{
-	BASE_COMPONENT,
-	RENDER_COMPONENT,
-};
-
 class GameObject;
 
 class IComponent

@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "Scene.h"
 
 Scene *currentScene;
 
@@ -9,6 +8,8 @@ void createGame()
 	Scene *mainScene = new Scene();
 	//main scene to the current scene (this could be usefull for multiple scenes (maybe))
 	currentScene = mainScene;
+
+	keyboard = mainScene;
 
 	currentScene->createScene();
 }

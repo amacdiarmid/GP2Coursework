@@ -10,6 +10,7 @@ GameObject::GameObject(string tempName)
 	name = tempName;
 	childrenList.clear();
 	componentsList.clear();
+	active = true;
 }
 
 GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempModel, GLuint *tempTexture, Shader *tempShader)
@@ -22,6 +23,7 @@ GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempMode
 	shader = tempShader;
 	childrenList.clear();
 	componentsList.clear();
+	active = true;
 }
 
 GameObject::~GameObject()
@@ -48,25 +50,31 @@ void GameObject::update()
 	{
 		worldPosition = localPosition + parent->getPosition();
 	}
-	for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+	if (active)
 	{
-		i->second->update();
-	}
-	for (auto i = childrenList.begin(); i != childrenList.end(); i++)
-	{
-		i->second->update();
+		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+		{
+			i->second->update();
+		}
+		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
+		{
+			i->second->update();
+		}
 	}
 }
 
 void GameObject::render()
 {
-	for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+	if (active)
 	{
-		i->second->render();
-	}
-	for (auto i = childrenList.begin(); i != childrenList.end(); i++)
-	{
-		i->second->render();
+		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+		{
+			i->second->render();
+		}
+		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
+		{
+			i->second->render();
+		}
 	}
 }
 

@@ -9,11 +9,14 @@
 #include "FBXLoader.h"
 #include "Object.h"
 #include "GameObject.h"
-//add a .h file with all the components
-#include "Components\BaseComponent.h"
-#include "Components\RenderComponent.h"
+#include "Components\Components.h"
+#include "Editor.h"
+#include "SDL2.h"
+#include "KeyboardListener.h"
 
-class Scene
+
+
+class Scene : public IkeyboardListener
 {
 public:
 	Scene();
@@ -24,6 +27,14 @@ public:
 	void destroyScene();
 	void SceneLoop();
 
+	//debug stuff
+	GameObject *getGameObject(string command);
+	Object *getObject(string command);
+	Texture *getTexture(string command);
+	Shader *getShader(string command);
+
+	void onKeyDown(SDL_Keycode key);
+	void onkeyUp(SDL_Keycode key);
 private:
 	//matrices
 	mat4 viewMatrix;
@@ -49,6 +60,10 @@ private:
 	
 	//shaders
 	Shader *mainShader;
+
+	//debug mode stuff
+	Editor *editor;
+	bool debugMode;
 
 };
 

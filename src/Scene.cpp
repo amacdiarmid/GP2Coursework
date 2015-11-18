@@ -2,6 +2,7 @@
 
 Scene::Scene()
 {
+	debugMode = false;
 }
 
 Scene::~Scene()
@@ -31,21 +32,54 @@ void Scene::render()
 
 void Scene::update()
 {
+	//SDL_Event event;
+	//while (SDL_PollEvent(&event))
+	//{
+	//	cout << "2" << endl;
+	//	switch (event.key.keysym.sym)
+	//	{
+	//		cout << "3" << endl;
+	//	case SDLK_p:
+	//		cout << "4" << endl;
+	//		if (debugMode)
+	//		{
+	//			cout << "debug mode off" << endl;
+	//			debugMode = false;
+	//		}
+	//		else
+	//		{
+	//			cout << "debug mode on" << endl;
+	//			debugMode = true;
+	//		}
+	//	case SDLK_l:
+	//		if (debugMode)
+	//		{
+	//			editor->readCommand();
+	//		}
+	//	default:
+	//		break;
+	//	}
+	//}
+
 	projMatrix = perspective(45.0f, 640.0f / 480.0f, 0.1f, 100.0f);
 	viewMatrix = lookAt(worldPoint, lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
 	worldMatrix = translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f));
 	MVPMatrix = projMatrix*viewMatrix*worldMatrix;
 
+	/*
 	worldObject->getChild("sun")->changePosition(vec3(0.01f, 0.0f, 0.0f));
 	worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(0.0f, 0.01f, 0.0f));
 	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
-
+	*/
 
 	worldObject->update();
 }
 
 void Scene::createScene()
 {
+	editor = new Editor(this);
+	debugMode = false;
+
 	//create objects
 	teapotObj = new Object();
 	teapotObj->createBuffer("/utah-teapot.fbx");
@@ -67,18 +101,21 @@ void Scene::createScene()
 	//create player/debug cam
 
 	//add scene graph. this could be an external file or another function but it is here for now 
+	
+	/*
 	worldObject->addChild(new GameObject("sun", worldObject, teapotObj, sunText->getTexture(), mainShader));
 	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, teapotObj, earthText->getTexture(), mainShader));
+	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject->getChild("sun"), teapotObj, earthText->getTexture(), mainShader));
 	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, teapotObj, moonText->getTexture(), mainShader));
+	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject->getChild("sun")->getChild("earth"), teapotObj, moonText->getTexture(), mainShader));
 	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->getComponents();
 	worldObject->getChildern();
+	*/	
 }
 
 void Scene::destroyScene()
@@ -91,4 +128,34 @@ void Scene::SceneLoop()
 {
 	update();
 	render();
+}
+
+GameObject *Scene::getGameObject(string command)
+{
+	return worldObject;
+}
+
+Object *Scene::getObject(string command)
+{
+	return teapotObj;
+}
+
+Texture *Scene::getTexture(string command)
+{
+	return sunText;
+}
+
+Shader *Scene::getShader(string command)
+{
+	return mainShader;
+}
+
+
+void Scene::onKeyDown(SDL_Keycode key)
+{
+	cout << "Key Pressed" << endl;
+}
+void Scene::onkeyUp(SDL_Keycode key)
+{
+
 }
