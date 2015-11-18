@@ -7,7 +7,13 @@ private:
 	vec3 movementVec;
 	vec3 worldPoint;
 	vec3 lookAtPoint;
+
+	//matrices
 	mat4 viewMatrix;
+	mat4 projMatrix;
+	mat4 worldMatrix;
+	mat4 MVPMatrix;
+
 
 public:
 	PlayerController();
@@ -25,6 +31,7 @@ public:
 	void Update();
 
 	mat4 GetViewMatrix(){ return viewMatrix; }
+	mat4 getMVPmatrix(){ return MVPMatrix; }
 	vec3 GetMovementVec(){ return movementVec; }
 };
 

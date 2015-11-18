@@ -13,6 +13,7 @@
 #include "Editor.h"
 #include "SDL2.h"
 #include "KeyboardListener.h"
+#include "PlayerController.h"
 
 
 
@@ -36,17 +37,7 @@ public:
 	void onKeyDown(SDL_Keycode key);
 	void onkeyUp(SDL_Keycode key);
 private:
-	//matrices
-	mat4 viewMatrix;
-	mat4 projMatrix;
-	mat4 worldMatrix;
-	mat4 MVPMatrix;
-
-	//move object
-	vec3 movementVec = vec3(0.0f, 0.0f, 0.0f);
-	//move camera 
-	vec3 worldPoint = vec3(0.0f, 0.0f, 10.0f);
-	vec3 lookAtPoint = vec3(0.0f, 0.0f, 0.0f);
+	PlayerController *player;
 
 	//main gameobject 
 	GameObject *worldObject = new GameObject("world Object");

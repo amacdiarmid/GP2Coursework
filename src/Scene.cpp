@@ -24,7 +24,7 @@ void Scene::render()
 
 	//get the uniform loaction for the MVP
 	GLint MVPLocation = glGetUniformLocation(mainShader->getShader(), "MVP");
-	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, value_ptr(MVPMatrix));
+	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, value_ptr(player->getMVPmatrix()));
 
 	worldObject->render();
 
@@ -61,10 +61,7 @@ void Scene::update()
 	//	}
 	//}
 
-	projMatrix = perspective(45.0f, 640.0f / 480.0f, 0.1f, 100.0f);
-	viewMatrix = lookAt(worldPoint, lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
-	worldMatrix = translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f));
-	MVPMatrix = projMatrix*viewMatrix*worldMatrix;
+	player->Update();
 
 	/*
 	worldObject->getChild("sun")->changePosition(vec3(0.01f, 0.0f, 0.0f));
@@ -72,6 +69,7 @@ void Scene::update()
 	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
 	*/
 
+	worldObject->setPosition(player->GetMovementVec());
 	worldObject->update();
 }
 
@@ -99,6 +97,7 @@ void Scene::createScene()
 	mainShader->createShader();
 
 	//create player/debug cam
+	player = new PlayerController();
 
 	//add scene graph. this could be an external file or another function but it is here for now 
 	
@@ -153,9 +152,32 @@ Shader *Scene::getShader(string command)
 
 void Scene::onKeyDown(SDL_Keycode key)
 {
-	cout << "Key Pressed" << endl;
+	cout << "Key down " << key << endl;
+	switch (key)
+	{
+	case SDLK_p:
+		if (debugMode)
+		{
+			cout << "debug mode off" << endl;
+			debugMode = false;
+		}
+		else
+		{
+			cout << "debug mode on" << endl;
+			debugMode = true;
+		}
+		break;
+	case SDLK_l:
+		if (debugMode)
+		{
+			editor->readCommand();
+		}
+		break;
+	default:
+		break;
+	}
 }
 void Scene::onkeyUp(SDL_Keycode key)
 {
-
+	cout << "Key up " << key << endl;
 }

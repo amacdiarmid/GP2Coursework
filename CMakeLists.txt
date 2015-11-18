@@ -31,6 +31,7 @@ add_executable(GP2Coursework
 				src/GameObject.cpp
 				src/Object.cpp
 				src/Editor.cpp
+				src/LightSource.cpp
 				src/Components/RenderComponent.cpp
 				include/Common.h
 				include/OpenGL.h
@@ -49,6 +50,8 @@ add_executable(GP2Coursework
 				include/GameObject.h
 				include/Object.h
 				include/Editor.h
+				include/KeyboardListener.h
+				include/LightSource.h
 				include/Components/Components.h
 				include/Components/BaseComponent.h
 				include/Components/RenderComponent.h )
