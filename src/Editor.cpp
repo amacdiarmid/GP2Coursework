@@ -52,6 +52,22 @@ void Editor::readCommand()
 		{
 			spawnObject();
 		}
+		else if (com == "transform")
+		{
+			do
+			{
+				cout << "adjust transform" << endl;
+				cin >> com;
+				if (com == "setPos")
+				{
+					setPos();
+				}
+				else if (com == "movePos")
+				{
+					movePos();
+				}
+			} while (com != "doneTransform");
+		}
 		else
 		{
 			cout << "unknown command" << endl;
@@ -74,7 +90,7 @@ void Editor::assignGameObject()
 	string com;
 	cin >> com;
 	curGameObject = curScene->getGameObject(com);
-	cout << "game object assigned " << curName << endl;
+	cout << "game object assigned " << curGameObject->getName() << endl;
 }
 
 void Editor::assignObject()
@@ -91,8 +107,8 @@ void Editor::assignTexture()
 	cout << "get texture name" << endl;
 	string com;
 	cin >> com;
-	curTexture = curScene->getTexture(com)->getTexture();
-	cout << "texture assigned " << curName << endl;
+	curTexture = curScene->getTexture(com);
+	cout << "texture assigned " << curTexture->getName() << endl;
 }
 
 void Editor::assignShader()
@@ -109,7 +125,7 @@ void Editor::spawnObject()
 	if (curName != "" && curGameObject != NULL && curObject != NULL && curTexture != NULL && curShader != NULL)
 	{
 		cout << "spawning object" << endl;
-		curGameObject->addChild(new GameObject(curName, curGameObject, curObject, curTexture, curShader));
+		curGameObject->addChild(new GameObject(curName, curGameObject, curObject, curTexture->getTexture(), curShader));	
 	}
 	else
 	{
@@ -135,7 +151,7 @@ void Editor::spawnObject()
 		}
 		else
 		{
-			cout << "cur object " << curObject << endl;
+			cout << "cur object " << curObject->getName() << endl;
 		}
 		if (curTexture == NULL)
 		{
@@ -143,7 +159,7 @@ void Editor::spawnObject()
 		}
 		else
 		{
-			cout << "cur texture " << curTexture << endl;
+			cout << "cur texture " << curTexture->getName() << endl;
 		}
 		if (curShader == NULL)
 		{
@@ -151,7 +167,58 @@ void Editor::spawnObject()
 		}
 		else
 		{
-			cout << "cur Shader " << curShader << endl;
+			cout << "cur Shader " << curShader->getName() << endl;
 		}
 	}
+}
+
+void Editor::setPos()
+{
+	if (curGameObject != NULL)
+	{
+		cout << "cur Game Object " << curGameObject->getName() << endl;
+		int xCoord;
+		cout << "set X" << endl;
+		cin >> xCoord;
+		
+		int yCoord;
+		cout << "set Y" << endl;
+		cin >> yCoord;
+
+		int zCoord;
+		cout << "set z" << endl;
+		cin >> zCoord;
+
+		curGameObject->setPosition(vec3(xCoord, yCoord, zCoord));
+	}
+	else
+	{
+		cout << "no object" << endl;
+	}
+}
+
+void Editor::movePos()
+{
+	if (curGameObject != NULL)
+	{
+		cout << "cur Game Object " << curGameObject->getName() << endl;
+		int xCoord;
+		cout << "set X" << endl;
+		cin >> xCoord;
+
+		int yCoord;
+		cout << "set Y" << endl;
+		cin >> yCoord;
+
+		int zCoord;
+		cout << "set z" << endl;
+		cin >> zCoord;
+
+		curGameObject->changePosition(vec3(xCoord, yCoord, zCoord));
+	}
+	else
+	{
+		cout << "no object" << endl;
+	}
+
 }

@@ -82,6 +82,11 @@ Texture::Texture()
 {
 }
 
+Texture::Texture(string tempName)
+{
+	name == tempName;
+}
+
 Texture::~Texture()
 {
 }
@@ -108,4 +113,9 @@ void Texture::cleanUp()
 GLuint *Texture::getTexture()
 {
 	return &textureMap;
+}
+
+string Texture::getName()
+{
+	return name;
 }

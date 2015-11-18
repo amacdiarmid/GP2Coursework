@@ -11,6 +11,7 @@ class Object
 {
 public:
 	Object();
+	Object(string tempName);
 	~Object();
 
 	void createBuffer(string modelPath);
@@ -19,9 +20,12 @@ public:
 	GLuint getEBO();
 	GLuint getVAO();
 	MeshData *getMesh();
+	string getName();
 
 private:
 	MeshData *currentMesh;
+
+	string name;
 
 	GLuint VBO;
 	GLuint EBO;

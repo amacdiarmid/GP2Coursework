@@ -11,14 +11,17 @@ class Texture
 {
 public:
 	Texture();
+	Texture(string tempName);
 	~Texture();
 
 	void createTexture(string texturePath);
 	GLuint *getTexture();
+	string getName();
 	void cleanUp();
 
 private:
 	GLuint textureMap;
+	string name;
 
 };
 

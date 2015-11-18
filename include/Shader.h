@@ -18,15 +18,21 @@ class Shader
 {
 public:
 	Shader();
+	Shader(string tempName);
 	~Shader();
 
 	void attatchVertexShader(string shaderPath);
 	void attatchFragmentShader(string shaderPath);
 	void createShader();
 	GLuint getShader();
+	string getName();
 	void cleanUp();
 
 private:
+	string name;
+	GLuint vertexShader = 0;
+	GLuint fragmentShader = 0;
+	GLuint finalShader = 0;
 
 };
 

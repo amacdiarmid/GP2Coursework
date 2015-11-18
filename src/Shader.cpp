@@ -84,12 +84,13 @@ bool checkForLinkErrors(GLuint program)
 	return false;
 }
 
-GLuint vertexShader = 0;
-GLuint fragmentShader = 0;
-GLuint finalShader = 0;
-
 Shader::Shader()
 {
+}
+
+Shader::Shader(string tempName)
+{
+	name = tempName;
 }
 
 Shader::~Shader()
@@ -131,6 +132,11 @@ void Shader::createShader()
 GLuint Shader::getShader()
 {
 	return finalShader;
+}
+
+string Shader::getName()
+{
+	return name;
 }
 
 void Shader::cleanUp()

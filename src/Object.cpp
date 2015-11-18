@@ -4,6 +4,11 @@ Object::Object()
 {
 }
 
+Object::Object(string tempName)
+{
+	name = tempName;
+}
+
 Object::~Object()
 {
 }
@@ -72,4 +77,9 @@ GLuint Object::getVAO()
 MeshData *Object::getMesh()
 {
 	return currentMesh;
+}
+
+string Object::getName()
+{
+	return name;
 }

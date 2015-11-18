@@ -79,19 +79,19 @@ void Scene::createScene()
 	debugMode = false;
 
 	//create objects
-	teapotObj = new Object();
+	teapotObj = new Object("teapot");
 	teapotObj->createBuffer("/utah-teapot.fbx");
 
 	//create textures
-	sunText = new Texture();
+	sunText = new Texture("sun");
 	sunText->createTexture("/SunTexture.png");
-	earthText = new Texture();
+	earthText = new Texture("earth");
 	earthText->createTexture("/EarthTexture.png");
-	moonText = new Texture();
+	moonText = new Texture("moon");
 	moonText->createTexture("/MoonTexture.png");
 
 	//create shaders
-	mainShader = new Shader();
+	mainShader = new Shader("main");
 	mainShader->attatchVertexShader("/textureVS.glsl");
 	mainShader->attatchFragmentShader("/textureFS.glsl");
 	mainShader->createShader();

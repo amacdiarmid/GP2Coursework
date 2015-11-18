@@ -19,7 +19,7 @@ private:
 	string curName;
 	GameObject *curGameObject;
 	Object *curObject;
-	GLuint *curTexture;
+	Texture *curTexture;
 	Shader *curShader;
 	
 	void assignName();
@@ -28,6 +28,8 @@ private:
 	void assignTexture();
 	void assignShader();
 	void spawnObject();
+	void setPos();
+	void movePos();
 };
 
 #endif
