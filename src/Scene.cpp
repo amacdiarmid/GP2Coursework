@@ -20,10 +20,10 @@ void Scene::render()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glUseProgram(mainShader->getShader());
+	glUseProgram(shaders["main"]->getShader());
 
 	//get the uniform loaction for the MVP
-	GLint MVPLocation = glGetUniformLocation(mainShader->getShader(), "MVP");
+	GLint MVPLocation = glGetUniformLocation(shaders["main"]->getShader(), "MVP");
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, value_ptr(player->getMVPmatrix()));
 
 	worldObject->render();
@@ -79,48 +79,48 @@ void Scene::createScene()
 	debugMode = false;
 
 	//create objects
-	teapotObj = new Object("teapot");
-	teapotObj->createBuffer("/utah-teapot.fbx");
+	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
+	objects["teapot"]->createBuffer("/utah-teapot.fbx");
 
 	//create textures
-	sunText = new Texture("sun");
-	sunText->createTexture("/SunTexture.png");
-	earthText = new Texture("earth");
-	earthText->createTexture("/EarthTexture.png");
-	moonText = new Texture("moon");
-	moonText->createTexture("/MoonTexture.png");
+	textures.insert(pair<string, Texture*>("sun", new Texture("sun")));
+	textures["sun"]->createTexture("/SunTexture.png");
+	textures.insert(pair<string, Texture*>("earth", new Texture("earth")));
+	textures["earth"]->createTexture("/EarthTexture.png");
+	textures.insert(pair<string, Texture*>("moon", new Texture("moon")));
+	textures["moon"]->createTexture("/MoonTexture.png");
 
 	//create shaders
-	mainShader = new Shader("main");
-	mainShader->attatchVertexShader("/textureVS.glsl");
-	mainShader->attatchFragmentShader("/textureFS.glsl");
-	mainShader->createShader();
+	shaders.insert(pair<string, Shader*>("main", new Shader("main")));
+	shaders["main"]->attatchVertexShader("/textureVS.glsl");
+	shaders["main"]->attatchFragmentShader("/textureFS.glsl");
+	shaders["main"]->createShader();
 
 	//create player/debug cam
 	player = new PlayerController();
 
 	//add scene graph. this could be an external file or another function but it is here for now 
 	
-	/*
-	worldObject->addChild(new GameObject("sun", worldObject, teapotObj, sunText->getTexture(), mainShader));
+	
+	worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"]->getTexture(), shaders["main"]));
 	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject->getChild("sun"), teapotObj, earthText->getTexture(), mainShader));
+	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject->getChild("sun"), objects["teapot"], textures["earth"]->getTexture(), shaders["main"]));
 	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject->getChild("sun")->getChild("earth"), teapotObj, moonText->getTexture(), mainShader));
+	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject->getChild("sun")->getChild("earth"), objects["teapot"], textures["moon"]->getTexture(), shaders["main"]));
 	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->getComponents();
 	worldObject->getChildern();
-	*/	
+		
 }
 
 void Scene::destroyScene()
 {
-	mainShader->cleanUp();
-	teapotObj->cleanUp();
+	shaders["main"]->cleanUp();
+	objects["teapot"]->cleanUp();
 }
 
 void Scene::SceneLoop()
@@ -136,17 +136,17 @@ GameObject *Scene::getGameObject(string command)
 
 Object *Scene::getObject(string command)
 {
-	return teapotObj;
+	return objects[command];
 }
 
 Texture *Scene::getTexture(string command)
 {
-	return sunText;
+	return textures[command];
 }
 
 Shader *Scene::getShader(string command)
 {
-	return mainShader;
+	return shaders[command];
 }
 
 

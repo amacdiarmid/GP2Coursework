@@ -14,8 +14,7 @@
 #include "SDL2.h"
 #include "KeyboardListener.h"
 #include "PlayerController.h"
-
-
+#include <map>
 
 class Scene : public IkeyboardListener
 {
@@ -41,16 +40,15 @@ private:
 
 	//main gameobject 
 	GameObject *worldObject = new GameObject("world Object");
-	//game obejcts
-	Object *teapotObj;
+	
+	//game objects
+	map<string, Object*> objects;
 	
 	//textures 
-	Texture *sunText;
-	Texture *earthText;
-	Texture *moonText;
+	map<string, Texture*> textures;
 	
 	//shaders
-	Shader *mainShader;
+	map<string, Shader*> shaders;
 
 	//debug mode stuff
 	Editor *editor;
