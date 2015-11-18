@@ -7,6 +7,7 @@ GameObject::GameObject()
 GameObject::GameObject(string tempName)
 {
 	world = true;
+	parent = NULL;
 	name = tempName;
 	childrenList.clear();
 	componentsList.clear();
