@@ -18,7 +18,7 @@ private:
 	Scene *curScene;
 	string curName;
 	GameObject *curGameObject;
-	Object *curObject;
+	Object *curMesh;
 	Texture *curTexture;
 	Shader *curShader;
 	

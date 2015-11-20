@@ -151,7 +151,7 @@ void Scene::SceneLoop()
 
 GameObject *Scene::getGameObject(string command)
 {
-	return worldObject;
+	return worldObject->findChild(command);
 }
 
 Object *Scene::getObject(string command)

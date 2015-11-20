@@ -11,7 +11,7 @@ Editor::Editor(Scene *tempScene)
 	curScene = tempScene;
 	curName = "";
 	curGameObject = NULL;
-	curObject = NULL;
+	curMesh = NULL;
 	curTexture = NULL;
 	curShader = NULL;
 }
@@ -54,19 +54,27 @@ void Editor::readCommand()
 		}
 		else if (com == "transform")
 		{
-			do
+			if (curGameObject == NULL)
 			{
-				cout << "adjust transform" << endl;
-				cin >> com;
-				if (com == "setPos")
+				cout << "no object" << endl;
+			}
+			else
+			{
+				cout << "curent pos " << curGameObject->getPosition().x << " " << curGameObject->getPosition().z << endl;
+				do
 				{
-					setPos();
-				}
-				else if (com == "movePos")
-				{
-					movePos();
-				}
-			} while (com != "doneTransform");
+					cout << "adjust transform" << endl;
+					cin >> com;
+					if (com == "setPos")
+					{
+						setPos();
+					}
+					else if (com == "movePos")
+					{
+						movePos();
+					}
+				} while (com != "doneTransform");
+			}
 		}
 		else
 		{
@@ -98,7 +106,7 @@ void Editor::assignObject()
 	cout << "get mesh name" << endl;
 	string com;
 	cin >> com;
-	curObject = curScene->getObject(com);
+	curMesh = curScene->getObject(com);
 	cout << "mesh assigned " << curName << endl;
 }
 
@@ -122,10 +130,10 @@ void Editor::assignShader()
 
 void Editor::spawnObject()
 {
-	if (curName != "" && curGameObject != NULL && curObject != NULL && curTexture != NULL && curShader != NULL)
+	if (curName != "" && curGameObject != NULL && curMesh != NULL && curTexture != NULL && curShader != NULL)
 	{
 		cout << "spawning object" << endl;
-		curGameObject->addChild(new GameObject(curName, curGameObject, curObject, curTexture->getTexture(), curShader));	
+		curGameObject->addChild(new GameObject(curName, curGameObject, curMesh, curTexture->getTexture(), curShader));
 	}
 	else
 	{
@@ -145,13 +153,13 @@ void Editor::spawnObject()
 		{
 			cout << "cur Game Object " << curGameObject->getName() << endl;
 		}
-		if (curObject == NULL)
+		if (curMesh == NULL)
 		{
 			cout << "no object" << endl;
 		}
 		else
 		{
-			cout << "cur object " << curObject->getName() << endl;
+			cout << "cur object " << curMesh->getName() << endl;
 		}
 		if (curTexture == NULL)
 		{

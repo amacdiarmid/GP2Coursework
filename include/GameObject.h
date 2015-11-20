@@ -30,6 +30,7 @@ public:
 	void changePosition(vec3 tempPos);
 	string getName();
 	void getChildern();
+	GameObject *findChild(string com);
 	void getComponents();
 private:
 	string name;

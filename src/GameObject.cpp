@@ -136,6 +136,21 @@ void GameObject::getChildern()
 	}
 }
 
+GameObject *GameObject::findChild(string com)
+{
+	for each (auto child in childrenList)
+	{
+		if (child.first == com)
+		{
+			return child.second;
+		}
+		else
+		{
+			child.second->findChild(com);
+		}
+	}
+}
+
 void GameObject::getComponents()
 {
 	cout << " " << componentsList.size() << " ";

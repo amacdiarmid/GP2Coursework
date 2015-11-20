@@ -62,6 +62,8 @@ PlayerController::PlayerController()
 
 	void PlayerController::Update()
 	{
-		PlayerController::viewMatrix = lookAt(PlayerController::worldPoint, PlayerController::lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
+		projMatrix = perspective(45.0f, 640.0f / 480.0f, 0.1f, 100.0f);
+		viewMatrix = lookAt(worldPoint, lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
+		worldMatrix = translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f));
+		MVPMatrix = projMatrix*viewMatrix*worldMatrix;
 	}
-
