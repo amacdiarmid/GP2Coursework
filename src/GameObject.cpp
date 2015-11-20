@@ -149,6 +149,7 @@ GameObject *GameObject::findChild(string com)
 			child.second->findChild(com);
 		}
 	}
+	return NULL;
 }
 
 void GameObject::getComponents()

@@ -151,22 +151,62 @@ void Scene::SceneLoop()
 
 GameObject *Scene::getGameObject(string command)
 {
-	return worldObject->findChild(command);
+	GameObject * tempGameObject;
+	tempGameObject = worldObject->findChild(command);
+	if (tempGameObject != NULL)
+	{
+		cout << "game object assigned " << tempGameObject->getName() << endl;
+	}
+	else
+	{
+		cout << "game object assigned NULL"  << endl;
+	}
+	return tempGameObject;
 }
 
 Object *Scene::getObject(string command)
 {
-	return objects[command];
+	Object * tempObject;
+	tempObject = objects[command];
+	if (tempObject != NULL)
+	{
+		cout << "mesh assigned " << tempObject->getName() << endl;
+	}
+	else
+	{
+		cout << "mesh assigned NULL" << endl;
+	}
+	return tempObject;
 }
 
 Texture *Scene::getTexture(string command)
 {
-	return textures[command];
+	Texture * tempTexture;
+	tempTexture = textures[command];
+	if (tempTexture != NULL)
+	{
+		cout << "texture assigned " << tempTexture->getName() << endl;
+	}
+	else
+	{
+		cout << "texture assigned NULL" << endl;		
+	}
+	return tempTexture;
 }
 
 Shader *Scene::getShader(string command)
 {
-	return shaders[command];
+	Shader * tempShader;
+	tempShader = shaders[command];
+	if (tempShader != NULL)
+	{
+		cout << "shader assigned " << tempShader->getName() << endl;
+	}
+	else
+	{
+		cout << "shader assigned NULL" << endl;
+	}
+	return tempShader;
 }
 
 

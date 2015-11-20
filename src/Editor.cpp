@@ -98,7 +98,6 @@ void Editor::assignGameObject()
 	string com;
 	cin >> com;
 	curGameObject = curScene->getGameObject(com);
-	cout << "game object assigned " << curGameObject->getName() << endl;
 }
 
 void Editor::assignObject()
@@ -107,7 +106,6 @@ void Editor::assignObject()
 	string com;
 	cin >> com;
 	curMesh = curScene->getObject(com);
-	cout << "mesh assigned " << curName << endl;
 }
 
 void Editor::assignTexture()
@@ -116,7 +114,6 @@ void Editor::assignTexture()
 	string com;
 	cin >> com;
 	curTexture = curScene->getTexture(com);
-	cout << "texture assigned " << curTexture->getName() << endl;
 }
 
 void Editor::assignShader()
@@ -125,7 +122,6 @@ void Editor::assignShader()
 	string com;
 	cin >> com;
 	curShader = curScene->getShader(com);
-	cout << "shader assigned " << curName << endl;
 }
 
 void Editor::spawnObject()
@@ -134,6 +130,8 @@ void Editor::spawnObject()
 	{
 		cout << "spawning object" << endl;
 		curGameObject->addChild(new GameObject(curName, curGameObject, curMesh, curTexture->getTexture(), curShader));
+		curGameObject = curGameObject->findChild(curName);
+		curGameObject->addComponent(RENDER_COMPONENT);
 	}
 	else
 	{
