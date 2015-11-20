@@ -10,6 +10,7 @@ int initSDL2()
 
 		return -1;
 	}
+
 }
 
 void initSDL2Image()
@@ -21,6 +22,7 @@ void initSDL2Image()
 	{
 		cout << "Error SDL_Image Init " << IMG_GetError() << endl;
 	}
+
 }
 
 void initSDL2TTF()
@@ -30,4 +32,5 @@ void initSDL2TTF()
 	{
 		cout << "ERROR TTF_Init: " << TTF_GetError();
 	}
+
 }

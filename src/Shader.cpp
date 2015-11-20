@@ -127,6 +127,14 @@ void Shader::createShader()
 
 	glDeleteShader(fragmentShader);
 	glDeleteShader(vertexShader);
+
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in creating shader " << err << endl;
+	}
+
 }
 
 GLuint Shader::getShader()

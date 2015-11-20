@@ -103,6 +103,13 @@ void Texture::createTexture(string texturePath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
 	glGenerateMipmap(GL_TEXTURE_2D);
+
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in creating texture " << err << endl;
+	}
 }
 
 void Texture::cleanUp()

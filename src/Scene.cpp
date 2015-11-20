@@ -28,6 +28,13 @@ void Scene::render()
 
 	worldObject->render();
 
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in rendering scene " << err << endl;
+	}
+
 }
 
 void Scene::update()
@@ -71,6 +78,13 @@ void Scene::update()
 
 	worldObject->setPosition(player->GetMovementVec());
 	worldObject->update();
+
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in updating scene " << err << endl;
+	}
 }
 
 void Scene::createScene()
@@ -105,16 +119,22 @@ void Scene::createScene()
 	worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"]->getTexture(), shaders["main"]));
 	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject->getChild("sun"), objects["teapot"], textures["earth"]->getTexture(), shaders["main"]));
-	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
+	//worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"]->getTexture(), shaders["main"]));
+	//worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject->getChild("sun")->getChild("earth"), objects["teapot"], textures["moon"]->getTexture(), shaders["main"]));
-	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
+	//worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"]->getTexture(), shaders["main"]));
+	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->getComponents();
 	worldObject->getChildern();
-		
+
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in creating scene " << err << endl;
+	}	
 }
 
 void Scene::destroyScene()
@@ -172,6 +192,9 @@ void Scene::onKeyDown(SDL_Keycode key)
 		{
 			editor->readCommand();
 		}
+		break;
+	case SDLK_m:
+		//set world object to active or not
 		break;
 	default:
 		break;

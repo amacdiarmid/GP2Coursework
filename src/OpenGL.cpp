@@ -22,7 +22,7 @@ void initOpenGL()
 	glDepthFunc(GL_LEQUAL);
 
 	//turn on best perspective correction
-	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	//glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
 	//Need to normalize the normal vectors for lighting calculations
 	glEnable(GL_NORMALIZE);

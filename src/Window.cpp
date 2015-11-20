@@ -35,6 +35,14 @@ void createWindow()
 	//set our viewport
 	setViewport(640, 480);
 
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in creating window " << err << endl;
+	}
+
+
 	createGame();
 }
 

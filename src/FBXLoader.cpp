@@ -128,6 +128,14 @@ bool loadFBXFromFile(const string& filename, MeshData *meshData)
 
 	iImporter->Destroy();
 	return true;
+
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in loading FBX " << err << endl;
+	}
+
 }
 
 void processNode(FbxNode *node, MeshData *meshData)

@@ -15,6 +15,7 @@ Object::~Object()
 
 void Object::createBuffer(string modelPath)
 {
+
 	//load model
 	currentMesh = new MeshData();
 	string Path = ASSET_PATH + MODEL_PATH + "/utah-teapot.fbx";
@@ -50,6 +51,14 @@ void Object::createBuffer(string modelPath)
 	//send normals to buffer
 	glDisableVertexAttribArray(3);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void**)(sizeof(vec3) + sizeof(vec4) + sizeof(vec2)));
+
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in creating object buffer " << err << endl;
+	}
+
 }
 
 void Object::cleanUp()
