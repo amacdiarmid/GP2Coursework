@@ -7,14 +7,17 @@ GameObject::GameObject()
 GameObject::GameObject(string tempName)
 {
 	world = true;
-	parent = NULL;
 	name = tempName;
+	parent = NULL;
+	model = NULL;
+	texture = NULL;
+	shader = NULL;
 	childrenList.clear();
 	componentsList.clear();
 	active = true;
 }
 
-GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempModel, GLuint *tempTexture, Shader *tempShader)
+GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempModel, Texture *tempTexture, Shader *tempShader)
 {
 	world = false;
 	name = tempName;
@@ -49,7 +52,7 @@ void GameObject::update()
 {
 	if (world == false)
 	{
-		worldPosition = localPosition + parent->getPosition();
+		worldPosition = localPosition + parent->getWorldPos();
 	}
 	if (active)
 	{
@@ -79,9 +82,14 @@ void GameObject::render()
 	}
 }
 
-vec3 GameObject::getPosition()
+vec3 GameObject::getWorldPos()
 {
 	return worldPosition;
+}
+
+vec3 GameObject::getLocalPos()
+{
+	return localPosition;
 }
 
 void GameObject::addChild(GameObject *tempChild)
@@ -99,7 +107,7 @@ Shader *GameObject::getShader()
 	return shader;
 }
 
-GLuint *GameObject::getTexture()
+Texture *GameObject::getTexture()
 {
 	return texture;
 }
@@ -152,6 +160,11 @@ GameObject *GameObject::findChild(string com)
 	return NULL;
 }
 
+map<string, GameObject*> *GameObject::getChildrenMap()
+{
+	return &childrenList;
+}
+
 void GameObject::getComponents()
 {
 	cout << " " << componentsList.size() << " ";
@@ -160,4 +173,19 @@ void GameObject::getComponents()
 		cout << i->second->getType() << " ";
 	}
 	cout << endl;
+}
+
+map<Components, Component*> *GameObject::getCompMap()
+{
+	return &componentsList;
+}
+
+bool GameObject::getWorld()
+{
+	return world;
+}
+
+bool GameObject::getActive()
+{
+	return active;
 }

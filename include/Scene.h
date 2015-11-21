@@ -20,6 +20,7 @@ class Scene : public IkeyboardListener
 {
 public:
 	Scene();
+	Scene(string tempName);
 	~Scene();
 	void update();
 	void render();
@@ -29,13 +30,17 @@ public:
 
 	//debug stuff
 	GameObject *getGameObject(string command);
+	GameObject *getWorldObject();
 	Object *getObject(string command);
 	Texture *getTexture(string command);
 	Shader *getShader(string command);
+	string getName();
 
 	void onKeyDown(SDL_Keycode key);
 	void onkeyUp(SDL_Keycode key);
 private:
+	string name;
+
 	PlayerController *player;
 
 	//main gameobject 

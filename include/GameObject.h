@@ -14,24 +14,29 @@ class GameObject
 public:
 	GameObject();
 	GameObject(string tempName);
-	GameObject(string tempName,GameObject *tempParent, Object *tempModel, GLuint *tempTexture, Shader *tempShader);
+	GameObject(string tempName,GameObject *tempParent, Object *tempModel, Texture *tempTexture, Shader *tempShader);
 	~GameObject();
 
 	void addComponent(Components type);
 	void update();
 	void render();
-	vec3 getPosition();
+	vec3 getWorldPos();
+	vec3 getLocalPos();
 	void addChild(GameObject *tempChild);
 	Object *getModel();
 	Shader *getShader();
-	GLuint *getTexture();
+	Texture *getTexture();
 	GameObject *getChild(string tempName);
 	void setPosition(vec3 TempPos);
 	void changePosition(vec3 tempPos);
 	string getName();
 	void getChildern();
 	GameObject *findChild(string com);
+	map<string, GameObject*> *getChildrenMap();
 	void getComponents();
+	map<Components, Component*> *getCompMap();
+	bool getWorld();
+	bool getActive();
 private:
 	string name;
 	GameObject *parent;
@@ -40,7 +45,7 @@ private:
 	map<string, GameObject*> childrenList;
 	map<Components, Component*> componentsList;
 	Object *model;
-	GLuint *texture;
+	Texture *texture;
 	Shader *shader;
 
 	//the world position 

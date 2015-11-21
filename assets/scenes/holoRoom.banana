@@ -1,0 +1,64 @@
+<root>
+    <world object>
+        <object>
+            <name>world Object</name>
+            <world>1</world>
+            <active>1</active>
+            <model/>
+            <texture/>
+            <shader/>
+            <worldPos x="0" y="0" z="0"/>
+            <localPos x="0" y="0" z="0"/>
+            <components/>
+            <children>
+                <object>
+                    <name>sun</name>
+                    <world>1</world>
+                    <active>1</active>
+                    <model>teapot</model>
+                    <texture>sun</texture>
+                    <shader>main</shader>
+                    <worldPos x="0" y="0" z="0"/>
+                    <localPos x="0" y="0" z="0"/>
+                    <components>
+                        <component>1</component>
+                    </components>
+                    <children>
+                        <object>
+                            <name>earth</name>
+                            <world>1</world>
+                            <active>1</active>
+                            <model>teapot</model>
+                            <texture>earth</texture>
+                            <shader>main</shader>
+                            <worldPos x="0" y="0" z="0"/>
+                            <localPos x="0" y="0" z="0"/>
+                            <components>
+                                <component>1</component>
+                            </components>
+                            <children>
+                                <object>
+                                    <name>moon</name>
+                                    <world>1</world>
+                                    <active>1</active>
+                                    <model>teapot</model>
+                                    <texture>moon</texture>
+                                    <shader>main</shader>
+                                    <worldPos x="0" y="0" z="0"/>
+                                    <localPos x="0" y="0" z="0"/>
+                                    <components>
+                                        <component>1</component>
+                                    </components>
+                                    <children/>
+                                </object>
+                                <child/>
+                            </children>
+                        </object>
+                        <child/>
+                    </children>
+                </object>
+                <child/>
+            </children>
+        </object>
+    </world object>
+</root>

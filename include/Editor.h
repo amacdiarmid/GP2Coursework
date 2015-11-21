@@ -3,6 +3,7 @@
 
 #include "Common.h"
 #include "GameObject.h"
+#include "SavingData.h"
 
 class Scene;
 

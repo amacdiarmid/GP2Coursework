@@ -60,7 +60,7 @@ void Editor::readCommand()
 			}
 			else
 			{
-				cout << "curent pos " << curGameObject->getPosition().x << " " << curGameObject->getPosition().z << endl;
+				cout << "curent pos " << curGameObject->getWorldPos().x << " " << curGameObject->getWorldPos().y << " " << curGameObject->getWorldPos().z << endl;
 				do
 				{
 					cout << "adjust transform" << endl;
@@ -75,6 +75,11 @@ void Editor::readCommand()
 					}
 				} while (com != "doneTransform");
 			}
+		}
+		else if (com == "save")
+		{
+			cout << "saving" << endl;
+			saveScene(curScene->getWorldObject(), curScene->getName());
 		}
 		else
 		{
@@ -129,7 +134,7 @@ void Editor::spawnObject()
 	if (curName != "" && curGameObject != NULL && curMesh != NULL && curTexture != NULL && curShader != NULL)
 	{
 		cout << "spawning object" << endl;
-		curGameObject->addChild(new GameObject(curName, curGameObject, curMesh, curTexture->getTexture(), curShader));
+		curGameObject->addChild(new GameObject(curName, curGameObject, curMesh, curTexture, curShader));
 		curGameObject = curGameObject->findChild(curName);
 		curGameObject->addComponent(RENDER_COMPONENT);
 	}

@@ -84,7 +84,7 @@ Texture::Texture()
 
 Texture::Texture(string tempName)
 {
-	name == tempName;
+	name = tempName;
 }
 
 Texture::~Texture()

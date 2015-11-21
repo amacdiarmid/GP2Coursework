@@ -5,6 +5,12 @@ Scene::Scene()
 	debugMode = false;
 }
 
+Scene::Scene(string tempName)
+{
+	debugMode = false;
+	name = tempName;
+}
+
 Scene::~Scene()
 {
 }
@@ -116,14 +122,14 @@ void Scene::createScene()
 	//add scene graph. this could be an external file or another function but it is here for now 
 	
 	
-	worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"]->getTexture(), shaders["main"]));
+	worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["main"]));
 	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	//worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"]->getTexture(), shaders["main"]));
-	//worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
+	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"], shaders["main"]));
+	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
 
-	//worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"]->getTexture(), shaders["main"]));
-	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
+	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["main"]));
+	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->getComponents();
@@ -163,6 +169,12 @@ GameObject *Scene::getGameObject(string command)
 	}
 	return tempGameObject;
 }
+
+GameObject *Scene::getWorldObject()
+{
+	return worldObject;
+}
+
 
 Object *Scene::getObject(string command)
 {
@@ -243,4 +255,9 @@ void Scene::onKeyDown(SDL_Keycode key)
 void Scene::onkeyUp(SDL_Keycode key)
 {
 	cout << "Key up " << key << endl;
+}
+
+string Scene::getName()
+{
+	return name;
 }
