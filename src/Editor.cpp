@@ -78,8 +78,16 @@ void Editor::readCommand()
 		}
 		else if (com == "save")
 		{
+			//atm just one scene to keep it easy
 			cout << "saving" << endl;
 			saveScene(curScene->getWorldObject(), curScene->getName());
+		}
+		else if (com == "load")
+		{
+			cout << "select scene" << endl;
+			cin >> com;
+			cout << "loading" << endl;
+			loadScene(curScene->getWorldObject(), com, curScene);
 		}
 		else
 		{

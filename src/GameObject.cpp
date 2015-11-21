@@ -35,18 +35,6 @@ GameObject::~GameObject()
 }
 
 
-void GameObject::addComponent(Components type)
-{
-	if (type == RENDER_COMPONENT)
-	{
-		cout << "adding render Comp to " << name <<  endl;
-		componentsList.insert(pair<Components, Component*>(type, new Renderer(this)));
-	}
-	else
-	{
-		cout << "error_1, gameObject.cpp - no component" << endl;
-	}
-}
 
 void GameObject::update()
 {
@@ -82,14 +70,17 @@ void GameObject::render()
 	}
 }
 
-vec3 GameObject::getWorldPos()
+void GameObject::addComponent(Components type)
 {
-	return worldPosition;
-}
-
-vec3 GameObject::getLocalPos()
-{
-	return localPosition;
+	if (type == RENDER_COMPONENT)
+	{
+		cout << "adding render Comp to " << name <<  endl;
+		componentsList.insert(pair<Components, Component*>(type, new Renderer(this)));
+	}
+	else
+	{
+		cout << "error_1, gameObject.cpp - no component" << endl;
+	}
 }
 
 void GameObject::addChild(GameObject *tempChild)
@@ -97,51 +88,9 @@ void GameObject::addChild(GameObject *tempChild)
 	childrenList.insert(pair<string, GameObject*>(tempChild->getName(), tempChild));
 }
 
-Object *GameObject::getModel()
-{
-	return model;
-}
-
-Shader *GameObject::getShader()
-{
-	return shader;
-}
-
-Texture *GameObject::getTexture()
-{
-	return texture;
-}
-
-GameObject *GameObject::getChild(string tempName)
-{
-	return childrenList[tempName];
-}
-
-void GameObject::setPosition(vec3 tempPos)
-{
-	localPosition = tempPos;
-}
-
 void GameObject::changePosition(vec3 tempPos)
 {
 	localPosition += tempPos;
-}
-
-string GameObject::getName()
-{
-	return name;
-}
-
-void GameObject::getChildern()
-{
-	cout << "\t";
-
-	for (auto i = childrenList.begin(); i != childrenList.end(); i++)
-	{
-		cout << "object: " << i->second->getName() << " components ";
-		i->second->getComponents();
-		i->second->getChildern();
-	}
 }
 
 GameObject *GameObject::findChild(string com)
@@ -160,12 +109,19 @@ GameObject *GameObject::findChild(string com)
 	return NULL;
 }
 
-map<string, GameObject*> *GameObject::getChildrenMap()
+void GameObject::printChildern()
 {
-	return &childrenList;
+	cout << "\t";
+
+	for (auto i = childrenList.begin(); i != childrenList.end(); i++)
+	{
+		cout << "object: " << i->second->getName() << " components ";
+		i->second->printComponents();
+		i->second->printChildern();
+	}
 }
 
-void GameObject::getComponents()
+void GameObject::printComponents()
 {
 	cout << " " << componentsList.size() << " ";
 	for (auto i = componentsList.begin(); i != componentsList.end(); i++)
@@ -173,19 +129,4 @@ void GameObject::getComponents()
 		cout << i->second->getType() << " ";
 	}
 	cout << endl;
-}
-
-map<Components, Component*> *GameObject::getCompMap()
-{
-	return &componentsList;
-}
-
-bool GameObject::getWorld()
-{
-	return world;
-}
-
-bool GameObject::getActive()
-{
-	return active;
 }

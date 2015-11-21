@@ -121,19 +121,20 @@ void Scene::createScene()
 
 	//add scene graph. this could be an external file or another function but it is here for now 
 	
-	
-	worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["main"]));
-	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
+	loadScene(worldObject, name, this);
 
-	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"], shaders["main"]));
-	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
+	//worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["main"]));
+	//worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["main"]));
-	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
+	//worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"], shaders["main"]));
+	//worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
+
+	//worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["main"]));
+	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
-	worldObject->getComponents();
-	worldObject->getChildern();
+	worldObject->printComponents();
+	worldObject->printChildern();
 
 	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
