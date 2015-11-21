@@ -32,6 +32,7 @@ add_executable(GP2Coursework
 				src/Object.cpp
 				src/Editor.cpp
 				src/LightSource.cpp
+				src/tinyxml2.cpp
 				src/Components/RenderComponent.cpp
 				include/Common.h
 				include/OpenGL.h
@@ -52,6 +53,7 @@ add_executable(GP2Coursework
 				include/Editor.h
 				include/KeyboardListener.h
 				include/LightSource.h
+				include/tinyxml2.h
 				include/Components/Components.h
 				include/Components/BaseComponent.h
 				include/Components/RenderComponent.h )
