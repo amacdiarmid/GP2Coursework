@@ -103,7 +103,7 @@ GameObject *GameObject::findChild(string com)
 		}
 		else
 		{
-			child.second->findChild(com);
+			return child.second->findChild(com);
 		}
 	}
 	return NULL;
