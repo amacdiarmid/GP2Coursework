@@ -39,10 +39,6 @@ void Renderer::render()
 	GLint MVPLocation = glGetUniformLocation(owner->getShader()->getShader(), "MVP");
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, value_ptr(MVP));
 
-	//get the uniform for the movementVec
-	GLint moveVecLocation = glGetUniformLocation(owner->getShader()->getShader(), "movementVec");
-	glUniform3fv(moveVecLocation, 1, value_ptr(owner->getLocalPos()));
-
 	//get the uniform for the texture coords
 	GLint texture0Location = glGetUniformLocation(owner->getShader()->getShader(), "texture0");
 	glActiveTexture(GL_TEXTURE0);

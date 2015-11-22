@@ -14,31 +14,32 @@
 #include "SDL2.h"
 #include "KeyboardListener.h"
 #include "PlayerController.h"
+#include "Window.h"
 #include <map>
 
 class Scene : public IkeyboardListener
 {
 public:
-	Scene();
-	Scene(string tempName);
-	~Scene();
-	void update();
-	void render();
-	void createScene();
-	void destroyScene();
-	void SceneLoop();
+	Scene(){};
+	Scene(string tempName){};
+	virtual ~Scene(){};
+	virtual void update() = 0;
+	virtual void render() = 0;
+	virtual void createScene() = 0;
+	virtual void destroyScene() = 0;
+	virtual void SceneLoop() = 0;
 
 	//debug stuff
-	GameObject *getGameObject(string command);
-	GameObject *getWorldObject();
-	Object *getObject(string command);
-	Texture *getTexture(string command);
-	Shader *getShader(string command);
-	string getName();
+	virtual GameObject *getGameObject(string command) = 0;
+	virtual GameObject *getWorldObject() = 0;
+	virtual Object *getObject(string command) = 0;
+	virtual Texture *getTexture(string command) = 0;
+	virtual Shader *getShader(string command) = 0;
+	virtual string getName() = 0;
 
-	void onKeyDown(SDL_Keycode key);
-	void onkeyUp(SDL_Keycode key);
-private:
+	virtual void onKeyDown(SDL_Keycode key) = 0;
+	virtual void onkeyUp(SDL_Keycode key) = 0;
+protected:
 	string name;
 
 	PlayerController *player;

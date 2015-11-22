@@ -10,8 +10,8 @@
 
 extern  IkeyboardListener *keyboard; // this nees to be a vector
 
-void createWindow();
+void createWindow(string gameName);
 void destroyWindow();
-bool windowLoop();
+void windowLoop();
 
 #endif

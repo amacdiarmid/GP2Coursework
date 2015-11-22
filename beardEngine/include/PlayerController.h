@@ -4,7 +4,6 @@
 class PlayerController
 {
 private:
-	vec3 movementVec;
 	vec3 worldPoint;
 	vec3 lookAtPoint;
 
@@ -27,7 +26,6 @@ public:
 
 	mat4 GetViewMatrix(){ return viewMatrix; }
 	mat4 getMVPmatrix(){ return MVPMatrix; }
-	vec3 GetMovementVec(){ return movementVec; }
 };
 
 

@@ -29,10 +29,10 @@ public:
 
 	void setOwner(GameObject *tempOwner){ owner = tempOwner; };
 	GameObject *getOwner(){ return owner; };
-	 void init(){};
-	 void update(mat4 MVPMat){};
-	 void render(){};
-	 string getType(){ return type; };
+	void init(){};
+	void update(mat4 MVPMat){};
+	void render(){};
+	string getType(){ return type; };
 
 protected:
 	string type;

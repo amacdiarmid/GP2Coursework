@@ -4,8 +4,15 @@
 #include "Scene.h"
 #include "Window.h"
 
-void createGame();
-void destroyGame();
-void gameLoop();
+class GameApp
+{
+public:
+	virtual ~GameApp(){};
+	virtual void destroyGame() = 0;
+	virtual bool gameLoop() = 0;
+
+protected:
+	Scene *currentScene;
+};
 
 #endif
