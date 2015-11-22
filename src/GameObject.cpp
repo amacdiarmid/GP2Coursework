@@ -36,21 +36,17 @@ GameObject::~GameObject()
 
 
 
-void GameObject::update()
+void GameObject::update(mat4 MVPMat)
 {
-	if (world == false)
-	{
-		worldPosition = localPosition + parent->getWorldPos();
-	}
 	if (active)
 	{
 		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
 		{
-			i->second->update();
+			i->second->update(MVPMat);
 		}
 		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
 		{
-			i->second->update();
+			i->second->update(MVPMat);
 		}
 	}
 }
@@ -90,7 +86,7 @@ void GameObject::addChild(GameObject *tempChild)
 
 void GameObject::changePosition(vec3 tempPos)
 {
-	localPosition += tempPos;
+	worldPos += tempPos;
 }
 
 GameObject *GameObject::findChild(string com)

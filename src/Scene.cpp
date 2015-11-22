@@ -1,5 +1,7 @@
 #include "Scene.h"
 
+//int i = 0;
+
 Scene::Scene()
 {
 	debugMode = false;
@@ -26,12 +28,6 @@ void Scene::render()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	glUseProgram(shaders["main"]->getShader());
-
-	//get the uniform loaction for the MVP
-	GLint MVPLocation = glGetUniformLocation(shaders["main"]->getShader(), "MVP");
-	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, value_ptr(player->getMVPmatrix()));
-
 	worldObject->render();
 
 	GLenum err = GL_NO_ERROR;
@@ -45,45 +41,16 @@ void Scene::render()
 
 void Scene::update()
 {
-	//SDL_Event event;
-	//while (SDL_PollEvent(&event))
-	//{
-	//	cout << "2" << endl;
-	//	switch (event.key.keysym.sym)
-	//	{
-	//		cout << "3" << endl;
-	//	case SDLK_p:
-	//		cout << "4" << endl;
-	//		if (debugMode)
-	//		{
-	//			cout << "debug mode off" << endl;
-	//			debugMode = false;
-	//		}
-	//		else
-	//		{
-	//			cout << "debug mode on" << endl;
-	//			debugMode = true;
-	//		}
-	//	case SDLK_l:
-	//		if (debugMode)
-	//		{
-	//			editor->readCommand();
-	//		}
-	//	default:
-	//		break;
-	//	}
-	//}
-
 	player->Update();
 
-	/*
-	worldObject->getChild("sun")->changePosition(vec3(0.01f, 0.0f, 0.0f));
-	worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(0.0f, 0.01f, 0.0f));
-	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
-	*/
+	//i ++;
+	//worldObject->getChild("sun")->setRotation(vec3(0, i, 0));
+	//worldObject->getChild("sun")->getChild("earth")->setRotation(vec3(0, i, 0));
+	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
+	  
 
 	worldObject->setPosition(player->GetMovementVec());
-	worldObject->update();
+	worldObject->update(player->getMVPmatrix());
 
 	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
@@ -128,6 +95,7 @@ void Scene::createScene()
 
 	//worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"], shaders["main"]));
 	//worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
+	//worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(25, 0, 0));
 
 	//worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["main"]));
 	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
@@ -249,6 +217,20 @@ void Scene::onKeyDown(SDL_Keycode key)
 	case SDLK_m:
 		//set world object to active or not
 		break;
+		//test stuff
+	case SDLK_w:
+		player->LookUp();
+		break;
+	case SDLK_s:
+		player->LookDown();	
+		break;
+	case SDLK_a:
+		player->LookLeft();
+		break;
+	case SDLK_d:
+		player->LookRight();
+		break;
+
 	default:
 		break;
 	}

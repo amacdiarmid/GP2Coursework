@@ -60,7 +60,9 @@ void Editor::readCommand()
 			}
 			else
 			{
-				cout << "curent pos " << curGameObject->getWorldPos().x << " " << curGameObject->getWorldPos().y << " " << curGameObject->getWorldPos().z << endl;
+				cout << "curent pos " << curGameObject->getLocalPos().x << " " << curGameObject->getLocalPos().y << " " << curGameObject->getLocalPos().z << endl;
+				cout << "curent scale " << curGameObject->getScale().x << " " << curGameObject->getScale().y << " " << curGameObject->getScale().z << endl;
+				cout << "curent rotation " << curGameObject->getRotation().x << " " << curGameObject->getRotation().y << " " << curGameObject->getRotation().z << endl;
 				do
 				{
 					cout << "adjust transform" << endl;
@@ -72,6 +74,14 @@ void Editor::readCommand()
 					else if (com == "movePos")
 					{
 						movePos();
+					}
+					else if (com == "setRotation")
+					{
+						setRotation();
+					}
+					else if (com == "setScale")
+					{
+						setScale();
 					}
 				} while (com != "doneTransform");
 			}
@@ -196,15 +206,15 @@ void Editor::setPos()
 	if (curGameObject != NULL)
 	{
 		cout << "cur Game Object " << curGameObject->getName() << endl;
-		int xCoord;
+		float xCoord;
 		cout << "set X" << endl;
 		cin >> xCoord;
 		
-		int yCoord;
+		float yCoord;
 		cout << "set Y" << endl;
 		cin >> yCoord;
 
-		int zCoord;
+		float zCoord;
 		cout << "set z" << endl;
 		cin >> zCoord;
 
@@ -221,19 +231,71 @@ void Editor::movePos()
 	if (curGameObject != NULL)
 	{
 		cout << "cur Game Object " << curGameObject->getName() << endl;
-		int xCoord;
+		float xCoord;
 		cout << "set X" << endl;
 		cin >> xCoord;
 
-		int yCoord;
+		float yCoord;
 		cout << "set Y" << endl;
 		cin >> yCoord;
 
-		int zCoord;
+		float zCoord;
 		cout << "set z" << endl;
 		cin >> zCoord;
 
 		curGameObject->changePosition(vec3(xCoord, yCoord, zCoord));
+	}
+	else
+	{
+		cout << "no object" << endl;
+	}
+
+}
+
+void Editor::setScale()
+{
+	if (curGameObject != NULL)
+	{
+		cout << "cur Game Object " << curGameObject->getName() << endl;
+		float xCoord;
+		cout << "set X" << endl;
+		cin >> xCoord;
+
+		float yCoord;
+		cout << "set Y" << endl;
+		cin >> yCoord;
+
+		float zCoord;
+		cout << "set z" << endl;
+		cin >> zCoord;
+
+		curGameObject->setScale(vec3(xCoord, yCoord, zCoord));
+	}
+	else
+	{
+		cout << "no object" << endl;
+	}
+
+}
+
+void Editor::setRotation()
+{
+	if (curGameObject != NULL)
+	{
+		cout << "cur Game Object " << curGameObject->getName() << endl;
+		float xCoord;
+		cout << "set X" << endl;
+		cin >> xCoord;
+
+		float yCoord;
+		cout << "set Y" << endl;
+		cin >> yCoord;
+
+		float zCoord;
+		cout << "set z" << endl;
+		cin >> zCoord;
+
+		curGameObject->setRotation(vec3(xCoord, yCoord, zCoord));
 	}
 	else
 	{

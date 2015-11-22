@@ -62,12 +62,6 @@ XMLError saveObject(GameObject* tempObject, XMLElement* parentNode, XMLDocument*
 	}
 	objectElement->InsertEndChild(nameElement);
 
-	nameElement = doc->NewElement("worldPos");
-	nameElement->SetAttribute("x", tempObject->getWorldPos().x);
-	nameElement->SetAttribute("y", tempObject->getWorldPos().y);
-	nameElement->SetAttribute("z", tempObject->getWorldPos().z);
-	objectElement->InsertEndChild(nameElement);
-
 	nameElement = doc->NewElement("localPos");
 	nameElement->SetAttribute("x", tempObject->getLocalPos().x);
 	nameElement->SetAttribute("y", tempObject->getLocalPos().y);

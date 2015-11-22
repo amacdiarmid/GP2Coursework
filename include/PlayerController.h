@@ -17,11 +17,6 @@ private:
 
 public:
 	PlayerController();
-	//Movement
-	void MoveForward();
-	void MoveBackwards();
-	void MoveRight();
-	void MoveLeft();
 	//Camera LookAt
 	void LookUp();
 	void LookDown();

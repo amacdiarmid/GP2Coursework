@@ -9,7 +9,7 @@
             <shader/>
             <worldPos x="0" y="0" z="0"/>
             <localPos x="0" y="0" z="0"/>
-            <scale x="1" y="1" z="1"/>
+            <scale x="0" y="0" z="0"/>
             <rotation x="0" y="0" z="0"/>
             <components/>
             <children>
@@ -21,8 +21,8 @@
                         <model>teapot</model>
                         <texture>sun</texture>
                         <shader>main</shader>
-                        <worldPos x="0" y="0" z="0"/>
-                        <localPos x="0" y="0" z="0"/>
+                        <worldPos x="0" y="0" z="-25"/>
+                        <localPos x="0" y="0" z="-25"/>
                         <scale x="1" y="1" z="1"/>
                         <rotation x="0" y="0" z="0"/>
                         <components>
@@ -37,8 +37,8 @@
                                     <model>teapot</model>
                                     <texture>earth</texture>
                                     <shader>main</shader>
-                                    <worldPos x="0" y="0" z="0"/>
-                                    <localPos x="0" y="0" z="0"/>
+                                    <worldPos x="20" y="-20" z="-45"/>
+                                    <localPos x="20" y="-20" z="-20"/>
                                     <scale x="1" y="1" z="1"/>
                                     <rotation x="0" y="0" z="0"/>
                                     <components>
@@ -53,8 +53,8 @@
                                                 <model>teapot</model>
                                                 <texture>moon</texture>
                                                 <shader>main</shader>
-                                                <worldPos x="0" y="0" z="0"/>
-                                                <localPos x="0" y="0" z="0"/>
+                                                <worldPos x="-20" y="20" z="-45"/>
+                                                <localPos x="-40" y="40" z="0"/>
                                                 <scale x="1" y="1" z="1"/>
                                                 <rotation x="0" y="0" z="0"/>
                                                 <components>

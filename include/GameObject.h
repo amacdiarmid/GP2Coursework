@@ -18,7 +18,7 @@ public:
 	~GameObject();
 
 	//in .cpp
-	void update();
+	void update(mat4 MVPMat);
 	void render();
 	void addComponent(Components type);
 	void addChild(GameObject *tempChild);
@@ -28,8 +28,7 @@ public:
 	void printComponents();
 
 	//getters
-	vec3 getWorldPos(){ return worldPosition; };
-	vec3 getLocalPos(){ return localPosition; };
+	vec3 getLocalPos(){ return worldPos; };
 	vec3 getScale(){ return scale; };
 	vec3 getRotation(){ return rotation; };
 	Object *getModel(){ return model; };
@@ -48,7 +47,7 @@ public:
 	void setModel(Object* tempModel) { model = tempModel; };
 	void setShader(Shader* tempShader){ shader = tempShader; };
 	void setTexture(Texture* tempTexture){ texture = tempTexture; };
-	void setPosition(vec3 TempPos){ localPosition = TempPos; };
+	void setPosition(vec3 TempPos){ worldPos = TempPos; };
 	void setName(string tempName){ name = tempName; };
 	void setParent(GameObject* tempParent){ parent = tempParent; };
 	void setWord(bool tempBool){ world = tempBool; };
@@ -64,10 +63,8 @@ private:
 	Texture *texture;
 	Shader *shader;
 
-	//the world position 
-	vec3 worldPosition = vec3(0.0f, 0.0f, 0.0f);
 	//the distance from the parent world position
-	vec3 localPosition = vec3(0.0f, 0.0f, 0.0f);
+	vec3 worldPos = vec3(0.0f, 0.0f, 0.0f);
 	//scale
 	vec3 scale = vec3(1.0f, 1.0f, 1.0f);
 	//rotation

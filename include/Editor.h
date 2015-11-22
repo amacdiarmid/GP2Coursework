@@ -31,6 +31,8 @@ private:
 	void spawnObject();
 	void setPos();
 	void movePos();
+	void setScale();
+	void setRotation();
 };
 
 #endif

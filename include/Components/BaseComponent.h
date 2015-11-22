@@ -12,7 +12,7 @@ public:
 
 	virtual void setOwner(GameObject * tempOwner) = 0;
 	virtual void init() = 0;
-	virtual void update() = 0;
+	virtual void update(mat4 MVPMat) = 0;
 	virtual void render() = 0;
 	virtual string getType() = 0;
 
@@ -30,13 +30,14 @@ public:
 	void setOwner(GameObject *tempOwner){ owner = tempOwner; };
 	GameObject *getOwner(){ return owner; };
 	 void init(){};
-	 void update(){};
+	 void update(mat4 MVPMat){};
 	 void render(){};
 	 string getType(){ return type; };
 
 protected:
 	string type;
 	GameObject *owner;
+	mat4 MVP;
 
 };
 
