@@ -28,7 +28,7 @@ void HoloRoomScene::render()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	worldObject->render();
+	worldObject->render(fustrum);
 
 	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
@@ -63,6 +63,7 @@ void HoloRoomScene::createScene()
 	editor = new Editor(this);
 	debugMode = false;
 
+
 	//create objects
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
 	objects["teapot"]->createBuffer("/utah-teapot.fbx");
@@ -83,6 +84,8 @@ void HoloRoomScene::createScene()
 
 	//create player/debug cam
 	player = new PlayerController();
+	fustrum = new Fustrum(player);
+	fustrum->updateCamera();
 
 	//add scene graph. this could be an external file or another function but it is here for now 
 
@@ -193,6 +196,7 @@ Shader *HoloRoomScene::getShader(string command)
 void HoloRoomScene::onKeyDown(SDL_Keycode key)
 {
 	cout << "Key down " << key << endl;
+	fustrum->updateCamera();
 	switch (key)
 	{
 	case SDLK_p:
@@ -216,7 +220,7 @@ void HoloRoomScene::onKeyDown(SDL_Keycode key)
 	case SDLK_m:
 		//set world object to active or not
 		break;
-		//test stuff
+		//temp movement stuff
 	case SDLK_w:
 		player->LookUp();
 		break;

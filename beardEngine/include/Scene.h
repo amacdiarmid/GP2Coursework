@@ -40,10 +40,13 @@ public:
 
 	virtual void onKeyDown(SDL_Keycode key) = 0;
 	virtual void onkeyUp(SDL_Keycode key) = 0;
+
+	Fustrum *getFustrum(){ return fustrum; };
 protected:
 	string name;
 
 	PlayerController *player;
+	Fustrum* fustrum;
 
 	//main gameobject 
 	GameObject *worldObject = new GameObject("world Object");

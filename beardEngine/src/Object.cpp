@@ -52,6 +52,10 @@ void Object::createBuffer(string modelPath)
 	glDisableVertexAttribArray(3);
 	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void**)(sizeof(vec3) + sizeof(vec4) + sizeof(vec2)));
 
+	//create bounding box
+	boundingBox = new Box();
+	boundingBox->setPoints(currentMesh);
+
 	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{

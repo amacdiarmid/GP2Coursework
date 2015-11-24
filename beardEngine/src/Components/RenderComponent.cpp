@@ -23,12 +23,7 @@ void Renderer::init()
 
 void Renderer::update(mat4 MVPMat)
 {
-	mat4 tempMat = translate(mat4(1.0f), owner->getLocalPos());
-	tempMat = rotate(tempMat, radians(owner->getRotation().x), vec3(1, 0, 0));
-	tempMat = rotate(tempMat, radians(owner->getRotation().y), vec3(0, 1, 0));
-	tempMat = rotate(tempMat, radians(owner->getRotation().z), vec3(0, 0, 1));
-	tempMat = scale(tempMat, owner->getScale());
-	MVP = MVPMat * tempMat;
+	MVP = MVPMat;
 }
 
 void Renderer::render()

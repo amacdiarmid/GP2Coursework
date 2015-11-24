@@ -36,23 +36,46 @@ GameObject::~GameObject()
 
 
 
-void GameObject::update(mat4 MVPMat)
+void GameObject::update(mat4 VPMat)
 {
+	mat4 modelMatrix = translate(mat4(1.0f), localPos);
+	modelMatrix = rotate(modelMatrix, radians(rotation.x), vec3(1, 0, 0));
+	modelMatrix = rotate(modelMatrix, radians(rotation.y), vec3(0, 1, 0));
+	modelMatrix = rotate(modelMatrix, radians(rotation.z), vec3(0, 0, 1));
+	modelMatrix = scale(modelMatrix, size);
+	MVP = VPMat * modelMatrix;
+
 	if (active)
 	{
 		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
 		{
-			i->second->update(MVPMat);
+			i->second->update(MVP);
 		}
 		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
 		{
-			i->second->update(MVPMat);
+			i->second->update(VPMat);
 		}
 	}
 }
 
-void GameObject::render()
+void GameObject::render(Fustrum* fustrum)
 {
+	if (model != NULL)
+	{
+		positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox(), MVP);
+		if (pos == OUTSIDE_FRUSTRUM)
+		{
+			cout << name << " is outside" << endl;
+		}
+		else if (pos == INTERSECT_FRUSTRUM)
+		{
+			cout << name << " is intersected" << endl;
+		}
+		else
+		{
+			cout << name << " is inside" << endl;
+		}
+	}
 	if (active)
 	{
 		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
@@ -61,7 +84,7 @@ void GameObject::render()
 		}
 		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
 		{
-			i->second->render();
+			i->second->render(fustrum);
 		}
 	}
 }
@@ -86,7 +109,7 @@ void GameObject::addChild(GameObject *tempChild)
 
 void GameObject::changePosition(vec3 tempPos)
 {
-	worldPos += tempPos;
+	localPos += tempPos;
 }
 
 GameObject *GameObject::findChild(string com)

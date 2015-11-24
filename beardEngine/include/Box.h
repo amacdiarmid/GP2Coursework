@@ -2,15 +2,50 @@
 #define _BOX_H
 
 #include "Common.h"
-#include 
+#include "Mesh.h"
 
 struct Box
 {
-	vec3 P1, P2, P3, P4, P5, P6, P7, P8;
+	vec3 boxPoints[6];
+	vec3 center;
 
-	void setPoints()
+	void setPoints(MeshData* tempMesh)
 	{
+		vec3 min = vec3(0, 0, 0);
+		vec3 max = vec3(0, 0, 0);
+		for each (auto vertex in tempMesh->getVertives())
+		{
+			//find the max values
+			if (vertex.position.x > max.x){ max.x = vertex.position.x; }
+			if (vertex.position.y > max.y){ max.y = vertex.position.y; }
+			if (vertex.position.z > max.z){ max.z = vertex.position.z; }
+			//find the min values
+			if (vertex.position.x < min.x){ min.x = vertex.position.x; }
+			if (vertex.position.y < min.y){ min.y = vertex.position.y; }
+			if (vertex.position.z < min.z){ min.z = vertex.position.z; }
+		}
 
+		boxPoints[0] = vec3(min.x, min.y, min.z);
+		boxPoints[1] = vec3(max.x, min.y, min.z);
+		boxPoints[2] = vec3(max.x, min.y, max.z);
+		boxPoints[3] = vec3(min.x, min.y, max.z);
+		boxPoints[4] = vec3(min.x, max.y, min.z);
+		boxPoints[5] = vec3(max.x, max.y, min.z);
+		boxPoints[6] = vec3(max.x, max.y, max.z);
+		boxPoints[7] = vec3(min.x, max.y, max.z);
+
+		center = vec3((min.x + max.x / 2), (min.y + max.y / 2), (min.z + max.z / 2));
+
+	}
+
+	vec3 getPoints(int point)
+	{
+		return boxPoints[point];
+	}
+
+	vec3 getCenter()
+	{
+		return center;
 	}
 };
 

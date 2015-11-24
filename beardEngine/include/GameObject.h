@@ -8,6 +8,7 @@
 #include "Shader.h"
 #include "Object.h"
 #include <map>
+#include "ViewFrustumCulling.h"
 
 class GameObject
 {
@@ -18,8 +19,8 @@ public:
 	~GameObject();
 
 	//in .cpp
-	void update(mat4 MVPMat);
-	void render();
+	void update(mat4 VPMat);
+	void render(Fustrum *fustrum);
 	void addComponent(Components type);
 	void addChild(GameObject *tempChild);
 	void changePosition(vec3 tempPos);
@@ -28,8 +29,8 @@ public:
 	void printComponents();
 
 	//getters
-	vec3 getLocalPos(){ return worldPos; };
-	vec3 getScale(){ return scale; };
+	vec3 getLocalPos(){ return localPos; };
+	vec3 getScale(){ return size; };
 	vec3 getRotation(){ return rotation; };
 	Object *getModel(){ return model; };
 	Shader *getShader(){ return shader; };
@@ -42,12 +43,12 @@ public:
 	bool getWorld(){ return world; };
 
 	//setters
-	void setScale(vec3 tempScale){ scale = tempScale; };
+	void setScale(vec3 tempScale){ size = tempScale; };
 	void setRotation(vec3 tempRotation){ rotation = tempRotation; };
 	void setModel(Object* tempModel) { model = tempModel; };
 	void setShader(Shader* tempShader){ shader = tempShader; };
 	void setTexture(Texture* tempTexture){ texture = tempTexture; };
-	void setPosition(vec3 TempPos){ worldPos = TempPos; };
+	void setPosition(vec3 TempPos){ localPos = TempPos; };
 	void setName(string tempName){ name = tempName; };
 	void setParent(GameObject* tempParent){ parent = tempParent; };
 	void setWord(bool tempBool){ world = tempBool; };
@@ -62,11 +63,12 @@ private:
 	Object *model;
 	Texture *texture;
 	Shader *shader;
+	mat4 MVP;
 
 	//the distance from the parent world position
-	vec3 worldPos = vec3(0.0f, 0.0f, 0.0f);
+	vec3 localPos = vec3(0.0f, 0.0f, 0.0f);
 	//scale
-	vec3 scale = vec3(1.0f, 1.0f, 1.0f);
+	vec3 size = vec3(1.0f, 1.0f, 1.0f);
 	//rotation
 	vec3 rotation = vec3(0.0f, 0.0f, 0.0f);
 };

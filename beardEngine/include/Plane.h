@@ -18,7 +18,7 @@ struct Plane
 	{
 		vec3 vector1 = point1 - point2;
 		vec3 vector2 = point3 - point2;
-		return cross(vector1, vector2;
+		return cross(vector1, vector2);
 	}
 
 	

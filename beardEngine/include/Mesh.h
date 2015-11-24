@@ -19,6 +19,11 @@ struct MeshData
 		return indices.size();
 	};
 
+	vector<Vertex> getVertives()
+	{
+		return vertices;
+	}
+
 	~MeshData()
 	{
 		vertices.clear();

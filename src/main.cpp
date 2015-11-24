@@ -1,4 +1,5 @@
 #include "Window.h"
+#undef main
 #include "GP2CourseWorkGame.h"
 
 int main(int argc, char * arg[])

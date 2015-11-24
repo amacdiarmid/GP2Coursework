@@ -30,10 +30,10 @@ public:
 	Fustrum(PlayerController* tempPlayer);
 	~Fustrum();
 	void updateCamera();
-	positionToFrustrum isInFrustrum(Box* tempBox);
+	positionToFrustrum isInFrustrum(Box* TempBox, mat4 modelMatrix);
 private:
 	PlayerController* player;
-	Plane plane[6];
+	Plane planes[6];
 	vec3 farClippingCenter, nearClippingCenter;
 	vec3 topFarLeftPoint, topFarRightPoint, bottomFarLeftPoint, bottomFarRightPoint;
 	vec3 topNearLeftPoint, topNearRightPoint, bottomNearLeftPoint, bottomNearRightPoint;
