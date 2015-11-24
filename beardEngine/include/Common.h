@@ -22,8 +22,11 @@ using namespace glm;
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const float SCREEN_WIDTH = 640;
+const float SCREEN_HEIGHT = 480;
+const float FOV = 45;
+const float NEAR_CLIPPINGPLANE = 0.1f;
+const float FAR_CLIPPINGPLANE = 100;
 
 const string ASSET_PATH = "assets";
 const string SHADER_PATH = "/shaders";

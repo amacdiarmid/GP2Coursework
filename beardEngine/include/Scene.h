@@ -15,6 +15,7 @@
 #include "KeyboardListener.h"
 #include "PlayerController.h"
 #include "Window.h"
+#include "ViewFrustumCulling.h"
 #include <map>
 
 class Scene : public IkeyboardListener

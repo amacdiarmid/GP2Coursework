@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "FBXLoader.h"
+#include "Box.h"
 
 class Object
 {
@@ -21,9 +22,11 @@ public:
 	GLuint getVAO();
 	MeshData *getMesh();
 	string getName();
+	Box *getBoundingBox(){ return boundingBox; };
 
 private:
 	MeshData *currentMesh;
+	Box *boundingBox;
 
 	string name;
 

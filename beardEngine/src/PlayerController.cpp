@@ -3,8 +3,9 @@
 
 PlayerController::PlayerController()
 {
-	lookAtPoint = vec3(0, 0, 0);
 	worldPoint = vec3(0, 0, 10);
+	lookAtPoint = vec3(0, 0, 0);
+	upPoint = vec3(0, 1, 0);
 }
 
 	void PlayerController::LookUp()
@@ -37,7 +38,7 @@ PlayerController::PlayerController()
 
 	void PlayerController::Update()
 	{
-		projMatrix = perspective(45.0f, 640.0f / 480.0f, 0.1f, 100.0f);
-		viewMatrix = lookAt(worldPoint, lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
+		projMatrix = perspective(FOV, SCREEN_WIDTH / SCREEN_HEIGHT, NEAR_CLIPPINGPLANE, FAR_CLIPPINGPLANE);
+		viewMatrix = lookAt(worldPoint, lookAtPoint, upPoint);
 		MVPMatrix = projMatrix*viewMatrix;
 	}
