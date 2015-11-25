@@ -35,8 +35,8 @@ private:
 	PlayerController* player;
 	Plane planes[6];
 	vec3 farClippingCenter, nearClippingCenter;
-	vec3 topFarLeftPoint, topFarRightPoint, bottomFarLeftPoint, bottomFarRightPoint;
-	vec3 topNearLeftPoint, topNearRightPoint, bottomNearLeftPoint, bottomNearRightPoint;
+	vec3 farTopLeftPoint, farTopRightPoint, farBottomLeftPoint, farBottomRightPoint;
+	vec3 nearTopLeftPoint, nearTopRightPoint, nearBottomLeftPoint, nearBottomRightPoint;
 };
 
 #endif

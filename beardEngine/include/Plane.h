@@ -5,22 +5,26 @@
 
 struct Plane
 {
-	vec3 point1, point2, point3;
+	vec3 normal, point;
+	float d;
 
-	void setPoints(vec3 P1, vec3 P2, vec3 P3)
+	void setPlane(vec3 P1, vec3 P2, vec3 P3)
 	{
-		point1 = P1;
-		point2 = P2;
-		point3 = P3;
+		vec3 vector1 = P1 - P2;
+		vec3 vector2 = P3 - P2;
+		
+		vec3 normal = vector2 * vector1;
+
+		normal = normalize(normal);
+		point = P2;
+
+		d = -(normal.x * point.x + normal.y * point.y + normal.z * point.z);
 	}
 
-	vec3 getNormal()
+	float distanceFromVec(vec3 tempPoint)
 	{
-		vec3 vector1 = point1 - point2;
-		vec3 vector2 = point3 - point2;
-		return cross(vector1, vector2);
+		return (d + (normal.x * tempPoint.x + normal.y * tempPoint.y + normal.z * tempPoint.z));
 	}
-
 	
 };
 

@@ -47,6 +47,21 @@ struct Box
 	{
 		return center;
 	}
+
+	void DrawBox(mat4 modelMatrix)
+	{
+		glLineWidth(5);
+		glColor4f(1, 0, 0, 0);
+		glEnable(GL_LINE_SMOOTH);
+		glBegin(GL_LINE_LOOP);
+
+		for each (vec3 P1 in boxPoints)
+		{
+			vec4 A = vec4(P1.x, P1.y, P1.z, 1) * modelMatrix;
+			glVertex3f(A.x, A.y, A.z);
+		}
+		glEnd();
+	}
 };
 
 #endif
