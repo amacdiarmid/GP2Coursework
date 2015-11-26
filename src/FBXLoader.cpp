@@ -249,8 +249,8 @@ void processMeshTextureCoords(FbxMesh *mesh, Vertex *verts, int numVerts)
 				}
 
 				fbxUV = fbxLayerUV->GetDirectArray().GetAt(iUVIndex);
-				verts[fbxCornerIndex].texCoords.x = fbxUV[0];
-				verts[fbxCornerIndex].texCoords.y = 1.0f - fbxUV[1];
+				verts[fbxCornerIndex].texCoords.x = (float)fbxUV[0];
+				verts[fbxCornerIndex].texCoords.y = 1.0f - (float)fbxUV[1];
 			}
 		}
 	}

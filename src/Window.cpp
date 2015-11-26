@@ -14,8 +14,8 @@ void createWindow()
 	initSDL2TTF();
 
 	//ask for version 4.2 of openGL
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	//create a window 
 	window = SDL_CreateWindow("SDL", //window title
@@ -70,8 +70,10 @@ bool windowLoop()
 		}
 		if (event.type == SDL_KEYDOWN)
 		{
-
-			keyboard->onKeyDown(event.key.keysym.sym);
+			for each (auto var in keyboardListeners)
+			{
+				var->onKeyDown(event.key.keysym.sym);
+			}
 		//	switch (event.key.keysym.sym)
 		//	{
 		//	case SDLK_p:

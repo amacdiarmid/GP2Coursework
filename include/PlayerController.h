@@ -9,6 +9,7 @@ private:
 	vec3 lookAtPoint;
 	mat4 viewMatrix;
 
+
 public:
 	PlayerController();
 	//Movement
@@ -22,7 +23,9 @@ public:
 	void LookRight();
 	void LookLeft();
 
+
 	void Update();
+
 
 	mat4 GetViewMatrix(){ return viewMatrix; }
 	vec3 GetMovementVec(){ return movementVec; }

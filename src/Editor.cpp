@@ -97,5 +97,5 @@ void Editor::assignShader()
 void Editor::spawnObject()
 {
 	cout << "spawning object" << endl;
-	curGameObject->addChild(new GameObject(curName, curGameObject, curObject, curTexture, curShader));
+	curGameObject->addChild(new GameObject(curName, curGameObject, curObject, curTexture, curShader, NULL));
 }

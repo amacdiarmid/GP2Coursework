@@ -8,13 +8,14 @@
 #include "Shader.h"
 #include "Object.h"
 #include <map>
+#include "PlayerController.h"
 
 class GameObject
 {
 public:
 	GameObject();
 	GameObject(string tempName);
-	GameObject(string tempName,GameObject *tempParent, Object *tempModel, GLuint *tempTexture, Shader *tempShader);
+	GameObject(string tempName,GameObject *tempParent, Object *tempModel, GLuint *tempTexture, Shader *tempShader, PlayerController *tempInput);
 	~GameObject();
 
 	void addComponent(Components type);
@@ -25,6 +26,7 @@ public:
 	Object *getModel();
 	Shader *getShader();
 	GLuint *getTexture();
+	PlayerController *getInput();
 	GameObject *getChild(string tempName);
 	void setPosition(vec3 TempPos);
 	void changePosition(vec3 tempPos);
@@ -41,6 +43,7 @@ private:
 	Object *model;
 	GLuint *texture;
 	Shader *shader;
+	PlayerController *input;
 
 	//the world position 
 	vec3 worldPosition = vec3(0.0f, 0.0f, 0.0f);

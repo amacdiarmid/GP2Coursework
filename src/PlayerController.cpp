@@ -1,5 +1,6 @@
 #include "Common.h"
 #include "PlayerController.h"
+#include "Components\InputComponent.h"
 
 PlayerController::PlayerController()
 {

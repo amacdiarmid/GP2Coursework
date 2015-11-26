@@ -8,8 +8,10 @@
 #include "KeyboardListener.h"
 
 
-extern  IkeyboardListener *keyboard; // this nees to be a vector
+//extern  IkeyboardListener *keyboard; // this needs to be a vector
+extern vector <IkeyboardListener*> keyboardListeners;
 
+void addinput();
 void createWindow();
 void destroyWindow();
 bool windowLoop();

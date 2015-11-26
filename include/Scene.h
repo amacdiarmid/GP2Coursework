@@ -13,8 +13,10 @@
 #include "Editor.h"
 #include "SDL2.h"
 #include "KeyboardListener.h"
+#include "PlayerController.h"
 
 
+class Editor;
 
 class Scene : public IkeyboardListener
 {
@@ -49,10 +51,10 @@ private:
 	vec3 lookAtPoint = vec3(0.0f, 0.0f, 0.0f);
 
 	//main gameobject 
-	GameObject *worldObject = new GameObject("world Object");
+	GameObject *worldObject;// = new GameObject("world Object");
+	GameObject *playerObject;
 	//game obejcts
 	Object *teapotObj;
-	
 	//textures 
 	Texture *sunText;
 	Texture *earthText;
@@ -60,6 +62,8 @@ private:
 	
 	//shaders
 	Shader *mainShader;
+
+	PlayerController *input;
 
 	//debug mode stuff
 	Editor *editor;

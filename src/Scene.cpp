@@ -3,6 +3,7 @@
 Scene::Scene()
 {
 	debugMode = false;
+	worldObject = new GameObject("world Object");
 }
 
 Scene::~Scene()
@@ -32,45 +33,45 @@ void Scene::render()
 
 void Scene::update()
 {
-	//SDL_Event event;
-	//while (SDL_PollEvent(&event))
-	//{
-	//	cout << "2" << endl;
-	//	switch (event.key.keysym.sym)
-	//	{
-	//		cout << "3" << endl;
-	//	case SDLK_p:
-	//		cout << "4" << endl;
-	//		if (debugMode)
-	//		{
-	//			cout << "debug mode off" << endl;
-	//			debugMode = false;
-	//		}
-	//		else
-	//		{
-	//			cout << "debug mode on" << endl;
-	//			debugMode = true;
-	//		}
-	//	case SDLK_l:
-	//		if (debugMode)
-	//		{
-	//			editor->readCommand();
-	//		}
-	//	default:
-	//		break;
-	//	}
-	//}
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		cout << "2" << endl;
+		switch (event.key.keysym.sym)
+		{
+			cout << "3" << endl;
+		case SDLK_p:
+			cout << "4" << endl;
+			if (debugMode)
+			{
+				cout << "debug mode off" << endl;
+				debugMode = false;
+			}
+			else
+			{
+				cout << "debug mode on" << endl;
+				debugMode = true;
+			}
+		case SDLK_l:
+			if (debugMode)
+			{
+				editor->readCommand();
+			}
+		default:
+			break;
+		}
+	}
 
 	projMatrix = perspective(45.0f, 640.0f / 480.0f, 0.1f, 100.0f);
 	viewMatrix = lookAt(worldPoint, lookAtPoint, vec3(0.0f, 1.0f, 0.0f));
 	worldMatrix = translate(mat4(1.0f), vec3(0.0f, 0.0f, 0.0f));
 	MVPMatrix = projMatrix*viewMatrix*worldMatrix;
 
-	/*
+	
 	worldObject->getChild("sun")->changePosition(vec3(0.01f, 0.0f, 0.0f));
 	worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(0.0f, 0.01f, 0.0f));
 	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
-	*/
+	
 
 	worldObject->update();
 }
@@ -79,6 +80,8 @@ void Scene::createScene()
 {
 	editor = new Editor(this);
 	debugMode = false;
+
+	input = new PlayerController();
 
 	//create objects
 	teapotObj = new Object();
@@ -94,28 +97,33 @@ void Scene::createScene()
 
 	//create shaders
 	mainShader = new Shader();
+
 	mainShader->attatchVertexShader("/textureVS.glsl");
 	mainShader->attatchFragmentShader("/textureFS.glsl");
 	mainShader->createShader();
 
 	//create player/debug cam
 
+	playerObject = new GameObject("player", worldObject, NULL, NULL, NULL, input);
+	playerObject->addComponent(INPUT_COMPONENT);
+	//playerObject->addComponent(CAMERA_COMPONENT);
+
 	//add scene graph. this could be an external file or another function but it is here for now 
 	
-	/*
-	worldObject->addChild(new GameObject("sun", worldObject, teapotObj, sunText->getTexture(), mainShader));
+	
+	worldObject->addChild(new GameObject("sun", worldObject, teapotObj, sunText->getTexture(), mainShader, NULL));
 	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject->getChild("sun"), teapotObj, earthText->getTexture(), mainShader));
+	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject->getChild("sun"), teapotObj, earthText->getTexture(), mainShader, NULL));
 	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject->getChild("sun")->getChild("earth"), teapotObj, moonText->getTexture(), mainShader));
+	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject->getChild("sun")->getChild("earth"), teapotObj, moonText->getTexture(), mainShader, NULL));
 	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->getComponents();
 	worldObject->getChildern();
-	*/	
+	
 }
 
 void Scene::destroyScene()

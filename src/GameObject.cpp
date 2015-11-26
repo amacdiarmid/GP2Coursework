@@ -1,4 +1,5 @@
-#include "GameObject.h";
+#include "GameObject.h"
+#include "Components\InputComponent.h"
 
 GameObject::GameObject()
 {
@@ -13,7 +14,7 @@ GameObject::GameObject(string tempName)
 	active = true;
 }
 
-GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempModel, GLuint *tempTexture, Shader *tempShader)
+GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempModel, GLuint *tempTexture, Shader *tempShader, PlayerController *tempInput)
 {
 	world = false;
 	name = tempName;
@@ -21,26 +22,32 @@ GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempMode
 	model = tempModel;
 	texture = tempTexture;
 	shader = tempShader;
+	input = tempInput;
 	childrenList.clear();
 	componentsList.clear();
 	active = true;
+
 }
 
 GameObject::~GameObject()
 {
 }
 
-
 void GameObject::addComponent(Components type)
 {
-	if (type == RENDER_COMPONENT)
+	switch (type)
 	{
-		cout << "adding render Comp to " << name <<  endl;
+	case RENDER_COMPONENT:
+		cout << "adding render Comp to " << name << endl;
 		componentsList.insert(pair<Components, Component*>(type, new Renderer(this)));
-	}
-	else
-	{
+		break;
+	case INPUT_COMPONENT:
+		cout << "adding render Comp to " << name << endl;
+		componentsList.insert(pair<Components, Component*>(type, new InputComponent(this)));
+		break;
+	default:
 		cout << "error_1, gameObject.cpp - no component" << endl;
+		break;
 	}
 }
 
@@ -121,6 +128,11 @@ void GameObject::changePosition(vec3 tempPos)
 string GameObject::getName()
 {
 	return name;
+}
+
+PlayerController *GameObject::getInput()
+{
+	return input;
 }
 
 void GameObject::getChildern()
