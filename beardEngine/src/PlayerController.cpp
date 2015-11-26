@@ -38,7 +38,7 @@ PlayerController::PlayerController()
 
 	void PlayerController::Update()
 	{
-		projMatrix = perspective(FOV, SCREEN_WIDTH / SCREEN_HEIGHT, NEAR_CLIPPINGPLANE, FAR_CLIPPINGPLANE);
+		projMatrix = perspective(FOV, getRatio(), NEAR_CLIPPINGPLANE, FAR_CLIPPINGPLANE);
 		viewMatrix = lookAt(worldPoint, lookAtPoint, upPoint);
 		MVPMatrix = projMatrix*viewMatrix;
 	}

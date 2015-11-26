@@ -28,6 +28,10 @@ void HoloRoomScene::render()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	//backface culling
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+
 	worldObject->render(fustrum);
 
 	GLenum err = GL_NO_ERROR;
@@ -85,6 +89,7 @@ void HoloRoomScene::createScene()
 	//create player/debug cam
 	player = new PlayerController();
 	fustrum = new Fustrum(player);
+	fustrum->setUpCamera();
 	fustrum->updateCamera();
 
 	//add scene graph. this could be an external file or another function but it is here for now 

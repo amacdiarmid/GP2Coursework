@@ -16,6 +16,8 @@ private:
 
 public:
 	PlayerController();
+	~PlayerController();
+	
 	//Camera LookAt
 	void LookUp();
 	void LookDown();
@@ -28,10 +30,15 @@ public:
 	vec3 getlookAtPoint(){ return lookAtPoint; };
 	vec3 getUpPoint(){ return upPoint; };
 	vec3 getDirection(){ return lookAtPoint - worldPoint; };
+
+	float getRatio(){ return SCREEN_WIDTH / SCREEN_HEIGHT; };
+	float getFOV(){ return FOV; };
+	float getNearPlaneDis(){ return NEAR_CLIPPINGPLANE; };
+	float getFarPlaneDis(){ return FAR_CLIPPINGPLANE; };
 	float getNearHeight(){ return 2 * tan(FOV / 2) * NEAR_CLIPPINGPLANE; };
-	float getNearWidth(){ return getNearHeight() * (SCREEN_WIDTH / SCREEN_HEIGHT); };
+	float getNearWidth(){ return getNearHeight() * getRatio(); };
 	float getFarHeight(){ return 2 * tan(FOV / 2) * FAR_CLIPPINGPLANE; };
-	float getFarWidth(){ return getNearHeight() * (SCREEN_WIDTH / SCREEN_HEIGHT); };
+	float getFarWidth(){ return getFarHeight() * getRatio(); };
 
 	mat4 GetViewMatrix(){ return viewMatrix; };
 	mat4 getProjMatrix(){ return projMatrix; };

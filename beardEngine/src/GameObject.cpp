@@ -62,7 +62,7 @@ void GameObject::render(Fustrum* fustrum)
 {
 	if (model != NULL)
 	{
-		positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox(), MVP);
+		positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox(), localPos);
 		if (pos == OUTSIDE_FRUSTRUM)
 		{
 			cout << name << " is outside" << endl;
