@@ -11,12 +11,12 @@ struct MeshData
 
 	int getNumVerts()
 	{
-		return vertices.size();
+		return (int)vertices.size();
 	};
 
 	int getNumIndices()
 	{
-		return indices.size();
+		return (int)indices.size();
 	};
 
 	vector<Vertex> getVertives()

@@ -42,10 +42,11 @@ public:
 	virtual void onkeyUp(SDL_Keycode key) = 0;
 
 	Fustrum *getFustrum(){ return fustrum; };
+	PlayerController *getInput(){ return input; };
 protected:
 	string name;
 
-	PlayerController *player;
+	PlayerController *input;
 	Fustrum* fustrum;
 
 	//main gameobject 

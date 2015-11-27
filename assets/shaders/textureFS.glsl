@@ -1,4 +1,4 @@
-#version 150
+#version 130
 
 in vec4 vertexColourOut;
 in vec2 vertexTexCoordsOut;

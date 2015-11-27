@@ -23,3 +23,4 @@ int main(int argc, char * arg[])
 
     return 0;
 }
+vector <IkeyboardListener*> keyboardListeners;

@@ -14,8 +14,8 @@ void createWindow(string gameName)
 	initSDL2TTF();
 
 	//ask for version 4.2 of openGL
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	//create a window 
 	window = SDL_CreateWindow(gameName.c_str(), //window title
@@ -60,7 +60,7 @@ void destroyWindow()
 }
 
 void windowLoop()
-{
+		{
 	//call swap so that our GL back buffer is displayed
 	SDL_GL_SwapWindow(window);
 }

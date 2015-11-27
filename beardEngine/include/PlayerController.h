@@ -19,10 +19,10 @@ public:
 	~PlayerController();
 	
 	//Camera LookAt
-	void LookUp();
-	void LookDown();
-	void LookRight();
-	void LookLeft();
+	void moveForward();
+	void moveBackward();
+	void strafeRight();
+	void strafeLeft();
 
 	void Update();
 

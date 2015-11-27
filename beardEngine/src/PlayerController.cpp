@@ -8,28 +8,28 @@ PlayerController::PlayerController()
 	upPoint = vec3(0, 1, 0);
 }
 
-	void PlayerController::LookUp()
+	void PlayerController::moveForward()
 	{
 		worldPoint.z += -1.0f;
 		lookAtPoint.z += -1.0f;
 		cout << "w key " << endl;
 	}
 
-	void PlayerController::LookDown()
+	void PlayerController::moveBackward()
 	{
 		worldPoint.z += 1.0f;
 		lookAtPoint.z += 1.0f;
 		cout << "s key " << endl;
 	}
 
-	void PlayerController::LookRight()
+	void PlayerController::strafeRight()
 	{
 		worldPoint.x += 1.0f;
 		lookAtPoint.x += 1.0f;
 		cout << "s key " << endl;
 	}
 
-	void PlayerController::LookLeft()
+	void PlayerController::strafeLeft()
 	{
 		worldPoint.x += -1.0f;
 		lookAtPoint.x += -1.0f;

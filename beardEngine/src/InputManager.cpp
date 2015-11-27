@@ -9,16 +9,16 @@ void InputManager::KeyBoardPress(PlayerController *player)
 		switch (event.key.keysym.sym)
 		{
 		case SDLK_w:
-			player->LookUp();
+			player->moveForward();
 			break;
 		case SDLK_s:
-			player->LookDown();
+			player->moveBackward();
 			break;
 		case SDLK_a:
-			player->LookLeft();
+			player->strafeLeft();
 			break;
 		case SDLK_d:
-			player->LookRight();
+			player->strafeRight();
 			break;
 		default:
 			break;
