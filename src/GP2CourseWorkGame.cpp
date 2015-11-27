@@ -1,13 +1,12 @@
 #include "GP2CourseWorkGame.h"
+#include "Scene.h"
 
 GP2CourseWorkGame::GP2CourseWorkGame()
 {
 	//create the main scene
-	Scene *mainScene = new HoloRoomScene("holoRoom");
+	currentScene = new HoloRoomScene("holoRoom");
 	//main scene to the current scene (this could be usefull for multiple scenes (maybe))
-	currentScene = mainScene;
-
-	addinput(mainScene);
+	keyboardListeners.push_back(currentScene);
 
 	currentScene->createScene();
 }

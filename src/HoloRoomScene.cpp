@@ -1,16 +1,19 @@
 #include "HoloRoomScene.h"
+#include "Editor.h"
 
 //int i = 0;
 
 HoloRoomScene::HoloRoomScene()
 {
 	debugMode = false;
+	worldObject = new GameObject("world Object");
 }
 
 HoloRoomScene::HoloRoomScene(string tempName)
 {
 	debugMode = false;
 	name = tempName;
+	worldObject = new GameObject("world Object");
 }
 
 HoloRoomScene::~HoloRoomScene()
@@ -96,8 +99,9 @@ void HoloRoomScene::createScene()
 
 	loadScene(worldObject, name, this);
 
-	worldObject->addChild(new GameObject("player", worldObject, input));
-	worldObject->getChild("sun")->addComponent(INPUT_COMPONENT);
+	//uncomment for world reset
+	//worldObject->addChild(new GameObject("player", worldObject, input));
+	//worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
 
 	//worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["main"]));
 	//worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);

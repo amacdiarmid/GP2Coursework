@@ -1,6 +1,8 @@
 #ifndef _PLAYER_CONTROLLER_H
 #define _PLAYER_CONTROLLER_H
 
+#include "Common.h"
+
 class PlayerController
 {
 private:
@@ -43,6 +45,8 @@ public:
 	mat4 GetViewMatrix(){ return viewMatrix; };
 	mat4 getProjMatrix(){ return projMatrix; };
 	mat4 getMVPmatrix(){ return MVPMatrix; };
+
+	void setWorldPoint(vec3 tempPos){ worldPoint = tempPos; lookAtPoint = tempPos + vec3(0, 0, -10); };
 };
 
 

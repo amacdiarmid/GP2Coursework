@@ -51,24 +51,6 @@ GameObject::~GameObject()
 {
 }
 
-void GameObject::addComponent(Components type)
-{
-	switch (type)
-	{
-	case RENDER_COMPONENT:
-		cout << "adding render Comp to " << name << endl;
-		componentsList.insert(pair<Components, Component*>(type, new Renderer(this)));
-		break;
-	case INPUT_COMPONENT:
-		cout << "adding input Comp to " << name << endl;
-		componentsList.insert(pair<Components, Component*>(type, new InputComponent(this)));
-		break;
-	default:
-		cout << "error_1, gameObject.cpp - no component" << endl;
-		break;
-	}
-}
-
 void GameObject::update(mat4 VPMat)
 {
 	mat4 modelMatrix = translate(mat4(1.0f), localPos);

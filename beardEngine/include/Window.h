@@ -11,7 +11,6 @@
 //extern  IkeyboardListener *keyboard; // this needs to be a vector
 extern vector <IkeyboardListener*> keyboardListeners;
 
-void addinput(IkeyboardListener *tempLisener){ keyboardListeners.insert(tempLisener); };
 void createWindow(string gameName);
 void destroyWindow();
 void windowLoop();

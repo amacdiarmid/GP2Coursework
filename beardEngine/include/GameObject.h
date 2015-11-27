@@ -62,6 +62,8 @@ public:
 	void setParent(GameObject* tempParent){ parent = tempParent; };
 	void setWord(bool tempBool){ world = tempBool; };
 	void setActive(bool tempBool){ active = tempBool; };
+	void setInput(PlayerController *tempPlayer){ input = tempPlayer; };
+
 private:
 	string name;
 	GameObject *parent;
