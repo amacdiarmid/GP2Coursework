@@ -1,0 +1,561 @@
+﻿<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <LastAuthor>Alex</LastAuthor>
+  <LastSaved>2015-11-20T13:35:58Z</LastSaved>
+  <Version>15.00</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>8832</WindowHeight>
+  <WindowWidth>23040</WindowWidth>
+  <WindowTopX>0</WindowTopX>
+  <WindowTopY>0</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="s62">
+   <NumberFormat ss:Format="Standard"/>
+  </Style>
+  <Style ss:ID="s63">
+   <NumberFormat/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Worksheet1">
+  <Names>
+   <NamedRange ss:Name="_FilterDatabase" ss:RefersTo="=Worksheet1!R1C1:R1C7"
+    ss:Hidden="1"/>
+  </Names>
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="54" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultRowHeight="14.4">
+   <Column ss:Width="138"/>
+   <Column ss:Width="58.2"/>
+   <Column ss:Width="67.2"/>
+   <Column ss:AutoFitWidth="0" ss:Width="143.4"/>
+   <Column ss:AutoFitWidth="0" ss:Width="85.8"/>
+   <Column ss:AutoFitWidth="0" ss:Width="102.60000000000001"/>
+   <Column ss:AutoFitWidth="0" ss:Width="87.6"/>
+   <Row>
+    <Cell><Data ss:Type="String">Name</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Count</Data><NamedCell ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Capture Time %</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Total Time (μs)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Min (μs)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Avg (μs)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+    <Cell><Data ss:Type="String">Max (μs)</Data><NamedCell
+      ss:Name="_FilterDatabase"/></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glGetUniformLocation</Data></Cell>
+    <Cell><Data ss:Type="Number">19855</Data></Cell>
+    <Cell><Data ss:Type="Number">0.33</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">13672782</Data></Cell>
+    <Cell><Data ss:Type="Number">0.248</Data></Cell>
+    <Cell><Data ss:Type="Number">0.68799999999999994</Data></Cell>
+    <Cell><Data ss:Type="Number">263.23500000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glFlush</Data></Cell>
+    <Cell><Data ss:Type="Number">11252</Data></Cell>
+    <Cell><Data ss:Type="Number">0.06</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">2306996</Data></Cell>
+    <Cell><Data ss:Type="Number">0.17699999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">0.20499999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">8.9719999999999995</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glBindTexture</Data></Cell>
+    <Cell><Data ss:Type="Number">8515</Data></Cell>
+    <Cell><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">3978242</Data></Cell>
+    <Cell><Data ss:Type="Number">0.32800000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">0.46700000000000003</Data></Cell>
+    <Cell><Data ss:Type="Number">14.577999999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glActiveTexture</Data></Cell>
+    <Cell><Data ss:Type="Number">8512</Data></Cell>
+    <Cell><Data ss:Type="Number">0.06</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">2611275</Data></Cell>
+    <Cell><Data ss:Type="Number">0.24</Data></Cell>
+    <Cell><Data ss:Type="Number">0.30599999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">12.16</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glBindVertexArray</Data></Cell>
+    <Cell><Data ss:Type="Number">8510</Data></Cell>
+    <Cell><Data ss:Type="Number">7.0000000000000007E-2</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">3087394</Data></Cell>
+    <Cell><Data ss:Type="Number">0.25900000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">0.36199999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">12.627000000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glUniform3fv</Data></Cell>
+    <Cell><Data ss:Type="Number">8509</Data></Cell>
+    <Cell><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">4254342</Data></Cell>
+    <Cell><Data ss:Type="Number">0.40600000000000003</Data></Cell>
+    <Cell><Data ss:Type="Number">0.499</Data></Cell>
+    <Cell><Data ss:Type="Number">12.548</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glUniform1i</Data></Cell>
+    <Cell><Data ss:Type="Number">8509</Data></Cell>
+    <Cell><Data ss:Type="Number">0.1</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">4098478</Data></Cell>
+    <Cell><Data ss:Type="Number">0.36499999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">0.48099999999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">17.279</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glDrawElements</Data></Cell>
+    <Cell><Data ss:Type="Number">8508</Data></Cell>
+    <Cell><Data ss:Type="Number">58.24</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">2431006119</Data></Cell>
+    <Cell><Data ss:Type="Number">237.99299999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">285.73099999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">1503.3050000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">GetPixelFormat</Data></Cell>
+    <Cell><Data ss:Type="Number">5673</Data></Cell>
+    <Cell><Data ss:Type="Number">0.88</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">36634112</Data></Cell>
+    <Cell><Data ss:Type="Number">4.258</Data></Cell>
+    <Cell><Data ss:Type="Number">6.4569999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">254.20099999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glEnable</Data></Cell>
+    <Cell><Data ss:Type="Number">2839</Data></Cell>
+    <Cell><Data ss:Type="Number">0.03</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1309815</Data></Cell>
+    <Cell><Data ss:Type="Number">0.32300000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">0.46100000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">11.45</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glClearColor</Data></Cell>
+    <Cell><Data ss:Type="Number">2838</Data></Cell>
+    <Cell><Data ss:Type="Number">0.05</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1989696</Data></Cell>
+    <Cell><Data ss:Type="Number">0.40300000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">0.70099999999999996</Data></Cell>
+    <Cell><Data ss:Type="Number">254.84399999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glClear</Data></Cell>
+    <Cell><Data ss:Type="Number">2837</Data></Cell>
+    <Cell><Data ss:Type="Number">0.33</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">13907322</Data></Cell>
+    <Cell><Data ss:Type="Number">3.556</Data></Cell>
+    <Cell><Data ss:Type="Number">4.9020000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">205.886</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glUseProgram</Data></Cell>
+    <Cell><Data ss:Type="Number">2837</Data></Cell>
+    <Cell><Data ss:Type="Number">0.06</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">2414933</Data></Cell>
+    <Cell><Data ss:Type="Number">0.57699999999999996</Data></Cell>
+    <Cell><Data ss:Type="Number">0.85099999999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">96.192999999999998</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glUniformMatrix4fv</Data></Cell>
+    <Cell><Data ss:Type="Number">2837</Data></Cell>
+    <Cell><Data ss:Type="Number">0.05</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1895408</Data></Cell>
+    <Cell><Data ss:Type="Number">0.45200000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">0.66800000000000004</Data></Cell>
+    <Cell><Data ss:Type="Number">12.832000000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glBlendFunc</Data></Cell>
+    <Cell><Data ss:Type="Number">2837</Data></Cell>
+    <Cell><Data ss:Type="Number">0.03</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1279355</Data></Cell>
+    <Cell><Data ss:Type="Number">0.33200000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">0.45</Data></Cell>
+    <Cell><Data ss:Type="Number">12.355</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">SwapBuffers</Data></Cell>
+    <Cell><Data ss:Type="Number">2836</Data></Cell>
+    <Cell><Data ss:Type="Number">24.99</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1043007348</Data></Cell>
+    <Cell><Data ss:Type="Number">298.61799999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">367.774</Data></Cell>
+    <Cell><Data ss:Type="Number">4451.4520000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglGetProcAddress</Data></Cell>
+    <Cell><Data ss:Type="Number">2516</Data></Cell>
+    <Cell><Data ss:Type="Number">0.11</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">4797377</Data></Cell>
+    <Cell><Data ss:Type="Number">0.43</Data></Cell>
+    <Cell><Data ss:Type="Number">1.9059999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">26.428000000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">DescribePixelFormat</Data></Cell>
+    <Cell><Data ss:Type="Number">48</Data></Cell>
+    <Cell><Data ss:Type="Number">0.01</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">231507</Data></Cell>
+    <Cell><Data ss:Type="Number">3.4649999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">4.8230000000000004</Data></Cell>
+    <Cell><Data ss:Type="Number">15.805999999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glTexParameteri</Data></Cell>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">12312</Data></Cell>
+    <Cell><Data ss:Type="Number">0.192</Data></Cell>
+    <Cell><Data ss:Type="Number">1.026</Data></Cell>
+    <Cell><Data ss:Type="Number">4.91</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glBindAttribLocation</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">16940</Data></Cell>
+    <Cell><Data ss:Type="Number">1.157</Data></Cell>
+    <Cell><Data ss:Type="Number">4.2350000000000003</Data></Cell>
+    <Cell><Data ss:Type="Number">10.218</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glVertexAttribPointer</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">5522</Data></Cell>
+    <Cell><Data ss:Type="Number">0.23100000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">1.38</Data></Cell>
+    <Cell><Data ss:Type="Number">4.6950000000000003</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glTexImage2D</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">1.47</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">61295265</Data></Cell>
+    <Cell><Data ss:Type="Number">8417.384</Data></Cell>
+    <Cell><Data ss:Type="Number">20431.755000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">27412.268</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglDeleteContext</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">0.06</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">2575697</Data></Cell>
+    <Cell><Data ss:Type="Number">681.00699999999995</Data></Cell>
+    <Cell><Data ss:Type="Number">858.56500000000005</Data></Cell>
+    <Cell><Data ss:Type="Number">1058.7439999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glGenerateMipmap</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">0.02</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">871045</Data></Cell>
+    <Cell><Data ss:Type="Number">75.021000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">290.34800000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">604.57299999999998</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glGenTextures</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">33966</Data></Cell>
+    <Cell><Data ss:Type="Number">7.6139999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">11.321999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">13.601000000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glEnableVertexAttribArray</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">2211</Data></Cell>
+    <Cell><Data ss:Type="Number">0.20499999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">0.73699999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">1.78</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glCompileShader</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0.04</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1722364</Data></Cell>
+    <Cell><Data ss:Type="Number">430.51400000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">861.18200000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">1291.8499999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glBufferData</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0.02</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">831712</Data></Cell>
+    <Cell><Data ss:Type="Number">330.40499999999997</Data></Cell>
+    <Cell><Data ss:Type="Number">415.85599999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">501.30700000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glGetString</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">18315</Data></Cell>
+    <Cell><Data ss:Type="Number">1.6719999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">9.157</Data></Cell>
+    <Cell><Data ss:Type="Number">16.643000000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glCreateShader</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">12524</Data></Cell>
+    <Cell><Data ss:Type="Number">2.5049999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">6.2619999999999996</Data></Cell>
+    <Cell><Data ss:Type="Number">10.019</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glShaderSource</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">7648</Data></Cell>
+    <Cell><Data ss:Type="Number">1.657</Data></Cell>
+    <Cell><Data ss:Type="Number">3.8239999999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">5.9909999999999997</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglMakeCurrent</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">6601</Data></Cell>
+    <Cell><Data ss:Type="Number">3.0419999999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">3.3</Data></Cell>
+    <Cell><Data ss:Type="Number">3.5590000000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glGetShaderiv</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">6258</Data></Cell>
+    <Cell><Data ss:Type="Number">0.69699999999999995</Data></Cell>
+    <Cell><Data ss:Type="Number">3.129</Data></Cell>
+    <Cell><Data ss:Type="Number">5.5609999999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glAttachShader</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">5091</Data></Cell>
+    <Cell><Data ss:Type="Number">0.38800000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">2.5449999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">4.7030000000000003</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglGetExtensionsStringARB</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">4893</Data></Cell>
+    <Cell><Data ss:Type="Number">2.2320000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">2.4460000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">2.661</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glBindBuffer</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">4304</Data></Cell>
+    <Cell><Data ss:Type="Number">1.0449999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">2.1520000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">3.2589999999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glGenBuffers</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">3543</Data></Cell>
+    <Cell><Data ss:Type="Number">0.52300000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">1.7709999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">3.02</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glDeleteShader</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1161</Data></Cell>
+    <Cell><Data ss:Type="Number">0.311</Data></Cell>
+    <Cell><Data ss:Type="Number">0.57999999999999996</Data></Cell>
+    <Cell><Data ss:Type="Number">0.85</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglCreateContextAttribsARB</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0.08</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">3454146</Data></Cell>
+    <Cell><Data ss:Type="Number">3454.1460000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">3454.1460000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">3454.1460000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglCreateContext</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0.08</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">3451100</Data></Cell>
+    <Cell><Data ss:Type="Number">3451.1</Data></Cell>
+    <Cell><Data ss:Type="Number">3451.1</Data></Cell>
+    <Cell><Data ss:Type="Number">3451.1</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglCreateLayerContext</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0.08</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">3450306</Data></Cell>
+    <Cell><Data ss:Type="Number">3450.306</Data></Cell>
+    <Cell><Data ss:Type="Number">3450.306</Data></Cell>
+    <Cell><Data ss:Type="Number">3450.306</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glLinkProgram</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0.02</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">953376</Data></Cell>
+    <Cell><Data ss:Type="Number">953.37599999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">953.37599999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">953.37599999999998</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglChoosePixelFormatARB</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0.01</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">235032</Data></Cell>
+    <Cell><Data ss:Type="Number">235.03200000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">235.03200000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">235.03200000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glCreateProgram</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">18266</Data></Cell>
+    <Cell><Data ss:Type="Number">18.265999999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">18.265999999999998</Data></Cell>
+    <Cell><Data ss:Type="Number">18.265999999999998</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glGenVertexArrays</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">9992</Data></Cell>
+    <Cell><Data ss:Type="Number">9.9920000000000009</Data></Cell>
+    <Cell><Data ss:Type="Number">9.9920000000000009</Data></Cell>
+    <Cell><Data ss:Type="Number">9.9920000000000009</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glViewport</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1646</Data></Cell>
+    <Cell><Data ss:Type="Number">1.6459999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">1.6459999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">1.6459999999999999</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glHint</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1383</Data></Cell>
+    <Cell><Data ss:Type="Number">1.383</Data></Cell>
+    <Cell><Data ss:Type="Number">1.383</Data></Cell>
+    <Cell><Data ss:Type="Number">1.383</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glGetProgramiv</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s62"><Data ss:Type="Number">1218</Data></Cell>
+    <Cell><Data ss:Type="Number">1.218</Data></Cell>
+    <Cell><Data ss:Type="Number">1.218</Data></Cell>
+    <Cell><Data ss:Type="Number">1.218</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glShadeModel</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">708</Data></Cell>
+    <Cell><Data ss:Type="Number">0.70799999999999996</Data></Cell>
+    <Cell><Data ss:Type="Number">0.70799999999999996</Data></Cell>
+    <Cell><Data ss:Type="Number">0.70799999999999996</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glDepthFunc</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">638</Data></Cell>
+    <Cell><Data ss:Type="Number">0.63800000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">0.63800000000000001</Data></Cell>
+    <Cell><Data ss:Type="Number">0.63800000000000001</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glDisableVertexAttribArray</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">461</Data></Cell>
+    <Cell><Data ss:Type="Number">0.46100000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">0.46100000000000002</Data></Cell>
+    <Cell><Data ss:Type="Number">0.46100000000000002</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">glClearDepth</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">437</Data></Cell>
+    <Cell><Data ss:Type="Number">0.437</Data></Cell>
+    <Cell><Data ss:Type="Number">0.437</Data></Cell>
+    <Cell><Data ss:Type="Number">0.437</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">wglGetCurrentDC</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="Number">0</Data></Cell>
+    <Cell ss:StyleID="s63"><Data ss:Type="Number">299</Data></Cell>
+    <Cell><Data ss:Type="Number">0.29899999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">0.29899999999999999</Data></Cell>
+    <Cell><Data ss:Type="Number">0.29899999999999999</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveCol>1</ActiveCol>
+     <RangeSelection>C2</RangeSelection>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+  <AutoFilter x:Range="R1C1:R1C7" xmlns="urn:schemas-microsoft-com:office:excel">
+  </AutoFilter>
+ </Worksheet>
+</Workbook>
