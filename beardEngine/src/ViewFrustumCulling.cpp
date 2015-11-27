@@ -42,39 +42,38 @@ positionToFrustrum Fustrum::isInFrustrum(Box* TempBox, vec3 objectPos)
 	int out = 0;
 	int in = 0;
 
-	//not the mvp matrix but the gameobject position and add it to the box positions
-	//test center point
-	vec3 point = TempBox->getCenter() - objectPos;
-	return pointInFrustrum(point);
+	
+	////test center point
+	//vec3 point = TempBox->getCenter() + objectPos;
+	//return pointInFrustrum(point);
 
-
-	//for (int i = 0; i < 8; i++)
-	//{
-	//	//set up te correct point with the modelMatrix
-	//	vec4 pointBefore = (vec4(TempBox->getPoints(i).x, TempBox->getPoints(i).y, TempBox->getPoints(i).z, 1) * modelMatrix);
-	//	vec3 point = vec3(pointBefore.x, pointBefore.y, pointBefore.z);
-	//	
-	//	if (pointInFrustrum(point) == OUTSIDE_FRUSTRUM)
-	//	{
-	//		out++;
-	//	}
-	//	else
-	//	{
-	//		in++;
-	//	}
-	//}
-	//if (out == 8)
-	//{
-	//	return OUTSIDE_FRUSTRUM;
-	//}
-	//else if (in == 8)
-	//{
-	//	return INSIDE_FRUSTRUM;
-	//}
-	//else
-	//{
-	//	return INTERSECT_FRUSTRUM;
-	//}
+	//test all the points of the bounding box
+	for (int i = 0; i < 8; i++)
+	{
+		//set up te correct point with the modelMatrix
+		vec3 point = TempBox->getPoints(i) + objectPos;
+		
+		if (pointInFrustrum(point) == OUTSIDE_FRUSTRUM)
+		{
+			out++;
+		}
+		else
+		{
+			in++;
+		}
+	}
+	if (out == 8)
+	{
+		return OUTSIDE_FRUSTRUM;
+	}
+	else if (in == 8)
+	{
+		return INSIDE_FRUSTRUM;
+	}
+	else
+	{
+		return INTERSECT_FRUSTRUM;
+	}
 }
 
 positionToFrustrum Fustrum::pointInFrustrum(vec3 point)
@@ -82,7 +81,7 @@ positionToFrustrum Fustrum::pointInFrustrum(vec3 point)
 	float pcz, pcx, pcy, aux;
 
 	//get vectro from cam position
-	vec3 v = point + camPos;
+	vec3 v = -point + camPos;
 
 	//check if the z lies between the frustrum
 	pcz = dot(v, -Z);

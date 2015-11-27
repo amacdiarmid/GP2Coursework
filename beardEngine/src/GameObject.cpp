@@ -60,27 +60,19 @@ void GameObject::update(mat4 VPMat)
 
 void GameObject::render(Fustrum* fustrum)
 {
-	if (model != NULL)
-	{
-		positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox(), localPos);
-		if (pos == OUTSIDE_FRUSTRUM)
-		{
-			cout << name << " is outside" << endl;
-		}
-		else if (pos == INTERSECT_FRUSTRUM)
-		{
-			cout << name << " is intersected" << endl;
-		}
-		else
-		{
-			cout << name << " is inside" << endl;
-		}
-	}
 	if (active)
 	{
-		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+		if (model != NULL)
 		{
-			i->second->render();
+			//see if the model is inside the fustrum then render
+			positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox(), localPos);
+			if (pos == INSIDE_FRUSTRUM || pos == INTERSECT_FRUSTRUM)
+			{
+				for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+				{
+					i->second->render();
+				}
+			}
 		}
 		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
 		{
