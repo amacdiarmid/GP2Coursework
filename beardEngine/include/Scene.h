@@ -1,5 +1,5 @@
-#ifndef _SCENE_H_
-#define _SCENE_H_
+#ifndef _SCENE_H
+#define _SCENE_H
 
 #include "Common.h"
 #include "Vertex.h"
@@ -10,13 +10,14 @@
 #include "Object.h"
 #include "GameObject.h"
 #include "Components\Components.h"
-#include "Editor.h"
 #include "SDL2.h"
 #include "KeyboardListener.h"
 #include "PlayerController.h"
 #include "Window.h"
 #include "ViewFrustumCulling.h"
 #include <map>
+
+class Editor;
 
 class Scene : public IkeyboardListener
 {
@@ -42,14 +43,15 @@ public:
 	virtual void onkeyUp(SDL_Keycode key) = 0;
 
 	Fustrum *getFustrum(){ return fustrum; };
+	PlayerController *getInput(){ return input; };
 protected:
 	string name;
 
-	PlayerController *player;
+	PlayerController *input;
 	Fustrum* fustrum;
 
 	//main gameobject 
-	GameObject *worldObject = new GameObject("world Object");
+	GameObject *worldObject;
 	
 	//game objects
 	map<string, Object*> objects;

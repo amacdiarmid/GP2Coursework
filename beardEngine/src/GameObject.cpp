@@ -1,4 +1,5 @@
-#include "GameObject.h";
+#include "GameObject.h"
+#include "Components\InputComponent.h"
 
 GameObject::GameObject()
 {
@@ -12,6 +13,7 @@ GameObject::GameObject(string tempName)
 	model = NULL;
 	texture = NULL;
 	shader = NULL;
+	input = NULL;
 	childrenList.clear();
 	componentsList.clear();
 	active = true;
@@ -25,6 +27,21 @@ GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempMode
 	model = tempModel;
 	texture = tempTexture;
 	shader = tempShader;
+	input = NULL;
+	childrenList.clear();
+	componentsList.clear();
+	active = true;
+}
+
+GameObject::GameObject(string tempName, GameObject *tempParent, PlayerController *tempInput)
+{
+	world = false;
+	name = tempName;
+	parent = tempParent;
+	model = NULL;
+	texture = NULL;
+	shader = NULL;
+	input = tempInput;
 	childrenList.clear();
 	componentsList.clear();
 	active = true;
@@ -33,8 +50,6 @@ GameObject::GameObject(string tempName, GameObject *tempParent, Object *tempMode
 GameObject::~GameObject()
 {
 }
-
-
 
 void GameObject::update(mat4 VPMat)
 {
@@ -68,10 +83,10 @@ void GameObject::render(Fustrum* fustrum)
 			positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox(), localPos);
 			if (pos == INSIDE_FRUSTRUM || pos == INTERSECT_FRUSTRUM)
 			{
-				for (auto i = componentsList.begin(); i != componentsList.end(); i++)
-				{
-					i->second->render();
-				}
+		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+		{
+			i->second->render();
+		}
 			}
 		}
 		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
@@ -83,14 +98,19 @@ void GameObject::render(Fustrum* fustrum)
 
 void GameObject::addComponent(Components type)
 {
-	if (type == RENDER_COMPONENT)
+	switch (type)
 	{
-		cout << "adding render Comp to " << name <<  endl;
+	case RENDER_COMPONENT:
+		cout << "adding render Comp to " << name << endl;
 		componentsList.insert(pair<Components, Component*>(type, new Renderer(this)));
-	}
-	else
-	{
+		break;
+	case INPUT_COMPONENT:
+		cout << "adding input Comp to " << name << endl;
+		componentsList.insert(pair<Components, Component*>(type, new InputComponent(this)));
+		break;
+	default:
 		cout << "error_1, gameObject.cpp - no component" << endl;
+		break;
 	}
 }
 
@@ -107,16 +127,16 @@ void GameObject::changePosition(vec3 tempPos)
 GameObject *GameObject::findChild(string com)
 {
 	for each (auto child in childrenList)
-	{
+{
 		if (child.first == com)
-		{
+{
 			return child.second;
-		}
+}
 		else
-		{
+{
 			return child.second->findChild(com);
-		}
-	}
+}
+}
 	return NULL;
 }
 

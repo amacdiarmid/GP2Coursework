@@ -7,12 +7,28 @@
             <model/>
             <texture/>
             <shader/>
-            <worldPos x="0" y="0" z="0"/>
             <localPos x="0" y="0" z="0"/>
             <scale x="0" y="0" z="0"/>
             <rotation x="0" y="0" z="0"/>
             <components/>
             <children>
+                <child>
+                    <object>
+                        <name>player</name>
+                        <world>1</world>
+                        <active>1</active>
+                        <model/>
+                        <texture/>
+                        <shader/>
+                        <localPos x="5" y="0" z="45"/>
+                        <scale x="1" y="1" z="1"/>
+                        <rotation x="0" y="0" z="0"/>
+                        <components>
+                            <component>2</component>
+                        </components>
+                        <children/>
+                    </object>
+                </child>
                 <child>
                     <object>
                         <name>sun</name>
@@ -21,7 +37,6 @@
                         <model>teapot</model>
                         <texture>sun</texture>
                         <shader>main</shader>
-                        <worldPos x="0" y="0" z="-25"/>
                         <localPos x="0" y="0" z="-25"/>
                         <scale x="1" y="1" z="1"/>
                         <rotation x="0" y="0" z="0"/>
@@ -37,7 +52,6 @@
                                     <model>teapot</model>
                                     <texture>earth</texture>
                                     <shader>main</shader>
-                                    <worldPos x="20" y="-20" z="-45"/>
                                     <localPos x="20" y="-20" z="-20"/>
                                     <scale x="1" y="1" z="1"/>
                                     <rotation x="0" y="0" z="0"/>
@@ -53,7 +67,6 @@
                                                 <model>teapot</model>
                                                 <texture>moon</texture>
                                                 <shader>main</shader>
-                                                <worldPos x="-20" y="20" z="-45"/>
                                                 <localPos x="-40" y="40" z="0"/>
                                                 <scale x="1" y="1" z="1"/>
                                                 <rotation x="0" y="0" z="0"/>

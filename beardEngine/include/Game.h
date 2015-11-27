@@ -1,8 +1,7 @@
 #ifndef _GAME_H
 #define _GAME_H
 
-#include "Scene.h"
-#include "Window.h"
+class Scene;
 
 class GameApp
 {

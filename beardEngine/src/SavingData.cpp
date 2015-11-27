@@ -181,17 +181,17 @@ XMLError loadObject(GameObject* tempParent, XMLElement* parentNode, Scene* curSc
 	string outModel;
 	nameElement = objectElement->FirstChildElement("model");
 	if (nameElement == nullptr) return XML_ERROR_PARSING_ELEMENT;
-	outModel = nameElement->GetText();
+	if (nameElement->GetText() != NULL){ outModel = nameElement->GetText(); }
 
 	string outTexture;
 	nameElement = objectElement->FirstChildElement("texture");
 	if (nameElement == nullptr) return XML_ERROR_PARSING_ELEMENT;
-	outTexture = nameElement->GetText();
+	if (nameElement->GetText() != NULL){ outTexture = nameElement->GetText(); }
 
 	string outShader;
 	nameElement = objectElement->FirstChildElement("shader");
 	if (nameElement == nullptr) return XML_ERROR_PARSING_ELEMENT;
-	outShader = nameElement->GetText();
+	if (nameElement->GetText() != NULL){ outShader = nameElement->GetText(); }
 
 	tempParent->addChild(new GameObject(outName, tempParent, curScene->getObject(outModel), curScene->getTexture(outTexture), curScene->getShader(outShader)));
 	
@@ -242,6 +242,11 @@ XMLError loadObject(GameObject* tempParent, XMLElement* parentNode, Scene* curSc
 	{
 		eResult = loopElement->QueryIntText(&outInt);
 		tempParent->getChild(outName)->addComponent((Components)outInt);
+		if (outInt == INPUT_COMPONENT)
+		{
+			tempParent->getChild(outName)->setInput(curScene->getInput());
+			curScene->getInput()->setWorldPoint(tempParent->getChild(outName)->getLocalPos());
+		}
 		loopElement = loopElement->NextSiblingElement("component");
 	}
 

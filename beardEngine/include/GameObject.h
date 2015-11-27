@@ -14,8 +14,16 @@ class GameObject
 {
 public:
 	GameObject();
+	//create world object
 	GameObject(string tempName);
+	//greate mesh object
 	GameObject(string tempName, GameObject *tempParent, Object *tempModel, Texture *tempTexture, Shader *tempShader);
+	//create player
+	GameObject(string tempName, GameObject *tempParent, PlayerController *tempInput);
+	//create node
+	
+	//create light
+
 	~GameObject();
 
 	//in .cpp
@@ -41,6 +49,7 @@ public:
 	map<Components, Component*> *getCompMap(){ return &componentsList; };
 	bool getActive(){ return active; };
 	bool getWorld(){ return world; };
+	PlayerController *getInput(){ return input; };
 
 	//setters
 	void setScale(vec3 tempScale){ size = tempScale; };
@@ -53,6 +62,8 @@ public:
 	void setParent(GameObject* tempParent){ parent = tempParent; };
 	void setWord(bool tempBool){ world = tempBool; };
 	void setActive(bool tempBool){ active = tempBool; };
+	void setInput(PlayerController *tempPlayer){ input = tempPlayer; };
+
 private:
 	string name;
 	GameObject *parent;
@@ -63,6 +74,7 @@ private:
 	Object *model;
 	Texture *texture;
 	Shader *shader;
+	PlayerController *input;
 	mat4 MVP;
 
 	//the distance from the parent world position

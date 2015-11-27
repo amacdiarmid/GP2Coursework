@@ -1,16 +1,19 @@
 #include "HoloRoomScene.h"
+#include "Editor.h"
 
 //int i = 0;
 
 HoloRoomScene::HoloRoomScene()
 {
 	debugMode = false;
+	worldObject = new GameObject("world Object");
 }
 
 HoloRoomScene::HoloRoomScene(string tempName)
 {
 	debugMode = false;
 	name = tempName;
+	worldObject = new GameObject("world Object");
 }
 
 HoloRoomScene::~HoloRoomScene()
@@ -45,14 +48,14 @@ void HoloRoomScene::render()
 
 void HoloRoomScene::update()
 {
-	player->Update();
+	input->Update();
 
 	//i ++;
 	//worldObject->getChild("sun")->setRotation(vec3(0, i, 0));
 	//worldObject->getChild("sun")->getChild("earth")->setRotation(vec3(0, i, 0));
 	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->changePosition(vec3(0.0f, 0.0f, -0.01f));
 
-	worldObject->update(player->getMVPmatrix());
+	worldObject->update(input->getMVPmatrix());
 
 	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
@@ -87,14 +90,18 @@ void HoloRoomScene::createScene()
 	shaders["main"]->createShader();
 
 	//create player/debug cam
-	player = new PlayerController();
-	fustrum = new Fustrum(player);
+	input = new PlayerController();
+	fustrum = new Fustrum(input);
 	fustrum->setUpCamera();
 	fustrum->updateCamera();
 
 	//add scene graph. this could be an external file or another function but it is here for now 
 
 	loadScene(worldObject, name, this);
+
+	//uncomment for world reset
+	//worldObject->addChild(new GameObject("player", worldObject, input));
+	//worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
 
 	//worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["main"]));
 	//worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
@@ -225,20 +232,6 @@ void HoloRoomScene::onKeyDown(SDL_Keycode key)
 	case SDLK_m:
 		//set world object to active or not
 		break;
-		//temp movement stuff
-	case SDLK_w:
-		player->LookUp();
-		break;
-	case SDLK_s:
-		player->LookDown();
-		break;
-	case SDLK_a:
-		player->LookLeft();
-		break;
-	case SDLK_d:
-		player->LookRight();
-		break;
-
 	default:
 		break;
 	}
