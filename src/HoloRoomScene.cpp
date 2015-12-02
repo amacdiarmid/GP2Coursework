@@ -37,13 +37,14 @@ void HoloRoomScene::render()
 
 	worldObject->render(fustrum);
 
+	/*
 	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{
 		//Process/log the error.
 		cout << "error in rendering scene " << err << endl;
 	}
-
+	*/
 }
 
 void HoloRoomScene::update()
@@ -57,12 +58,14 @@ void HoloRoomScene::update()
 
 	worldObject->update(input->getMVPmatrix());
 
+	/*
 	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{
 		//Process/log the error.
 		cout << "error in updating scene " << err << endl;
 	}
+	*/
 }
 
 void HoloRoomScene::createScene()

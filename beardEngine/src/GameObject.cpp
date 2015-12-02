@@ -47,6 +47,20 @@ GameObject::GameObject(string tempName, GameObject *tempParent, PlayerController
 	active = true;
 }
 
+GameObject::GameObject(string tempName, GameObject *tempParent)
+{
+	world = false;
+	name = tempName;
+	parent = tempParent;
+	model = NULL;
+	texture = NULL;
+	shader = NULL;
+	input = NULL;
+	childrenList.clear();
+	componentsList.clear();
+	active = true;
+}
+
 GameObject::~GameObject()
 {
 }

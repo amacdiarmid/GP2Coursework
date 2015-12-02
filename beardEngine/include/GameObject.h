@@ -21,8 +21,7 @@ public:
 	//create player
 	GameObject(string tempName, GameObject *tempParent, PlayerController *tempInput);
 	//create node
-	
-	//create light
+	GameObject(string tempName, GameObject *tempParent);
 
 	~GameObject();
 

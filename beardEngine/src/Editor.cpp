@@ -52,6 +52,14 @@ void Editor::readCommand()
 		{
 			spawnObject();
 		}
+		else if (com == "spawnLight")
+		{
+			spawnLight();
+		}
+		else if (com == "spawnNode")
+		{
+			spawnNode();
+		}
 		else if (com == "transform")
 		{
 			if (curGameObject == NULL)
@@ -199,6 +207,68 @@ void Editor::spawnObject()
 			cout << "cur Shader " << curShader->getName() << endl;
 		}
 	}
+}
+
+void Editor::spawnNode()
+{
+	if (curName != "" && curGameObject != NULL)
+	{
+		cout << "spawning node" << endl;
+		curGameObject->addChild(new GameObject(curName, curGameObject));
+		curGameObject = curGameObject->findChild(curName);
+	}
+	else
+	{
+		if (curName == "")
+		{
+			cout << "no name" << endl;
+		}
+		else
+		{
+			cout << "cur name: " << curName << endl;
+		}
+		if (curGameObject == NULL)
+		{
+			cout << "no Game object" << endl;
+		}
+		else
+		{
+			cout << "cur Game Object " << curGameObject->getName() << endl;
+		}
+	}
+}
+
+void Editor::spawnLight()
+{
+	if (curName != "" && curGameObject != NULL)
+	{
+		cout << "spawning node" << endl;
+		curGameObject->addChild(new GameObject(curName, curGameObject));
+		curGameObject = curGameObject->findChild(curName);
+		//add light comp
+		//curGameObject->addComponent(RENDER_COMPONENT);
+		//add to light vector
+	}
+	else
+	{
+		if (curName == "")
+		{
+			cout << "no name" << endl;
+		}
+		else
+		{
+			cout << "cur name: " << curName << endl;
+		}
+		if (curGameObject == NULL)
+		{
+			cout << "no Game object" << endl;
+		}
+		else
+		{
+			cout << "cur Game Object " << curGameObject->getName() << endl;
+		}
+	}
+
 }
 
 void Editor::setPos()
