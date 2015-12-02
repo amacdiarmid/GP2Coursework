@@ -9,6 +9,7 @@
 #include "Object.h"
 #include <map>
 #include "ViewFrustumCulling.h"
+#include "Scene.h"
 
 class GameObject
 {
@@ -49,6 +50,7 @@ public:
 	bool getActive(){ return active; };
 	bool getWorld(){ return world; };
 	PlayerController *getInput(){ return input; };
+	Scene *getCurScene(){ return curScene; };
 
 	//setters
 	void setScale(vec3 tempScale){ size = tempScale; };
@@ -62,6 +64,7 @@ public:
 	void setWord(bool tempBool){ world = tempBool; };
 	void setActive(bool tempBool){ active = tempBool; };
 	void setInput(PlayerController *tempPlayer){ input = tempPlayer; };
+	void setScene(Scene *tempScene){ curScene = tempScene; };
 
 private:
 	string name;
@@ -82,6 +85,11 @@ private:
 	vec3 size = vec3(1.0f, 1.0f, 1.0f);
 	//rotation
 	vec3 rotation = vec3(0.0f, 0.0f, 0.0f);
+
+	//current scene
+	static Scene *curScene;
+
 };
+
 
 #endif

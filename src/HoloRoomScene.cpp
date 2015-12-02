@@ -97,12 +97,14 @@ void HoloRoomScene::createScene()
 	fustrum = new Fustrum(input);
 	fustrum->setUpCamera();
 	fustrum->updateCamera();
+	worldObject->setScene(this);
 
 	//add scene graph. this could be an external file or another function but it is here for now 
 
 	loadScene(worldObject, name, this);
 
 	//uncomment for world reset
+
 	//worldObject->addChild(new GameObject("player", worldObject, input));
 	//worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
 

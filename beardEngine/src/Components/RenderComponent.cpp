@@ -1,6 +1,5 @@
 #include "Components\RenderComponent.h"
 #include "GameObject.h"
-#include "Active.h"
 
 Renderer::Renderer()
 {
@@ -29,10 +28,10 @@ void Renderer::update(mat4 MVPMat)
 
 void Renderer::render()
 {
-	if (ACTIVE_SHADER != owner->getShader()->getShader())
+	if (owner->getCurScene()->getActiveShader() != owner->getShader()->getShader())
 	{
 		glUseProgram(owner->getShader()->getShader());
-		ACTIVE_SHADER = owner->getShader()->getShader();
+		owner->getCurScene()->setActiveShader(owner->getShader()->getShader());
 	}
 
 	//get the uniform loaction for the MVP

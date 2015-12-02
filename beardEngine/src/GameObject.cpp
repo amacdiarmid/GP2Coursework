@@ -1,6 +1,8 @@
 #include "GameObject.h"
 #include "Components\InputComponent.h"
 
+Scene* GameObject::curScene = NULL;
+
 GameObject::GameObject()
 {
 }
