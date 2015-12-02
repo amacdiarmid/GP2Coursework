@@ -227,6 +227,7 @@ void HoloRoomScene::onKeyDown(SDL_Keycode key)
 			cout << "debug mode on" << endl;
 			debugMode = true;
 		}
+		input->setDebug(debugMode);
 		break;
 	case SDLK_l:
 		if (debugMode)

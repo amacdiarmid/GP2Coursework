@@ -46,6 +46,7 @@ public:
 	PlayerController *getInput(){ return input; };
 	GLuint getActiveShader(){ return activeShader; };
 	GLuint getActiveTexture(){ return activeTexture; };
+	bool getDebug(){ return debugMode; };
 
 	void setActiveShader(GLuint tempShader){ activeShader = tempShader; };
 protected:

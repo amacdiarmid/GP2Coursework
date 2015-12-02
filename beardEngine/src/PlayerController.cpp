@@ -9,29 +9,57 @@ PlayerController::PlayerController()
 
 	void PlayerController::moveForward()
 	{
-		worldPoint.z += -1.0f;
-		lookAtPoint.z += -1.0f;
+		if (debug)
+		{
+			worldPoint.z += -1.0f;
+			lookAtPoint.z += -1.0f;
+		}
+		else
+		{
+
+		}
 		cout << "w key " << endl;
 	}
 
 	void PlayerController::moveBackward()
 	{
-		worldPoint.z += 1.0f;
-		lookAtPoint.z += 1.0f;
+		if (debug)
+		{
+			worldPoint.z += 1.0f;
+			lookAtPoint.z += 1.0f;
+		}
+		else
+		{
+
+		}
 		cout << "s key " << endl;
 	}
 
 	void PlayerController::strafeRight()
 	{
-		worldPoint.x += 1.0f;
-		lookAtPoint.x += 1.0f;
+		if (debug)
+		{
+			worldPoint.x += 1.0f;
+			lookAtPoint.x += 1.0f;
+		}
+		else
+		{
+
+		}
 		cout << "s key " << endl;
 	}
 
 	void PlayerController::strafeLeft()
 	{
-		worldPoint.x += -1.0f;
-		lookAtPoint.x += -1.0f;
+		if (debug)
+		{
+			worldPoint.x += -1.0f;
+			lookAtPoint.x += -1.0f;
+		}
+		else
+		{
+
+		}
 		cout << "s key " << endl;
 	}
 
