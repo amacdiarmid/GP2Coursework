@@ -32,8 +32,8 @@ void HoloRoomScene::render()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//backface culling
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
 
 	worldObject->render(fustrum);
 
@@ -77,6 +77,8 @@ void HoloRoomScene::createScene()
 	//create objects
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
 	objects["teapot"]->createBuffer("/utah-teapot.fbx");
+	objects.insert(pair<string, Object*>("holoRoom", new Object("holoRoom")));
+	objects["holoRoom"]->createBuffer("/Holodome2.FBX");
 
 	//create textures
 	textures.insert(pair<string, Texture*>("sun", new Texture("sun")));
@@ -85,6 +87,8 @@ void HoloRoomScene::createScene()
 	textures["earth"]->createTexture("/EarthTexture.png");
 	textures.insert(pair<string, Texture*>("moon", new Texture("moon")));
 	textures["moon"]->createTexture("/MoonTexture.png");
+	textures.insert(pair<string, Texture*>("wall", new Texture("wall")));
+	textures["wall"]->createTexture("/wallTexture.png");
 
 	//create shaders
 	shaders.insert(pair<string, Shader*>("main", new Shader("main")));
@@ -104,6 +108,9 @@ void HoloRoomScene::createScene()
 	loadScene(worldObject, name, this);
 
 	//uncomment for world reset
+
+	worldObject->addChild(new GameObject("room", worldObject, objects["holoRoom"], textures["wall"], shaders["main"]));
+	worldObject->getChild("room")->addComponent(RENDER_COMPONENT);
 
 	//worldObject->addChild(new GameObject("player", worldObject, input));
 	//worldObject->getChild("player")->addComponent(INPUT_COMPONENT);

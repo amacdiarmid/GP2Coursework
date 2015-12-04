@@ -2,7 +2,6 @@
 
 PlayerController::PlayerController()
 {
-	position = vec3(0, 0, 10);
 }
 
 void PlayerController::moveForward()
@@ -66,6 +65,7 @@ void PlayerController::mouseMovment(vec2 mousePos)
 
 	right = vec3(sin(horAngle - 3.14 / 2), 0, cos(horAngle - 3.14 / 2));
 	upPoint = vec3(0, 1, 0);
+	//upPoint = cross(direction, right);
 }
 
 void PlayerController::Update()
