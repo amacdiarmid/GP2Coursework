@@ -14,5 +14,6 @@ extern vector <IkeyboardListener*> keyboardListeners;
 void createWindow(string gameName);
 void destroyWindow();
 void windowLoop();
+SDL_Window *getWin();
 
 #endif

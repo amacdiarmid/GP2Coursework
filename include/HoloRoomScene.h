@@ -26,6 +26,7 @@ public:
 
 	void onKeyDown(SDL_Keycode key) override;
 	void onkeyUp(SDL_Keycode key) override;
+	void mouseMove(SDL_MouseMotionEvent motion) override;
 private:
 
 };

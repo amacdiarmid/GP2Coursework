@@ -247,6 +247,11 @@ void HoloRoomScene::onkeyUp(SDL_Keycode key)
 	cout << "Key up " << key << endl;
 }
 
+void HoloRoomScene::mouseMove(SDL_MouseMotionEvent motion)
+{
+
+}
+
 string HoloRoomScene::getName()
 {
 	return name;
