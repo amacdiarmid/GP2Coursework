@@ -1,12 +1,15 @@
-#version 330 core
+#version 330
 
 // Input vertex data, different for all executions of this shader.
-layout(location = 0) in vec3 vertexPosition;
-layout(location = 1) in vec2 vertexTexCoords;
-layout(location = 2) in vec3 vertexNormal;
+in vec3 vertexPosition;
+in vec4 vertexColour;
+in vec2 vertexTexCoords;
+in vec3 vertexNormal;
+
 
 // Output data ; will be interpolated for each fragment.
-out vec2 UV;
+out vec4 vertexColourOut;
+out vec2 vertexTexCoordsOut;
 out vec3 Position_worldspace;
 out vec3 Normal_cameraspace;
 out vec3 EyeDirection_cameraspace;
@@ -25,7 +28,7 @@ void main(){
 
 	// Output position of the vertex, in clip space : MVP * position
 	gl_Position = MVP * vec4(vertexPosition, 1);
-
+	vertexColourOut = vertexColour;
 	ShadowCoord = DepthBiasMVP * vec4(vertexPosition, 1);
 
 	// Position of the vertex, in worldspace : M * position
@@ -40,8 +43,8 @@ void main(){
 
 	// Normal of the the vertex, in camera space
 	Normal_cameraspace = (V * M * vec4(vertexPosition, 0)).xyz; // Only correct if ModelMatrix does not scale the model ! Use its inverse transpose if not.
-
+	//Normal_cameraspace = normalize(V * M * vec4(vertexPosition, 0)).xyz;
 	// UV of the vertex. No special space for this one.
-	UV = vertexTexCoords;
+	vertexTexCoordsOut = vertexTexCoords;
 }
 

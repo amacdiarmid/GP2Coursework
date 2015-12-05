@@ -51,9 +51,9 @@ void HoloRoomScene::render()
 	glActiveTexture(GL_TEXTURE0);
 
 	glUniform1i(textureSamplerLocation, 0);
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, depthTexture);
-	glUniform1i(shadowMapLocation, 1);
+	//glActiveTexture(GL_TEXTURE1);
+	//glBindTexture(GL_TEXTURE_2D, depthTexture);
+//	glUniform1i(shadowMapLocation, 1);
 
 	worldObject->render(fustrum);
 
@@ -101,6 +101,8 @@ void HoloRoomScene::createScene()
 	editor = new Editor(this);
 	debugMode = false;
 
+	Object *tea = new Object();
+	tea->createBuffer("/utah-teapot.fbx");
 
 	//create objects
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
@@ -115,24 +117,37 @@ void HoloRoomScene::createScene()
 	textures["moon"]->createTexture("/MoonTexture.png");
 	
 	//create shaders
-	shaders.insert(pair<string, Shader*>("main", new Shader("main")));
-	shaders["main"]->attatchVertexShader("/textureVS.glsl");
-	shaders["main"]->attatchFragmentShader("/textureFS.glsl");
-	shaders["main"]->createShader();
+	Shader * s = new Shader("main");
+	s->attatchVertexShader("/textureVS.glsl");
+	s->attatchFragmentShader("/textureFS.glsl");
+	s->createShader();
+	shaders.insert(pair<string, Shader*>("main", s));
 	
 	//Shadow Shaders
-	shaders.insert(pair<string, Shader*>("firstPassDepth", new Shader("firstPassDepth")));
-	shaders["firstPassDepth"]->attatchVertexShader("/DepthVS.glsl");
-	shaders["firstPassDepth"]->attatchFragmentShader("/DepthFS.glsl");
-	shaders["firstPassDepth"]->createShader();
-	shaders.insert(pair<string, Shader*>("quadShader", new Shader("quadShader")));
-	shaders["quadShader"]->attatchVertexShader("/quadVS.glsl");
-	shaders["quadShader"]->attatchFragmentShader("/quadFS.txt");
-	shaders["quadShader"]->createShader();
-	shaders.insert(pair<string, Shader*>("shadowMap", new Shader("shadowMap")));
-	shaders["shadowMap"]->attatchVertexShader("/shadowMapVS.glsl");
-	shaders["shadowMap"]->attatchFragmentShader("/shadowMapFS.glsl");
-	shaders["shadowMap"]->createShader();
+	s = new Shader("firstPassDepth");
+	s->attatchVertexShader("/DepthVS.glsl");
+	s->attatchFragmentShader("/DepthFS.glsl");
+	s->createShader();
+	shaders.insert(pair<string, Shader*>("firstPassDepth", s));
+
+	s = new Shader("quadShader");
+	s->attatchVertexShader("/quadVS.glsl");
+	s->attatchFragmentShader("/quadFS.txt");
+	s->createShader();
+	shaders.insert(pair<string, Shader*>("quadShader", s));
+
+	s = new Shader("shadowMap");
+	s->attatchVertexShader("/shadowMapVS.glsl");
+	s->attatchFragmentShader("/shadowMapFS.glsl");
+	s->createShader();
+	shaders.insert(pair<string, Shader*>("shadowMap", s));
+
+	/*s = new Shader("textureShadow");
+	s->attatchVertexShader("/textureShadowVS.glsl");
+	s->attatchFragmentShader("/shadowMapFS.glsl");
+	s->createShader();
+	shaders.insert(pair<string, Shader*>("textureShadow", s));*/
+
 
 	//create player/debug cam
 	input = new PlayerController();
@@ -145,18 +160,18 @@ void HoloRoomScene::createScene()
 	loadScene(worldObject, name, this);
 
 	//uncomment for world reset
-	worldObject->addChild(new GameObject("player", worldObject, input));
-	worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
+	//worldObject->addChild(new GameObject("player", worldObject, input));
+	//worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
 
-	worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["shadowMap"]));
-	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
+	//worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["shadowMap"]));
+	//worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"], shaders["shadowMap"]));
-	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
-	worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(0, 10, 20));
+	//worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"], shaders["shadowMap"]));
+	//worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
+	//worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(0, 10, 20));
 
-	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["shadowMap"]));
-	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
+	//worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["shadowMap"]));
+	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->printComponents();
@@ -171,8 +186,8 @@ void HoloRoomScene::createScene()
 
 	depthMVPLocation = glGetUniformLocation(shaders["firstPassDepth"]->getShader(), "depthMVP");
 
-	ShadowFramebuffer();
-	BuildQuad();
+	//ShadowFramebuffer();
+	//BuildQuad();
 
 	GLuint currentShader = shaders["shadowMap"]->getShader();
 
@@ -298,7 +313,7 @@ void HoloRoomScene::destroyScene()
 void HoloRoomScene::SceneLoop()
 {
 	windowLoop();
-	ShadowMapPass();
+	//ShadowMapPass();
 	render();
 	//RenderQuad();
 	//RenderPostQuad();

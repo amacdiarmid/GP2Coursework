@@ -56,7 +56,7 @@ private:
 	GLuint depthBiasLocation;
 	GLuint shadowMapLocation;
 	GLuint lightLocation;
-	vec3 lightInvDir = glm::vec3(0.5, 2, 2);
+	vec3 lightInvDir = glm::vec3(0.5, 2, 2); //TODO Calculate based on light direction
 	mat4 depthBias;
 	glm::mat4 ModelMatrix = glm::mat4(1.0);
 
