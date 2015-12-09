@@ -22,7 +22,7 @@ HoloRoomScene::~HoloRoomScene()
 void HoloRoomScene::render()
 {
 	//set the clear colour background 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.5f, 0.5f);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, 1024, 768);
@@ -38,22 +38,32 @@ void HoloRoomScene::render()
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
+
 	glUseProgram(shaders["shadowMap"]->getShader());
 	update();
 
-	
+	materialShininess++;
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, &input->getMVPmatrix()[0][0]);
-	glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &input->GetViewMatrix()[0][0]);
+	//glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &input->GetViewMatrix()[0][0]);
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, &ModelMatrix[0][0]);
-	glUniformMatrix4fv(depthBiasLocation, 1, GL_FALSE, &depthBias[0][0]);
-	glUniform3f(lightLocation, lightInvDir.x, lightInvDir.y, lightInvDir.z);
+	//glUniformMatrix4fv(depthBiasLocation, 1, GL_FALSE, &depthBias[0][0]);
+	//glUniform3f(lightLocation, lightInvDir.x, lightInvDir.y, lightInvDir.z);
+	//glm::vec3 lightPos = glm::vec3(4, 4, 4);
+	//glUniform3f(lightId, lightPos.x, lightPos.y, lightPos.z);
+	glUniform1f(materialShininessLoc, materialShininess);
+	glUniform3f(materialSPecularLoc, materialSpecularColor.x, materialSpecularColor.y, materialSpecularColor.z);
+	glUniform3f(gLightPosLoc, gLight.position.x, gLight.position.y, gLight.position.z);
+	glUniform3f(gLightIntensitiesLoc, gLight.intensities.x, gLight.intensities.y, gLight.intensities.z);
+	glUniform1f(gLightAttenuationLoc, gLight.attenuation);
+	glUniform1f(gLightAmbientCoeLoc, gLight.ambientCoefficient);
+	glUniform3f(cameraPosLoc, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
 
 	glActiveTexture(GL_TEXTURE0);
 
 	glUniform1i(textureSamplerLocation, 0);
 	//glActiveTexture(GL_TEXTURE1);
 	//glBindTexture(GL_TEXTURE_2D, depthTexture);
-//	glUniform1i(shadowMapLocation, 1);
+	//glUniform1i(shadowMapLocation, 1);
 
 	worldObject->render(fustrum);
 
@@ -65,6 +75,8 @@ void HoloRoomScene::render()
 	}
 
 }
+
+
 
 void HoloRoomScene::update()
 {
@@ -92,11 +104,17 @@ void HoloRoomScene::update()
 		);
 
 	depthBias = biasMatrix * depthMVP;
+
 }
+
 
 void HoloRoomScene::createScene()
 {
 	//CreateFrameBuffer(); ENable for post processing
+	glEnable(GL_DEPTH_TEST);
+
+	// Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS);
 
 	editor = new Editor(this);
 	debugMode = false;
@@ -115,7 +133,9 @@ void HoloRoomScene::createScene()
 	textures["earth"]->createTexture("/EarthTexture.png");
 	textures.insert(pair<string, Texture*>("moon", new Texture("moon")));
 	textures["moon"]->createTexture("/MoonTexture.png");
-	
+	textures.insert(pair<string, Texture*>("gray", new Texture("gray")));
+	textures["gray"]->createTexture("/gray.png");
+
 	//create shaders
 	Shader * s = new Shader("main");
 	s->attatchVertexShader("/textureVS.glsl");
@@ -188,17 +208,30 @@ void HoloRoomScene::createScene()
 
 	//ShadowFramebuffer();
 	//BuildQuad();
+	materialShininess = 100;
+	gLight.position = glm::vec3(10, 30, 10);
+	gLight.intensities = glm::vec3(0.2, 0, 0); //white
+	gLight.attenuation = 0.2f;
+	gLight.ambientCoefficient = 0.605f;
 
 	GLuint currentShader = shaders["shadowMap"]->getShader();
 
 	textureSamplerLocation = glGetUniformLocation(currentShader, "texture0");
 	MVPLocation = glGetUniformLocation(currentShader, "MVP");
-	viewLocation = glGetUniformLocation(currentShader, "V");
+	materialShininessLoc = glGetUniformLocation(currentShader, "materialShininess");
+	materialSPecularLoc = glGetUniformLocation(currentShader, "materialSpecularColor");
+	gLightPosLoc = glGetUniformLocation(currentShader, "light.position");
+	gLightIntensitiesLoc = glGetUniformLocation(currentShader, "light.intensities");
+	gLightAttenuationLoc = glGetUniformLocation(currentShader, "light.attenuation");
+	gLightAmbientCoeLoc = glGetUniformLocation(currentShader, "light.ambientCoefficient");
+	cameraPosLoc = glGetUniformLocation(currentShader, "cameraPosition");
+	//viewLocation = glGetUniformLocation(currentShader, "V");
 	modelLocation = glGetUniformLocation(currentShader, "M");
-	depthBiasLocation = glGetUniformLocation(currentShader, "DepthBiasMVP");
-	shadowMapLocation = glGetUniformLocation(currentShader, "shadowMap");
-	lightLocation = glGetUniformLocation(currentShader, "LightInvDirection");
-
+	//depthBiasLocation = glGetUniformLocation(currentShader, "DepthBiasMVP");
+	//shadowMapLocation = glGetUniformLocation(currentShader, "shadowMap");
+	//lightLocation = glGetUniformLocation(currentShader, "LightInvDirection");
+	//lightId = glGetUniformLocation(currentShader, "LightPosition_worldspace");
+	
 }
 
 void HoloRoomScene::ShadowFramebuffer()
@@ -215,18 +248,13 @@ void HoloRoomScene::ShadowFramebuffer()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
 
 	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthTexture, 0);
 
 	glDrawBuffer(GL_NONE); // No color buffer is drawn to.
 	glReadBuffer(GL_NONE);
-
-	GLenum status;
-	if ((status = glCheckFramebufferStatus(
-		GL_FRAMEBUFFER)) !=
-		GL_FRAMEBUFFER_COMPLETE)	{
-		cout << "Issue	with	Framebuffers" << endl;
-	}
 
 }
 
@@ -272,6 +300,7 @@ void HoloRoomScene::UpdateLightPerspMVP()
 	mat4 depthViewMatrix = glm::lookAt(lightInvDir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	mat4 depthModelMatrix = glm::mat4(1.0);
 	depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
+
 }
 
 void HoloRoomScene::RenderQuad()
@@ -285,7 +314,7 @@ void HoloRoomScene::RenderQuad()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, depthTexture);
 	// Set our "renderedTexture" sampler to user Texture Unit 0
-	glUniform1i(textureSamplerLocation, 0);
+	glUniform1i(quadTexture, 0);
 
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
