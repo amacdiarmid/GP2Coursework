@@ -24,6 +24,10 @@ private:
 	float mouseSpeed = 0.005f;
 	float speed = 3;
 
+	float fixedHeight = 0;
+	vec3 center = position;
+	float maxDistance = 95;
+
 public:
 	PlayerController();
 	~PlayerController();
@@ -56,7 +60,7 @@ public:
 	mat4 getMVPmatrix(){ return MVPMatrix; };
 
 	void setWorldPoint(vec3 tempPos){ position = tempPos; direction = tempPos + vec3(0, 0, -10); };
-	void setDebug(bool tempBool){ debug = tempBool; };
+	void setDebug(bool tempBool){debug = tempBool; if (!debug){ position.y = fixedHeight; }};
 };
 
 

@@ -6,54 +6,59 @@ PlayerController::PlayerController()
 
 void PlayerController::moveForward()
 {
-	if (debug)
-	{
-		position += direction * speed;
+	position += direction * speed;
+	if (!debug)
+	{ 
+		position.y = fixedHeight; 
+		if (glm::distance(position,center) > maxDistance)
+		{
+			position -= direction * speed;
+		}
+		//cout << "distance " << glm::distance(position, center) << endl;
 	}
-	else
-	{
-
-	}
-	cout << "w key " << endl;
+	//cout << "w key " << endl;
 }
 
 void PlayerController::moveBackward()
 {
-	if (debug)
+	position -= direction * speed;
+	if (!debug)
 	{
-		position -= direction * speed;
-	}
-	else
-	{
-
-	}
-	cout << "s key " << endl;
+		position.y = fixedHeight;
+		if (glm::distance(position, center) > maxDistance)
+		{
+			position += direction * speed;
+		}
+		//cout << "distance " << glm::distance(position, center) << endl;
+	}	//cout << "s key " << endl;
 }
 
 void PlayerController::strafeRight()
 {
-	if (debug)
+	position += right * speed;
+	if (!debug)
 	{
-		position += right * speed;
-	}
-	else
-	{
-
-	}
-	cout << "s key " << endl;
+		position.y = fixedHeight;
+		if (glm::distance(position, center) > maxDistance)
+		{
+			position -= right * speed;
+		}
+		//cout << "distance " << glm::distance(position, center) << endl;
+	}	//cout << "s key " << endl;
 }
 
 void PlayerController::strafeLeft()
 {
-	if (debug)
+	position -= right * speed;
+	if (!debug)
 	{
-		position -= right * speed;
-	}
-	else
-	{
-
-	}
-	cout << "s key " << endl;
+		position.y = fixedHeight;
+		if (glm::distance(position, center) > maxDistance)
+		{
+			position += right * speed;
+		}
+		//cout << "distance " << glm::distance(position, center) << endl;
+	}	//cout << "s key " << endl;
 }
 
 void PlayerController::mouseMovment(vec2 mousePos)
@@ -64,7 +69,7 @@ void PlayerController::mouseMovment(vec2 mousePos)
 	VertAngle += mouseSpeed * float(SCREEN_HEIGHT / 2 - mousePos.y);
 	if (degrees(VertAngle) >= 90.0f) { VertAngle = radians(89.9f); }
 	else if (degrees(VertAngle) <= -90.0f) { VertAngle = radians (- 89.9f);}
-	cout << "hor angle " << degrees(horAngle) << " vert angle " << degrees(VertAngle) << endl;
+	//cout << "hor angle " << degrees(horAngle) << " vert angle " << degrees(VertAngle) << endl;
 
 	direction = vec3(cos(VertAngle)*sin(horAngle), sin(VertAngle), cos(VertAngle)*cos(horAngle));
 
