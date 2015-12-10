@@ -79,6 +79,8 @@ void HoloRoomScene::createScene()
 	objects["teapot"]->createBuffer("/utah-teapot.fbx");
 	objects.insert(pair<string, Object*>("holoRoom", new Object("holoRoom")));
 	objects["holoRoom"]->createBuffer("/Holodome2.FBX");
+	objects.insert(pair<string, Object*>("Dubstep", new Object("Dubstep")));
+	objects["Dubstep"]->createBuffer("/[Dubstep]GUN.FBX");
 
 	//create textures
 	textures.insert(pair<string, Texture*>("sun", new Texture("sun")));
@@ -89,6 +91,8 @@ void HoloRoomScene::createScene()
 	textures["moon"]->createTexture("/MoonTexture.png");
 	textures.insert(pair<string, Texture*>("wall", new Texture("wall")));
 	textures["wall"]->createTexture("/wallTexture.png");
+	textures.insert(pair<string, Texture*>("Dubstep", new Texture("Dubstep")));
+	textures["Dubstep"]->createTexture("/[Dubstep]GUN_Diffuse.png");
 
 	//create shaders
 	shaders.insert(pair<string, Shader*>("main", new Shader("main")));
@@ -103,27 +107,28 @@ void HoloRoomScene::createScene()
 	fustrum->updateCamera();
 	worldObject->setScene(this);
 
-	//add scene graph. this could be an external file or another function but it is here for now 
-
-	loadScene(worldObject, name, this);
+	//loadScene(worldObject, name, this);
 
 	//uncomment for world reset
 
 	worldObject->addChild(new GameObject("room", worldObject, objects["holoRoom"], textures["wall"], shaders["main"]));
 	worldObject->getChild("room")->addComponent(RENDER_COMPONENT);
 
-	//worldObject->addChild(new GameObject("player", worldObject, input));
-	//worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
+	worldObject->addChild(new GameObject("Dubstep", worldObject, objects["Dubstep"], textures["Dubstep"], shaders["main"]));
+	worldObject->getChild("Dubstep")->addComponent(RENDER_COMPONENT);
 
-	//worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["main"]));
-	//worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
+	worldObject->addChild(new GameObject("player", worldObject, input));
+	worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
 
-	//worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"], shaders["main"]));
-	//worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
-	//worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(25, 0, 0));
+	worldObject->addChild(new GameObject("sun", worldObject, objects["teapot"], textures["sun"], shaders["main"]));
+	worldObject->getChild("sun")->addComponent(RENDER_COMPONENT);
 
-	//worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["main"]));
-	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
+	worldObject->getChild("sun")->addChild(new GameObject("earth", worldObject, objects["teapot"], textures["earth"], shaders["main"]));
+	worldObject->getChild("sun")->getChild("earth")->addComponent(RENDER_COMPONENT);
+	worldObject->getChild("sun")->getChild("earth")->changePosition(vec3(25, 0, 0));
+
+	worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["main"]));
+	worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->printComponents();

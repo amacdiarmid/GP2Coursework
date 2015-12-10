@@ -47,7 +47,7 @@ void PlayerController::strafeLeft()
 {
 	if (debug)
 	{
-		position += right * speed;
+		position -= right * speed;
 	}
 	else
 	{
@@ -59,7 +59,12 @@ void PlayerController::strafeLeft()
 void PlayerController::mouseMovment(vec2 mousePos)
 {
 	horAngle += mouseSpeed * float(SCREEN_WIDTH / 2 - mousePos.x);
+	if (degrees(horAngle) > 360.0f) { horAngle = radians(0.0f); }
+	else if (degrees(horAngle) < 0.0f){ horAngle = radians(360.0f); }
 	VertAngle += mouseSpeed * float(SCREEN_HEIGHT / 2 - mousePos.y);
+	if (degrees(VertAngle) >= 90.0f) { VertAngle = radians(89.9f); }
+	else if (degrees(VertAngle) <= -90.0f) { VertAngle = radians (- 89.9f);}
+	cout << "hor angle " << degrees(horAngle) << " vert angle " << degrees(VertAngle) << endl;
 
 	direction = vec3(cos(VertAngle)*sin(horAngle), sin(VertAngle), cos(VertAngle)*cos(horAngle));
 
