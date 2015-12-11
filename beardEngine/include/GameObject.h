@@ -54,7 +54,7 @@ public:
 
 	//setters
 	void setScale(vec3 tempScale){ size = tempScale; };
-	void setRotation(vec3 tempRotation){ rotation = tempRotation; };
+	void setRotation(vec3 tempRotation){ rotation.x = radians(tempRotation.x); rotation.y = radians(tempRotation.y); rotation.z = radians(tempRotation.z); };
 	void setModel(Object* tempModel) { model = tempModel; };
 	void setShader(Shader* tempShader){ shader = tempShader; };
 	void setTexture(Texture* tempTexture){ texture = tempTexture; };

@@ -111,6 +111,7 @@ void Editor::readCommand()
 		{
 			cout << "unknown command" << endl;
 		}
+		curScene->render();
 	} while (com != "done");
 }
 
