@@ -7,14 +7,26 @@ class PlayerController
 {
 private:
 	//vectors
-	vec3 worldPoint;
-	vec3 lookAtPoint;
+	vec3 position;
+	vec3 direction;
 	vec3 upPoint;
+	vec3 right;
 
 	//matrices
 	mat4 viewMatrix;
 	mat4 projMatrix;
 	mat4 MVPMatrix;
+
+	bool debug = false;
+
+	float horAngle = 3.14f;
+	float VertAngle = 0;
+	float mouseSpeed = 0.005f;
+	float speed = 3;
+
+	float fixedHeight = 0;
+	vec3 center = position;
+	float maxDistance = 95;
 
 public:
 	PlayerController();
@@ -25,13 +37,14 @@ public:
 	void moveBackward();
 	void strafeRight();
 	void strafeLeft();
+	void mouseMovment(vec2 mousePos);
 
 	void Update();
 
-	vec3 getWorldPoint(){ return worldPoint; };
-	vec3 getlookAtPoint(){ return lookAtPoint; };
+	vec3 getWorldPoint(){ return position; };
+	vec3 getlookAtPoint(){ return direction; };
 	vec3 getUpPoint(){ return upPoint; };
-	vec3 getDirection(){ return lookAtPoint - worldPoint; };
+	vec3 getDirection(){ return direction - position; };
 
 	float getRatio(){ return SCREEN_WIDTH / SCREEN_HEIGHT; };
 	float getFOV(){ return FOV; };
@@ -46,7 +59,8 @@ public:
 	mat4 getProjMatrix(){ return projMatrix; };
 	mat4 getMVPmatrix(){ return MVPMatrix; };
 
-	void setWorldPoint(vec3 tempPos){ worldPoint = tempPos; lookAtPoint = tempPos + vec3(0, 0, -10); };
+	void setWorldPoint(vec3 tempPos){ position = tempPos; direction = tempPos + vec3(0, 0, -10); };
+	void setDebug(bool tempBool){debug = tempBool; if (!debug){ position.y = fixedHeight; }};
 };
 
 

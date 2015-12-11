@@ -44,8 +44,16 @@ public:
 
 	Fustrum *getFustrum(){ return fustrum; };
 	PlayerController *getInput(){ return input; };
+	GLuint getActiveShader(){ return activeShader; };
+	GLuint getActiveTexture(){ return activeTexture; };
+	bool getDebug(){ return debugMode; };
+
+	void setActiveShader(GLuint tempShader){ activeShader = tempShader; };
 protected:
 	string name;
+
+	GLuint activeShader;
+	GLuint activeTexture;
 
 	PlayerController *input;
 	Fustrum* fustrum;
