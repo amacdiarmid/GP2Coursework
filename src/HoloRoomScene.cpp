@@ -28,12 +28,12 @@ void HoloRoomScene::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//blend alpha channel
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glEnable(GL_BLEND);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//backface culling
-	//glEnable(GL_CULL_FACE);
-	//glCullFace(GL_BACK);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 
 	worldObject->render(fustrum);
 
@@ -84,6 +84,9 @@ void HoloRoomScene::createScene()
 	objects["Dubstep"]->createBuffer("/[Dubstep]GUN.FBX");
 	objects.insert(pair<string, Object*>("compCube", new Object("compCube")));
 	objects["compCube"]->createBuffer("/2-foot Weighted Companion Cube autodesk.FBX");
+	objects.insert(pair<string, Object*>("lander", new Object("lander")));
+	objects["lander"]->createBuffer("/lander.FBX");
+
 
 	//create textures
 	textures.insert(pair<string, Texture*>("sun", new Texture("sun")));
@@ -116,6 +119,9 @@ void HoloRoomScene::createScene()
 	textures["Dubstep"]->createTexture("/[Dubstep]GUN_Diffuse.png");
 	textures.insert(pair<string, Texture*>("compCube", new Texture("compCube")));
 	textures["compCube"]->createTexture("/companionCube.png");
+	textures.insert(pair<string, Texture*>("lander", new Texture("lander")));
+	textures["lander"]->createTexture("/apollo map.jpg");
+
 
 	//create shaders
 	shaders.insert(pair<string, Shader*>("main", new Shader("main")));
@@ -245,6 +251,12 @@ void HoloRoomScene::createScene()
 	tempObj->getChild("compCube")->setPosition(vec3(-50, 0, -50));	//changing postiion
 	tempObj->getChild("compCube")->setRotation(vec3(0, 0, 0));	//change rotaion
 	tempObj->getChild("compCube")->setScale(vec3(1, 1, 1));	//change scele
+
+	tempObj->addChild(new GameObject("lander", tempObj, objects["lander"], textures["lander"], shaders["main"]));	//creating object
+	tempObj->getChild("lander")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("lander")->setPosition(vec3(50, 0, 50));	//changing postiion
+	tempObj->getChild("lander")->setRotation(vec3(0, 0, 0));	//change rotaion
+	tempObj->getChild("lander")->setScale(vec3(1, 1, 1));	//change scele
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->printComponents();
