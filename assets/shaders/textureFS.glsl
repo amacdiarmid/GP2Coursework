@@ -11,3 +11,4 @@ void main()
 {
 	FragColour = texture(texture0, vertexTexCoordsOut);
 }
+

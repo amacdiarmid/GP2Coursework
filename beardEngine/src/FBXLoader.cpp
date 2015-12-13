@@ -93,6 +93,7 @@ bool loadFBXFromFile(const string& filename, MeshData *meshData)
 	//init sdk manager. this handles memory management
 	FbxManager *iSDKManager = FbxManager::Create();
 
+
 	//create the IO settings object
 	FbxIOSettings *IOS = FbxIOSettings::Create(iSDKManager, IOSROOT);
 	iSDKManager->SetIOSettings(IOS);
