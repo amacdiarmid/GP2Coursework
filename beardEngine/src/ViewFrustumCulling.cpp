@@ -15,12 +15,21 @@ Fustrum::~Fustrum()
 
 void Fustrum::setUpCamera()
 {
+	float angleX;
+
 	nearD = player->getNearPlaneDis();
 	farD = player->getFarPlaneDis();
+	
+	float angle = player->getFOV();
+	angle *= HALF_ANG2RAD;
 
-	tang = tan(radians(player->getFOV()));
-	height = player->getNearPlaneDis() * tang;
-	width = height * player->getRatio();
+	//compute width and height between near and far plane
+	tang = tan(angle);
+	sphereFactorY = 1 / cos(angle);
+
+	//half thje hrizontal fov 
+	angleX = atan(tang*player->getRatio());
+	sphereFactorY = 1 / cos(angleX);
 }
 
 //called everytime the camera moves 
@@ -37,43 +46,50 @@ void Fustrum::updateCamera()
 	Y = cross(X, Z);
 }
 
-positionToFrustrum Fustrum::isInFrustrum(Box* TempBox, vec3 objectPos)
+positionToFrustrum Fustrum::isInFrustrum(float radius, vec3 objectPos)
 {
-	int out = 0;
-	int in = 0;
+	float d;
+	float az, ax, ay;
+	positionToFrustrum result = INSIDE_FRUSTRUM;
 
-	
-	////test center point
-	//vec3 point = TempBox->getCenter() + objectPos;
-	//return pointInFrustrum(point);
+	vec3 v = objectPos - camPos;
 
-	//test all the points of the bounding box
-	for (int i = 0; i < 8; i++)
-	{
-		//set up te correct point with the modelMatrix
-		vec3 point = TempBox->getPoints(i) + objectPos;
-		
-		if (pointInFrustrum(point) == OUTSIDE_FRUSTRUM)
-		{
-			out++;
-		}
-		else
-		{
-			in++;
-		}
-	}
-	if (out == 8)
+	//check the z axis 
+	az = dot(v, Z);
+	if (az > farD + radius || az < nearD - radius)
 	{
 		return OUTSIDE_FRUSTRUM;
 	}
-	else if (in == 8)
-	{
-		return INSIDE_FRUSTRUM;
-	}
-	else
+	if (az > farD - radius || az < nearD + radius)
 	{
 		return INTERSECT_FRUSTRUM;
 	}
+
+	//check the y axis
+	ay = dot(v, Y);
+	d = sphereFactorY * radius;
+	az *= tang;
+	if (ay > az+d || ay < -az-d)
+	{
+		return(OUTSIDE_FRUSTRUM);
+	}
+	if (ay > az-d || ay < -az+d)
+	{
+		result = INTERSECT_FRUSTRUM;
+	}
+
+	//ax = dot(v, X);
+	//az *= player->getRatio();
+	//d = sphereFactorX * radius;
+	//if (ax > az+d || ax < -az-d)
+	//{
+	//	return(OUTSIDE_FRUSTRUM);
+	//}
+	//if (ax > az-d || ax < -az+d)
+	//{
+	//	result = INTERSECT_FRUSTRUM;
+	//}
+	return result;
 }
 
 positionToFrustrum Fustrum::pointInFrustrum(vec3 point)
