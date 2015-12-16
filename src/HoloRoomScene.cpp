@@ -79,14 +79,14 @@ void HoloRoomScene::createScene()
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
 	objects["teapot"]->createBuffer("/utah-teapot.fbx");
 	objects.insert(pair<string, Object*>("holoRoom", new Object("holoRoom")));
-	objects["holoRoom"]->createBuffer("/Holodome2.FBX");
-	objects.insert(pair<string, Object*>("Dubstep", new Object("Dubstep")));
-	objects["Dubstep"]->createBuffer("/[Dubstep]GUN.FBX");
-	objects.insert(pair<string, Object*>("compCube", new Object("compCube")));
-	objects["compCube"]->createBuffer("/2-foot Weighted Companion Cube autodesk.FBX");
+	objects["holoRoom"]->createBuffer("/Holodome.FBX");
 	objects.insert(pair<string, Object*>("lander", new Object("lander")));
 	objects["lander"]->createBuffer("/lander.FBX");
-
+	
+	objects.insert(pair<string, Object*>("heroWalker", new Object("heroWalker")));
+	objects["heroWalker"]->createBuffer("/heroWalker.FBX");
+	objects.insert(pair<string, Object*>("walkerEvo", new Object("walkerEvo")));
+	objects["walkerEvo"]->createBuffer("/walkerEvo.FBX");
 
 	//create textures
 	textures.insert(pair<string, Texture*>("sun", new Texture("sun")));
@@ -115,13 +115,13 @@ void HoloRoomScene::createScene()
 	textures.insert(pair<string, Texture*>("wall", new Texture("wall")));
 	textures["wall"]->createTexture("/wallTexture.png");
 
-	textures.insert(pair<string, Texture*>("Dubstep", new Texture("Dubstep")));
-	textures["Dubstep"]->createTexture("/[Dubstep]GUN_Diffuse.png");
-	textures.insert(pair<string, Texture*>("compCube", new Texture("compCube")));
-	textures["compCube"]->createTexture("/companionCube.png");
 	textures.insert(pair<string, Texture*>("lander", new Texture("lander")));
 	textures["lander"]->createTexture("/apollo map.jpg");
 
+	textures.insert(pair<string, Texture*>("heroWalker", new Texture("heroWalker")));
+	textures["heroWalker"]->createTexture("/unsung-map.jpg");
+	textures.insert(pair<string, Texture*>("walkerEvo", new Texture("walkerEvo")));
+	textures["walkerEvo"]->createTexture("/walkerMap.jpg");
 
 	//create shaders
 	shaders.insert(pair<string, Shader*>("main", new Shader("main")));
@@ -157,7 +157,7 @@ void HoloRoomScene::createScene()
 	worldObject->getChild("room")->addChild(new GameObject("emptyRoomNode", worldObject->getChild("room")));	//creating node
 	worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(true);
 
-	//teapot room node
+	//teapot room node done
 	worldObject->getChild("room")->addChild(new GameObject("teapotRoomNode", worldObject->getChild("room")));	//creating node
 	tempObj = worldObject->getChild("room")->getChild("teapotRoomNode"); //setting temp object for easy access
 	tempObj->setPosition(vec3(0, 0, 0));
@@ -230,33 +230,126 @@ void HoloRoomScene::createScene()
 	tempObj->getChild("pluto")->setScale(vec3(0.25, 0.25, 0.25));	//change scele
 
 
-	//old room node
-	worldObject->getChild("room")->addChild(new GameObject("oldRoomNode", worldObject->getChild("room")));	//creating node
-	tempObj = worldObject->getChild("room")->getChild("oldRoomNode"); //setting temp object for easy access
+	//lander room node
+	worldObject->getChild("room")->addChild(new GameObject("apolloRoomNode", worldObject->getChild("room")));	//creating node
+	tempObj = worldObject->getChild("room")->getChild("apolloRoomNode"); //setting temp object for easy access
 	tempObj->setActive(false);
-
-	//scifi room node
-	worldObject->getChild("room")->addChild(new GameObject("sciFiRoomNode", worldObject->getChild("room")));	//creating node
-	tempObj = worldObject->getChild("room")->getChild("sciFiRoomNode"); //setting temp object for easy access
-	tempObj->setActive(false);
-
-	tempObj->addChild(new GameObject("Dubstep", tempObj, objects["Dubstep"], textures["Dubstep"], shaders["main"]));	//creating object
-	tempObj->getChild("Dubstep")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("Dubstep")->setPosition(vec3(0, 0, 0));	//changing postiion
-	tempObj->getChild("Dubstep")->setRotation(vec3(0, 0, 0));	//change rotaion
-	tempObj->getChild("Dubstep")->setScale(vec3(0.25, 0.25, 0.25));	//change scele
-
-	tempObj->addChild(new GameObject("compCube", tempObj, objects["compCube"], textures["compCube"], shaders["main"]));	//creating object
-	tempObj->getChild("compCube")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("compCube")->setPosition(vec3(-50, 0, -50));	//changing postiion
-	tempObj->getChild("compCube")->setRotation(vec3(0, 0, 0));	//change rotaion
-	tempObj->getChild("compCube")->setScale(vec3(1, 1, 1));	//change scele
 
 	tempObj->addChild(new GameObject("lander", tempObj, objects["lander"], textures["lander"], shaders["main"]));	//creating object
 	tempObj->getChild("lander")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("lander")->setPosition(vec3(50, 0, 50));	//changing postiion
+	tempObj->getChild("lander")->setPosition(vec3(0, -5, 0));	//changing postiion
 	tempObj->getChild("lander")->setRotation(vec3(0, 0, 0));	//change rotaion
 	tempObj->getChild("lander")->setScale(vec3(1, 1, 1));	//change scele
+
+	//walker room node
+	worldObject->getChild("room")->addChild(new GameObject("walkerNode", worldObject->getChild("room")));	//creating node
+	tempObj = worldObject->getChild("room")->getChild("walkerNode"); //setting temp object for easy access
+	tempObj->setActive(false);
+
+	tempObj->addChild(new GameObject("heroWalker", tempObj, objects["heroWalker"], textures["heroWalker"], shaders["main"]));	//creating object
+	tempObj->getChild("heroWalker")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("heroWalker")->setPosition(vec3(0, -35, 0));	//changing postiion
+	tempObj->getChild("heroWalker")->setRotation(vec3(0, 0, 0));	//change rotaion
+	tempObj->getChild("heroWalker")->setScale(vec3(3, 3, 3));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo1", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo1")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo1")->setPosition(vec3(0, -23, 60));	//changing postiion
+	tempObj->getChild("walkerEvo1")->setRotation(vec3(0, 90, 0));	//change rotaion
+	tempObj->getChild("walkerEvo1")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo2", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo2")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo2")->setPosition(vec3(0, -23, 90));	//changing postiion
+	tempObj->getChild("walkerEvo2")->setRotation(vec3(0, 90, 0));	//change rotaion
+	tempObj->getChild("walkerEvo2")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo3", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo3")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo3")->setPosition(vec3(0, -23, -60));	//changing postiion
+	tempObj->getChild("walkerEvo3")->setRotation(vec3(0, -90, 0));	//change rotaion
+	tempObj->getChild("walkerEvo3")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo4", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo4")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo4")->setPosition(vec3(0, -23, -90));	//changing postiion
+	tempObj->getChild("walkerEvo4")->setRotation(vec3(0, -90, 0));	//change rotaion
+	tempObj->getChild("walkerEvo4")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo5", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo5")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo5")->setPosition(vec3(-60, -23, 0));	//changing postiion
+	tempObj->getChild("walkerEvo5")->setRotation(vec3(0, 0, 0));	//change rotaion
+	tempObj->getChild("walkerEvo5")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo6", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo6")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo6")->setPosition(vec3(-90, -23, 0));	//changing postiion
+	tempObj->getChild("walkerEvo6")->setRotation(vec3(0, 0, 0));	//change rotaion
+	tempObj->getChild("walkerEvo6")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo7", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo7")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo7")->setPosition(vec3(60, -23, 0));	//changing postiion
+	tempObj->getChild("walkerEvo7")->setRotation(vec3(0, 180, 0));	//change rotaion
+	tempObj->getChild("walkerEvo7")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo8", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo8")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo8")->setPosition(vec3(90, -23, 0));	//changing postiion
+	tempObj->getChild("walkerEvo8")->setRotation(vec3(0, 180, 0));	//change rotaion
+	tempObj->getChild("walkerEvo8")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo9", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo9")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo9")->setPosition(vec3(42, -23, 42));	//changing postiion
+	tempObj->getChild("walkerEvo9")->setRotation(vec3(0, 135, 0));	//change rotaion
+	tempObj->getChild("walkerEvo9")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo10", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo10")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo10")->setPosition(vec3(63, -23, 63));	//changing postiion
+	tempObj->getChild("walkerEvo10")->setRotation(vec3(0, 135, 0));	//change rotaion
+	tempObj->getChild("walkerEvo10")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo11", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo11")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo11")->setPosition(vec3(-42, -23, -42));	//changing postiion
+	tempObj->getChild("walkerEvo11")->setRotation(vec3(0, -45, 0));	//change rotaion
+	tempObj->getChild("walkerEvo11")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo12", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo12")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo12")->setPosition(vec3(-63, -23, -63));	//changing postiion
+	tempObj->getChild("walkerEvo12")->setRotation(vec3(0, -45, 0));	//change rotaion
+	tempObj->getChild("walkerEvo12")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo13", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo13")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo13")->setPosition(vec3(-42, -23, 42));	//changing postiion
+	tempObj->getChild("walkerEvo13")->setRotation(vec3(0, 45, 0));	//change rotaion
+	tempObj->getChild("walkerEvo13")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo14", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo14")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo14")->setPosition(vec3(-63, -23, 63));	//changing postiion
+	tempObj->getChild("walkerEvo14")->setRotation(vec3(0, 45, 0));	//change rotaion
+	tempObj->getChild("walkerEvo14")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo15", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo15")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo15")->setPosition(vec3(42, -23, -42));	//changing postiion
+	tempObj->getChild("walkerEvo15")->setRotation(vec3(0, 225, 0));	//change rotaion
+	tempObj->getChild("walkerEvo15")->setScale(vec3(2, 2, 2));	//change scele
+
+	tempObj->addChild(new GameObject("walkerEvo16", tempObj, objects["walkerEvo"], textures["walkerEvo"], shaders["main"]));	//creating object
+	tempObj->getChild("walkerEvo16")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("walkerEvo16")->setPosition(vec3(63, -23, -63));	//changing postiion
+	tempObj->getChild("walkerEvo16")->setRotation(vec3(0, 225, 0));	//change rotaion
+	tempObj->getChild("walkerEvo16")->setScale(vec3(2, 2, 2));	//change scele
+
+
+
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->printComponents();
@@ -382,29 +475,29 @@ void HoloRoomScene::onKeyDown(SDL_Keycode key)
 		cout << "set empty room" << endl;
 		worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(true);
 		worldObject->getChild("room")->getChild("teapotRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("oldRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("sciFiRoomNode")->setActive(false);
+		worldObject->getChild("room")->getChild("apolloRoomNode")->setActive(false);
+		worldObject->getChild("room")->getChild("walkerNode")->setActive(false);
 		break;
 	case SDLK_2:
 		cout << "set teapot room" << endl;
 		worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(false);
 		worldObject->getChild("room")->getChild("teapotRoomNode")->setActive(true);
-		worldObject->getChild("room")->getChild("oldRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("sciFiRoomNode")->setActive(false);
+		worldObject->getChild("room")->getChild("apolloRoomNode")->setActive(false);
+		worldObject->getChild("room")->getChild("walkerNode")->setActive(false);
 		break;
 	case SDLK_3:
 		cout << "set old room" << endl;
 		worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(false);
 		worldObject->getChild("room")->getChild("teapotRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("oldRoomNode")->setActive(true);
-		worldObject->getChild("room")->getChild("sciFiRoomNode")->setActive(false);
+		worldObject->getChild("room")->getChild("apolloRoomNode")->setActive(true);
+		worldObject->getChild("room")->getChild("walkerNode")->setActive(false);
 		break;
 	case SDLK_4:
 		cout << "set scifi room" << endl;
 		worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(false);
 		worldObject->getChild("room")->getChild("teapotRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("oldRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("sciFiRoomNode")->setActive(true);
+		worldObject->getChild("room")->getChild("apolloRoomNode")->setActive(false);
+		worldObject->getChild("room")->getChild("walkerNode")->setActive(true);
 		break;
 	default:
 		break;
