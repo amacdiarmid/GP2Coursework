@@ -2,6 +2,7 @@
 #define Shader_h
 
 #include "Common.h"
+#include "Texture.h"
 
 enum SHADER_TYPE
 {

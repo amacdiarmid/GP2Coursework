@@ -65,6 +65,11 @@ void Object::createBuffer(string modelPath)
 
 }
 
+void Object::createBuffer()
+{
+
+}
+
 void Object::cleanUp()
 {
 	glDeleteBuffers(1, &EBO);

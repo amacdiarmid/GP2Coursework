@@ -137,6 +137,7 @@ void Shader::createShader()
 
 }
 
+
 GLuint Shader::getShader()
 {
 	return finalShader;

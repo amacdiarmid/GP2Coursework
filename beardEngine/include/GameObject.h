@@ -9,6 +9,7 @@
 #include "Object.h"
 #include <map>
 #include "ViewFrustumCulling.h"
+#include "Mesh.h"
 
 class GameObject
 {
@@ -50,6 +51,7 @@ public:
 	bool getActive(){ return active; };
 	bool getWorld(){ return world; };
 	PlayerController *getInput(){ return input; };
+	MeshData getMesh(){ return mesh; };
 
 	//setters
 	void setScale(vec3 tempScale){ size = tempScale; };
@@ -76,6 +78,8 @@ private:
 	Shader *shader;
 	PlayerController *input;
 	mat4 MVP;
+	Shader material;
+	MeshData mesh;
 
 	//the distance from the parent world position
 	vec3 localPos = vec3(0.0f, 0.0f, 0.0f);

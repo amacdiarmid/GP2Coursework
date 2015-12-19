@@ -70,10 +70,30 @@ void HoloRoomScene::createScene()
 	editor = new Editor(this);
 	debugMode = false;
 
+	editor = new Editor(this);
+	debugMode = false;
+
+	input = new PlayerController();
+
+
+	//create cubemap
+	
+	skyMaterial = new CubeTexture();
+	string skyBoxFront = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_front.png";
+	string skyBoxBack = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_back.png";
+	string skyBoxLeft = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_left.png";
+	string skyBoxRight = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_right.png";
+	string skyBoxTop = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_top.png";
+	string skyBoxBottom = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_bottom.png";
+	skyMaterial->loadSkyBoxTextures(skyBoxFront, skyBoxBack, skyBoxLeft, skyBoxRight, skyBoxTop, skyBoxBottom);
+
 
 	//create objects
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
 	objects["teapot"]->createBuffer("/utah-teapot.fbx");
+
+	objects.insert(pair<string, Object*>("cubeMesh", new Cube("cubeMesh")));
+	objects["cubeMesh"]->createBuffer();
 
 	//create textures
 	textures.insert(pair<string, Texture*>("sun", new Texture("sun")));
@@ -88,6 +108,12 @@ void HoloRoomScene::createScene()
 	shaders["main"]->attatchVertexShader("/textureVS.glsl");
 	shaders["main"]->attatchFragmentShader("/textureFS.glsl");
 	shaders["main"]->createShader();
+
+	shaders.insert(pair<string, Shader*>("sky", new Shader("sky")));
+	shaders["sky"]->attatchVertexShader("/skyboxVS.glsl");
+	shaders["sky"]->attatchFragmentShader("/skyboxFS.glsl");
+	shaders["sky"]->createShader();
+
 
 	//create player/debug cam
 	input = new PlayerController();
@@ -113,6 +139,11 @@ void HoloRoomScene::createScene()
 	//worldObject->getChild("sun")->getChild("earth")->addChild(new GameObject("moon", worldObject, objects["teapot"], textures["moon"], shaders["main"]));
 	//worldObject->getChild("sun")->getChild("earth")->getChild("moon")->addComponent(RENDER_COMPONENT);
 
+	glDepthMask(GL_FALSE);
+	worldObject->addChild(new GameObject("skybox", worldObject, objects["cubeMesh"], skyMaterial, shaders["sky"]));
+	worldObject->getChild("skybox")->addComponent(RENDER_COMPONENT);
+	glDepthMask(GL_TRUE);
+
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->printComponents();
 	worldObject->printChildern();
@@ -128,7 +159,9 @@ void HoloRoomScene::createScene()
 void HoloRoomScene::destroyScene()
 {
 	shaders["main"]->cleanUp();
+	shaders["sky"]->cleanUp();
 	objects["teapot"]->cleanUp();
+	objects["cubeMesh"]->cleanUp();
 }
 
 void HoloRoomScene::SceneLoop()

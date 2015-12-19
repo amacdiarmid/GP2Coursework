@@ -1,10 +1,6 @@
 #include "GameObject.h"
 #include "Components\InputComponent.h"
 
-GameObject::GameObject()
-{
-}
-
 GameObject::GameObject(string tempName)
 {
 	world = true;
@@ -79,15 +75,15 @@ void GameObject::render(Fustrum* fustrum)
 	{
 		if (model != NULL)
 		{
-			//see if the model is inside the fustrum then render
-			positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox(), localPos);
-			if (pos == INSIDE_FRUSTRUM || pos == INTERSECT_FRUSTRUM)
-			{
-		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
-		{
-			i->second->render();
-		}
-			}
+			////see if the model is inside the fustrum then render
+			//positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox(), localPos);
+			//if (pos == INSIDE_FRUSTRUM || pos == INTERSECT_FRUSTRUM)
+			//{
+				for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+				{
+					i->second->render();
+				}
+			//}
 		}
 		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
 		{

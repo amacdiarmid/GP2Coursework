@@ -28,6 +28,9 @@ public:
 	void onkeyUp(SDL_Keycode key) override;
 private:
 
+	CubeTexture* skyMaterial;
+	//woo we're the best
+
 };
 
 #endif
