@@ -78,7 +78,6 @@ private:
 	Shader *shader;
 	PlayerController *input;
 	mat4 MVP;
-	Shader material;
 	MeshData mesh;
 
 	//the distance from the parent world position
