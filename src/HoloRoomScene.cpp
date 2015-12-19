@@ -76,12 +76,14 @@ void HoloRoomScene::createScene()
 	//set this stuff up into object files 
 
 	//create objects
-	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
-	objects["teapot"]->createBuffer("/utah-teapot.fbx");
-	objects.insert(pair<string, Object*>("holoRoom", new Object("holoRoom")));
-	objects["holoRoom"]->createBuffer("/Holodome.FBX");
 	objects.insert(pair<string, Object*>("lander", new Object("lander")));
 	objects["lander"]->createBuffer("/lander.FBX");
+	
+	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
+	objects["teapot"]->createBuffer("/utah-teapot.FBX");
+
+	objects.insert(pair<string, Object*>("teapotRoom", new Object("teapotRoom")));
+	objects["teapotRoom"]->createBuffer("/TheTeapotRoom.FBX");
 	
 	objects.insert(pair<string, Object*>("heroWalker", new Object("heroWalker")));
 	objects["heroWalker"]->createBuffer("/heroWalker.FBX");
@@ -91,29 +93,6 @@ void HoloRoomScene::createScene()
 	//create textures
 	textures.insert(pair<string, Texture*>("sun", new Texture("sun")));
 	textures["sun"]->createTexture("/SunTexture.png");
-	textures.insert(pair<string, Texture*>("mercury", new Texture("mercury")));
-	textures["mercury"]->createTexture("/MercuryTexture.png");
-	textures.insert(pair<string, Texture*>("venus", new Texture("venus")));
-	textures["venus"]->createTexture("/VenusTexture.png");
-	textures.insert(pair<string, Texture*>("earth", new Texture("earth")));
-	textures["earth"]->createTexture("/EarthTexture.png");
-	textures.insert(pair<string, Texture*>("moon", new Texture("moon")));
-	textures["moon"]->createTexture("/MoonTexture.png");
-	textures.insert(pair<string, Texture*>("mars", new Texture("mars")));
-	textures["mars"]->createTexture("/MarsTexture.png");
-	textures.insert(pair<string, Texture*>("jupiter", new Texture("jupiter")));
-	textures["jupiter"]->createTexture("/JupiterTexture.png");
-	textures.insert(pair<string, Texture*>("saturn", new Texture("saturn")));
-	textures["saturn"]->createTexture("/SaturnTexture.png");
-	textures.insert(pair<string, Texture*>("uranus", new Texture("uranus")));
-	textures["uranus"]->createTexture("/UranusTexture.png");
-	textures.insert(pair<string, Texture*>("neptune", new Texture("neptune")));
-	textures["neptune"]->createTexture("/NeptuneTexture.png");
-	textures.insert(pair<string, Texture*>("pluto", new Texture("pluto")));
-	textures["pluto"]->createTexture("/PlutoTexture.png");
-
-	textures.insert(pair<string, Texture*>("wall", new Texture("wall")));
-	textures["wall"]->createTexture("/wallTexture.png");
 
 	textures.insert(pair<string, Texture*>("lander", new Texture("lander")));
 	textures["lander"]->createTexture("/apollo map.jpg");
@@ -122,6 +101,9 @@ void HoloRoomScene::createScene()
 	textures["heroWalker"]->createTexture("/unsung-map.jpg");
 	textures.insert(pair<string, Texture*>("walkerEvo", new Texture("walkerEvo")));
 	textures["walkerEvo"]->createTexture("/walkerMap.jpg");
+
+	textures.insert(pair<string, Texture*>("teapotRoom", new Texture("teapotRoom")));
+	textures["teapotRoom"]->createTexture("/teapotRoom.jpg");
 
 	//create shaders
 	shaders.insert(pair<string, Shader*>("main", new Shader("main")));
@@ -148,18 +130,14 @@ void HoloRoomScene::createScene()
 	//skybox
 	//david do stuff here
 
-	//main room
-	worldObject->addChild(new GameObject("room", worldObject, objects["holoRoom"], textures["wall"], shaders["main"]));	//creating object
-	worldObject->getChild("room")->addComponent(RENDER_COMPONENT);	//adding render comp
-	worldObject->getChild("room")->changePosition(vec3(0, -25, 0));	//changing position
 
 	//empty room node
-	worldObject->getChild("room")->addChild(new GameObject("emptyRoomNode", worldObject->getChild("room")));	//creating node
-	worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(true);
+	worldObject->addChild(new GameObject("emptyRoomNode", worldObject));	//creating node
+	worldObject->getChild("emptyRoomNode")->setActive(true);
 
 	//teapot room node done
-	worldObject->getChild("room")->addChild(new GameObject("teapotRoomNode", worldObject->getChild("room")));	//creating node
-	tempObj = worldObject->getChild("room")->getChild("teapotRoomNode"); //setting temp object for easy access
+	worldObject->addChild(new GameObject("teapotRoomNode", worldObject));	//creating node
+	tempObj = worldObject->getChild("teapotRoomNode"); //setting temp object for easy access
 	tempObj->setPosition(vec3(0, 0, 0));
 	tempObj->setActive(false);
 	
@@ -169,70 +147,16 @@ void HoloRoomScene::createScene()
 	tempObj->getChild("sun")->setRotation(vec3(0, 0, 0));	//change rotaion
 	tempObj->getChild("sun")->setScale(vec3(0.5, 0.5, 0.5));	//change scele
 
-	tempObj->addChild(new GameObject("mercury", tempObj, objects["teapot"], textures["mercury"], shaders["main"]));	//creating object
-	tempObj->getChild("mercury")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("mercury")->setPosition(vec3(15, 20, 0));	//changing postiion
-	tempObj->getChild("mercury")->setRotation(vec3(10, 10, 10));	//change rotaion
-	tempObj->getChild("mercury")->setScale(vec3(0.25, 0.25, 0.25));	//change scele
-
-	tempObj->addChild(new GameObject("venus", tempObj, objects["teapot"], textures["venus"], shaders["main"]));	//creating object
-	tempObj->getChild("venus")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("venus")->setPosition(vec3(25, 15, 25));	//changing postiion
-	tempObj->getChild("venus")->setRotation(vec3(20, 20, 20));	//change rotaion
-	tempObj->getChild("venus")->setScale(vec3(0.3, 0.3, 0.3));	//change scele
-
-	tempObj->addChild(new GameObject("earth", tempObj, objects["teapot"], textures["earth"], shaders["main"]));	//creating object
-	tempObj->getChild("earth")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("earth")->setPosition(vec3(0, 30, 30));	//changing postiion
-	tempObj->getChild("earth")->setRotation(vec3(30, 30, 30));	//change rotaion
-	tempObj->getChild("earth")->setScale(vec3(0.35, 0.35, 0.35));	//change scele
-
-	tempObj->addChild(new GameObject("moon", tempObj->getChild("earth"), objects["teapot"], textures["moon"], shaders["main"]));	//creating object
-	tempObj->getChild("moon")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("moon")->setPosition(vec3(5, 35, 15));	//changing postiion
-	tempObj->getChild("moon")->setRotation(vec3(40, 40, 40));	//change rotaion
-	tempObj->getChild("moon")->setScale(vec3(0.25, 0.25, 0.25));	//change scele
-
-	tempObj->addChild(new GameObject("mars", tempObj, objects["teapot"], textures["mars"], shaders["main"]));	//creating object
-	tempObj->getChild("mars")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("mars")->setPosition(vec3(45, 25, 50));	//changing postiion
-	tempObj->getChild("mars")->setRotation(vec3(0, 0, 90));	//change rotaion
-	tempObj->getChild("mars")->setScale(vec3(0.35, 0.35, 0.35));	//change scele
-
-	tempObj->addChild(new GameObject("jupiter", tempObj, objects["teapot"], textures["jupiter"], shaders["main"]));	//creating object
-	tempObj->getChild("jupiter")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("jupiter")->setPosition(vec3(50, 40, 0));	//changing postiion
-	tempObj->getChild("jupiter")->setRotation(vec3(50, 50, 60));	//change rotaion
-	tempObj->getChild("jupiter")->setScale(vec3(0.45, 0.45, 0.45));	//change scele
-
-	tempObj->addChild(new GameObject("saturn", tempObj, objects["teapot"], textures["saturn"], shaders["main"]));	//creating object
-	tempObj->getChild("saturn")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("saturn")->setPosition(vec3(-65, 20, -65));	//changing postiion
-	tempObj->getChild("saturn")->setRotation(vec3(0, -10, 70));	//change rotaion
-	tempObj->getChild("saturn")->setScale(vec3(0.5, 0.5, 0.5));	//change scele
-
-	tempObj->addChild(new GameObject("uranus", tempObj, objects["teapot"], textures["uranus"], shaders["main"]));	//creating object
-	tempObj->getChild("uranus")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("uranus")->setPosition(vec3(-70, 30, 0));	//changing postiion
-	tempObj->getChild("uranus")->setRotation(vec3(0, 30, 80));	//change rotaion
-	tempObj->getChild("uranus")->setScale(vec3(0.3, 0.3, 0.3));	//change scele
-
-	tempObj->addChild(new GameObject("neptune", tempObj, objects["teapot"], textures["neptune"], shaders["main"]));	//creating object
-	tempObj->getChild("neptune")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("neptune")->setPosition(vec3(80, 50, 80));	//changing postiion
-	tempObj->getChild("neptune")->setRotation(vec3(0, 60, 90));	//change rotaion
-	tempObj->getChild("neptune")->setScale(vec3(0.3, 0.3, 0.3));	//change scele
-
-	tempObj->addChild(new GameObject("pluto", tempObj, objects["teapot"], textures["pluto"], shaders["main"]));	//creating object
-	tempObj->getChild("pluto")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("pluto")->setPosition(vec3(-90, 15, 0));	//changing postiion
-	tempObj->getChild("pluto")->setRotation(vec3(0, -30, 100));	//change rotaion
-	tempObj->getChild("pluto")->setScale(vec3(0.25, 0.25, 0.25));	//change scele
+	tempObj->addChild(new GameObject("teapotRoom", tempObj, objects["teapotRoom"], textures["teapotRoom"], shaders["main"]));	//creating object
+	tempObj->getChild("teapotRoom")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("teapotRoom")->setPosition(vec3(0, -25, 0));	//changing postiion
+	tempObj->getChild("teapotRoom")->setRotation(vec3(-90, 0, 0));	//change rotaion
+	tempObj->getChild("teapotRoom")->setScale(vec3(1, 1, 1));	//change scele
 
 
 	//lander room node
-	worldObject->getChild("room")->addChild(new GameObject("apolloRoomNode", worldObject->getChild("room")));	//creating node
-	tempObj = worldObject->getChild("room")->getChild("apolloRoomNode"); //setting temp object for easy access
+	worldObject->addChild(new GameObject("apolloRoomNode", worldObject));	//creating node
+	tempObj = worldObject->getChild("apolloRoomNode"); //setting temp object for easy access
 	tempObj->setActive(false);
 
 	tempObj->addChild(new GameObject("lander", tempObj, objects["lander"], textures["lander"], shaders["main"]));	//creating object
@@ -242,8 +166,8 @@ void HoloRoomScene::createScene()
 	tempObj->getChild("lander")->setScale(vec3(1, 1, 1));	//change scele
 
 	//walker room node
-	worldObject->getChild("room")->addChild(new GameObject("walkerNode", worldObject->getChild("room")));	//creating node
-	tempObj = worldObject->getChild("room")->getChild("walkerNode"); //setting temp object for easy access
+	worldObject->addChild(new GameObject("walkerNode", worldObject));	//creating node
+	tempObj = worldObject->getChild("walkerNode"); //setting temp object for easy access
 	tempObj->setActive(false);
 
 	tempObj->addChild(new GameObject("heroWalker", tempObj, objects["heroWalker"], textures["heroWalker"], shaders["main"]));	//creating object
@@ -473,31 +397,31 @@ void HoloRoomScene::onKeyDown(SDL_Keycode key)
 		break;
 	case SDLK_1:
 		cout << "set empty room" << endl;
-		worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(true);
-		worldObject->getChild("room")->getChild("teapotRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("apolloRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("walkerNode")->setActive(false);
+		worldObject->getChild("emptyRoomNode")->setActive(true);
+		worldObject->getChild("teapotRoomNode")->setActive(false);
+		worldObject->getChild("apolloRoomNode")->setActive(false);
+		worldObject->getChild("walkerNode")->setActive(false);
 		break;
 	case SDLK_2:
 		cout << "set teapot room" << endl;
-		worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("teapotRoomNode")->setActive(true);
-		worldObject->getChild("room")->getChild("apolloRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("walkerNode")->setActive(false);
+		worldObject->getChild("emptyRoomNode")->setActive(false);
+		worldObject->getChild("teapotRoomNode")->setActive(true);
+		worldObject->getChild("apolloRoomNode")->setActive(false);
+		worldObject->getChild("walkerNode")->setActive(false);
 		break;
 	case SDLK_3:
 		cout << "set old room" << endl;
-		worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("teapotRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("apolloRoomNode")->setActive(true);
-		worldObject->getChild("room")->getChild("walkerNode")->setActive(false);
+		worldObject->getChild("emptyRoomNode")->setActive(false);
+		worldObject->getChild("teapotRoomNode")->setActive(false);
+		worldObject->getChild("apolloRoomNode")->setActive(true);
+		worldObject->getChild("walkerNode")->setActive(false);
 		break;
 	case SDLK_4:
 		cout << "set scifi room" << endl;
-		worldObject->getChild("room")->getChild("emptyRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("teapotRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("apolloRoomNode")->setActive(false);
-		worldObject->getChild("room")->getChild("walkerNode")->setActive(true);
+		worldObject->getChild("emptyRoomNode")->setActive(false);
+		worldObject->getChild("teapotRoomNode")->setActive(false);
+		worldObject->getChild("apolloRoomNode")->setActive(false);
+		worldObject->getChild("walkerNode")->setActive(true);
 		break;
 	default:
 		break;
