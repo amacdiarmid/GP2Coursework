@@ -85,6 +85,7 @@ Texture::Texture()
 Texture::Texture(string tempName)
 {
 	name = tempName;
+	tex2D = true;
 }
 
 Texture::~Texture()

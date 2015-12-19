@@ -32,8 +32,8 @@ void HoloRoomScene::render()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//backface culling
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_BACK);
 
 	worldObject->render(fustrum);
 
@@ -70,15 +70,12 @@ void HoloRoomScene::createScene()
 	editor = new Editor(this);
 	debugMode = false;
 
-	editor = new Editor(this);
-	debugMode = false;
-
 	input = new PlayerController();
 
 
 	//create cubemap
 	
-	skyMaterial = new CubeTexture();
+	skyMaterial = new CubeTexture("skybox");
 	string skyBoxFront = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_front.png";
 	string skyBoxBack = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_back.png";
 	string skyBoxLeft = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_left.png";

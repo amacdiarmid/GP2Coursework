@@ -76,5 +76,5 @@ GLuint loadCubeMap(const string& filenamePosZ, const string& filenameNegZ, const
 
 void CubeTexture::loadSkyBoxTextures(const string& filenamePosZ, const string& filenameNegZ, const string& filenamePosX, const string& filenameNegX, const string& filenamePosY, const string& filenameNegY)
 {
-	environmentMap = loadCubeMap(filenamePosZ, filenameNegZ, filenamePosX, filenameNegX, filenamePosY, filenameNegY);
+	textureMap = loadCubeMap(filenamePosZ, filenameNegZ, filenamePosX, filenameNegX, filenamePosY, filenameNegY);
 }

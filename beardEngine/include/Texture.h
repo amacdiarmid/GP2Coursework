@@ -19,10 +19,12 @@ public:
 	GLuint *getTexture();
 	string getName();
 	void cleanUp();
+	bool getTex2D(){ return tex2D; }
 	
-private:
+protected:
 	GLuint textureMap;
 	string name;
+	bool tex2D;
 
 };
 

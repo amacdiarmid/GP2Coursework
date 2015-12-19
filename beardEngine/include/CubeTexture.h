@@ -11,15 +11,12 @@ class CubeTexture : public Texture
 public:
 
 	CubeTexture(){};
-	CubeTexture(string tempName){};
+	CubeTexture(string tempName){ name = tempName; tex2D = false; };
 	~CubeTexture(){};
 
 	void loadSkyBoxTextures(const string& filenamePosZ, const string& filenameNegZ, const string& filenamePosX, const string& filenameNegX, const string& filenamePosY, const string& filenameNegY);
-	GLuint getEnvironmentMap(){ return environmentMap; }
 
 private:
-
-	GLuint environmentMap = 0;
 
 
 	

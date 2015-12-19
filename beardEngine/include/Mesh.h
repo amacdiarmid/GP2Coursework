@@ -9,9 +9,6 @@ struct MeshData
 	vector<Vertex> vertices;
 	vector<int> indices;
 
-	void create(Vertex * pverts, int numverts, int *pIndices, int numIndices);
-
-
 	int getNumVerts()
 	{
 		return (int)vertices.size();
@@ -26,17 +23,6 @@ struct MeshData
 	{
 		return vertices;
 	}
-
-	MeshData();
-	~MeshData();
-
-private:
-	GLuint m_VBO;
-	GLuint m_EBO;
-	GLuint m_VAO;
-	int m_NoOfIndices;
-	int m_NoOfVertices;
-
 };
 
 #endif
