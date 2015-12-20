@@ -34,7 +34,9 @@ void HoloRoomScene::render()
 	//backface culling
 	//glEnable(GL_CULL_FACE);
 	//glCullFace(GL_BACK);
-
+	
+	glDepthMask(GL_TRUE);
+	
 	worldObject->render(fustrum);
 
 	/*
@@ -76,8 +78,7 @@ void HoloRoomScene::createScene()
 	input = new PlayerController();
 
 
-	//create cubemap
-	
+	//create cubemap texture
 	skyMaterial = new CubeTexture("skybox");
 	string skyBoxFront = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_front.png";
 	string skyBoxBack = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_back.png";
@@ -86,8 +87,6 @@ void HoloRoomScene::createScene()
 	string skyBoxTop = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_top.png";
 	string skyBoxBottom = ASSET_PATH + TEXTURE_PATH + "/skybox/Space_bottom.png";
 	skyMaterial->loadSkyBoxTextures(skyBoxFront, skyBoxBack, skyBoxLeft, skyBoxRight, skyBoxTop, skyBoxBottom);
-
-	//set this stuff up into object files 
 
 	//create objects
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
@@ -167,9 +166,6 @@ void HoloRoomScene::createScene()
 	//player
 	worldObject->addChild(new GameObject("player", worldObject, input));
 	worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
-
-	//skybox
-	//david do stuff here
 
 	//main room
 	worldObject->addChild(new GameObject("room", worldObject, objects["holoRoom"], textures["wall"], shaders["main"]));	//creating object
@@ -371,13 +367,10 @@ void HoloRoomScene::createScene()
 	tempObj->getChild("walkerEvo16")->setRotation(vec3(0, 225, 0));	//change rotaion
 	tempObj->getChild("walkerEvo16")->setScale(vec3(2, 2, 2));	//change scele
 
-
-
-
-	glDepthMask(GL_FALSE);
 	worldObject->addChild(new GameObject("skybox", worldObject, objects["cubeMesh"], skyMaterial, shaders["sky"]));
 	worldObject->getChild("skybox")->addComponent(RENDER_COMPONENT);
-	glDepthMask(GL_TRUE);
+	worldObject->getChild("skybox")->setForceRender(true);
+	worldObject->getChild("skybox")->setScale(vec3(20, 20, 20));	//change scele
 
 	cout << "world: " << worldObject->getName() << " components: ";
 	worldObject->printComponents();

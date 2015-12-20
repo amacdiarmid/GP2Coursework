@@ -72,6 +72,7 @@ GLuint loadCubeMap(const string& filenamePosZ, const string& filenameNegZ, const
 	loadCubeMapFace(filenameNegZ, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 
 
+
 	return textureID;
 }
 

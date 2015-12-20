@@ -53,6 +53,7 @@ public:
 	PlayerController *getInput(){ return input; };
 	Scene *getCurScene(){ return curScene; };
 	MeshData getMesh(){ return mesh; };
+	bool getForceRender(){ return forceRender; }
 
 	//setters
 	void setScale(vec3 tempScale){ size = tempScale; };
@@ -67,6 +68,7 @@ public:
 	void setActive(bool tempBool){ active = tempBool; };
 	void setInput(PlayerController *tempPlayer){ input = tempPlayer; };
 	void setScene(Scene *tempScene){ curScene = tempScene; };
+	void setForceRender(bool tempBool){ forceRender = tempBool; }
 
 private:
 	string name;
@@ -81,6 +83,7 @@ private:
 	PlayerController *input;
 	mat4 MVP;
 	MeshData mesh;
+	bool forceRender = false;
 
 	//the distance from the parent world position
 	vec3 localPos = vec3(0.0f, 0.0f, 0.0f);

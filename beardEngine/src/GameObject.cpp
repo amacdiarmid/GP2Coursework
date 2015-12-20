@@ -97,12 +97,12 @@ void GameObject::render(Fustrum* fustrum)
 		{
 			//see if the model is inside the fustrum then render
 			positionToFrustrum pos = fustrum->isInFrustrum(model->getBoundingBox()->radius, localPos);
-			if (pos == INSIDE_FRUSTRUM || pos == INTERSECT_FRUSTRUM)
+			if (forceRender == true || pos == INSIDE_FRUSTRUM || pos == INTERSECT_FRUSTRUM)
 			{
-		for (auto i = componentsList.begin(); i != componentsList.end(); i++)
-		{
-			i->second->render();
-		}
+				for (auto i = componentsList.begin(); i != componentsList.end(); i++)
+				{
+					i->second->render();
+				}
 			}
 		}
 		for (auto i = childrenList.begin(); i != childrenList.end(); i++)
@@ -143,16 +143,16 @@ void GameObject::changePosition(vec3 tempPos)
 GameObject *GameObject::findChild(string com)
 {
 	for each (auto child in childrenList)
-{
+	{
 		if (child.first == com)
-{
+		{
 			return child.second;
-}
+		}
 		else
-{
+		{
 			return child.second->findChild(com);
-}
-}
+		}
+	}
 	return NULL;
 }
 

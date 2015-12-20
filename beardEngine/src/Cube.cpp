@@ -29,7 +29,7 @@ void Cube::createBuffer()
 		vec2(1.0f, 1.0f),
 		vec3(0.3f, -0.3f, 0.3f)
 		},
-		{ vec3(-10.0f, 10.0f, 10.0f),		//top right 
+		{ vec3(10.0f, 10.0f, 10.0f),		//top right 
 		vec4(1.0f, 0.0f, 1.0f, 1.0f),
 		vec2(1.0f, 0.0f),
 		vec3(0.3f, 0.3f, 0.3f)
@@ -50,7 +50,7 @@ void Cube::createBuffer()
 		vec2(1.0f, 1.0f),
 		vec3(0.3f, -0.3f, -0.3f)
 		},
-		{ vec3(-10.0f, 10.0f, -10.0f),		//top right 
+		{ vec3(10.0f, 10.0f, -10.0f),		//top right 
 		vec4(1.0f, 0.0f, 1.0f, 1.0f),
 		vec2(1.0f, 0.0f),
 		vec3(0.3f, 0.3f, -0.3f)
