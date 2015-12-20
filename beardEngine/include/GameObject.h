@@ -9,6 +9,7 @@
 #include "Object.h"
 #include <map>
 #include "ViewFrustumCulling.h"
+#include "Scene.h"
 
 class GameObject
 {
@@ -21,8 +22,7 @@ public:
 	//create player
 	GameObject(string tempName, GameObject *tempParent, PlayerController *tempInput);
 	//create node
-	
-	//create light
+	GameObject(string tempName, GameObject *tempParent);
 
 	~GameObject();
 
@@ -50,10 +50,11 @@ public:
 	bool getActive(){ return active; };
 	bool getWorld(){ return world; };
 	PlayerController *getInput(){ return input; };
+	Scene *getCurScene(){ return curScene; };
 
 	//setters
 	void setScale(vec3 tempScale){ size = tempScale; };
-	void setRotation(vec3 tempRotation){ rotation = tempRotation; };
+	void setRotation(vec3 tempRotation){ rotation.x = tempRotation.x; rotation.y = tempRotation.y; rotation.z = tempRotation.z; };
 	void setModel(Object* tempModel) { model = tempModel; };
 	void setShader(Shader* tempShader){ shader = tempShader; };
 	void setTexture(Texture* tempTexture){ texture = tempTexture; };
@@ -63,6 +64,7 @@ public:
 	void setWord(bool tempBool){ world = tempBool; };
 	void setActive(bool tempBool){ active = tempBool; };
 	void setInput(PlayerController *tempPlayer){ input = tempPlayer; };
+	void setScene(Scene *tempScene){ curScene = tempScene; };
 
 private:
 	string name;
@@ -83,6 +85,11 @@ private:
 	vec3 size = vec3(1.0f, 1.0f, 1.0f);
 	//rotation
 	vec3 rotation = vec3(0.0f, 0.0f, 0.0f);
+
+	//current scene
+	static Scene *curScene;
+
 };
+
 
 #endif

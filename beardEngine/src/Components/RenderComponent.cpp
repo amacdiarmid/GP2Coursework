@@ -28,7 +28,11 @@ void Renderer::update(mat4 MVPMat)
 
 void Renderer::render()
 {
-	glUseProgram(owner->getShader()->getShader());
+	if (owner->getCurScene()->getActiveShader() != owner->getShader()->getShader())
+	{
+		glUseProgram(owner->getShader()->getShader());
+		owner->getCurScene()->setActiveShader(owner->getShader()->getShader());
+	}
 
 	//get the uniform loaction for the MVP
 	GLint MVPLocation = glGetUniformLocation(owner->getShader()->getShader(), "MVP");

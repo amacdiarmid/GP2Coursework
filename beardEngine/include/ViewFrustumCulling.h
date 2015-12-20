@@ -6,6 +6,8 @@
 #include "Plane.h"
 #include "Box.h"
 
+#define HALF_ANG2RAD 3.14/360;
+
 enum positionToFrustrum 
 {
 	OUTSIDE_FRUSTRUM,
@@ -31,13 +33,14 @@ public:
 	~Fustrum();
 	void setUpCamera();
 	void updateCamera();
-	positionToFrustrum isInFrustrum(Box* TempBox, vec3 objectPos);
+	positionToFrustrum isInFrustrum(float radius, vec3 objectPos);
 	positionToFrustrum pointInFrustrum(vec3 point);
 private:
 	PlayerController* player;
 	vec3 camPos;
 	vec3 X, Y, Z;
 	float nearD, farD, width, height, tang;
+	float sphereFactorX, sphereFactorY;
 
 	vec3 farClippingCenter, nearClippingCenter;
 	vec3 farTopLeftPoint, farTopRightPoint, farBottomLeftPoint, farBottomRightPoint;

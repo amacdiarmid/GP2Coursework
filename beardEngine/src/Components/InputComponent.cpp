@@ -29,5 +29,11 @@ void InputComponent::onKeyDown(SDL_Keycode key)
 	}
 
 void InputComponent::onkeyUp(SDL_Keycode key)
-{}
+{
+}
 
+void InputComponent::mouseMove(SDL_MouseMotionEvent motion)
+{
+	owner->getInput()->mouseMovment(vec2(motion.x, motion.y));
+	SDL_WarpMouseInWindow(getWin(), SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+}

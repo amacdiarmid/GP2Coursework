@@ -18,7 +18,7 @@ void Object::createBuffer(string modelPath)
 
 	//load model
 	currentMesh = new MeshData();
-	string Path = ASSET_PATH + MODEL_PATH + "/utah-teapot.fbx";
+	string Path = ASSET_PATH + MODEL_PATH + modelPath;
 	loadFBXFromFile(Path, currentMesh);
 
 	//gen vertex array object

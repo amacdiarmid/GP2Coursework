@@ -29,6 +29,8 @@ private:
 	void assignTexture();
 	void assignShader();
 	void spawnObject();
+	void spawnLight();
+	void spawnNode();
 	void setPos();
 	void movePos();
 	void setScale();

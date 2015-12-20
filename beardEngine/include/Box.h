@@ -8,6 +8,7 @@ struct Box
 {
 	vec3 boxPoints[6];
 	vec3 center;
+	float radius;
 
 	void setPoints(MeshData* tempMesh)
 	{
@@ -35,6 +36,16 @@ struct Box
 		boxPoints[7] = vec3(min.x, max.y, max.z);
 
 		center = vec3((min.x + max.x / 2), (min.y + max.y / 2), (min.z + max.z / 2));
+
+		radius = max.x;
+		if (max.y > radius)
+		{
+			radius = max.y;
+		}
+		if (max.z > radius)
+		{
+			radius = max.z;
+		}
 
 	}
 

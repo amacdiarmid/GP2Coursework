@@ -41,6 +41,13 @@ bool GP2CourseWorkGame::gameLoop()
 				var->onKeyDown(event.key.keysym.sym);
 			}
 		}
+		if (event.type == SDL_MOUSEMOTION)
+		{
+			for each (auto var in keyboardListeners)
+			{
+				var->mouseMove(event.motion);
+			}
+		}
 	}
 
 	currentScene->SceneLoop();
