@@ -7,6 +7,7 @@
 #include "Mesh.h"
 #include "FBXLoader.h"
 #include "Box.h"
+#include "Vertex.h"
 
 class Object
 {
@@ -15,16 +16,17 @@ public:
 	Object(string tempName);
 	~Object();
 
-	void createBuffer(string modelPath);
-	void cleanUp();
-	GLuint getVBO();
-	GLuint getEBO();
-	GLuint getVAO();
-	MeshData *getMesh();
-	string getName();
-	Box *getBoundingBox(){ return boundingBox; };
+	virtual void createBuffer(string modelPath);
+	virtual void cleanUp();
+	virtual GLuint getVBO();
+	virtual GLuint getEBO();
+	virtual GLuint getVAO();
+	virtual MeshData *getMesh();
+	virtual string getName();
+	virtual Box *getBoundingBox(){ return boundingBox; };
+	virtual void createBuffer();
 
-private:
+protected:
 	MeshData *currentMesh;
 	Box *boundingBox;
 
@@ -33,7 +35,6 @@ private:
 	GLuint VBO;
 	GLuint EBO;
 	GLuint VAO;
-
 };
 
 #endif

@@ -29,6 +29,9 @@ public:
 	void mouseMove(SDL_MouseMotionEvent motion) override;
 private:
 
+	CubeTexture* skyMaterial;
+	//woo we're the best
+
 };
 
 #endif

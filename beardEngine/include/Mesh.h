@@ -23,12 +23,6 @@ struct MeshData
 	{
 		return vertices;
 	}
-
-	~MeshData()
-	{
-		vertices.clear();
-		indices.clear();
-	}
 };
 
 #endif

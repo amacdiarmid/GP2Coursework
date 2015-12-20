@@ -2,6 +2,7 @@
 #define _TEXTURE_H
 
 #include "Common.h"
+#include "Shader.h"
 
 GLuint loadTextureFromFile(const string& filename);
 GLuint loadTextureFromFont(const string& fontFilename, int pointSize, const string& text);
@@ -18,10 +19,12 @@ public:
 	GLuint *getTexture();
 	string getName();
 	void cleanUp();
-
-private:
+	bool getTex2D(){ return tex2D; }
+	
+protected:
 	GLuint textureMap;
 	string name;
+	bool tex2D;
 
 };
 

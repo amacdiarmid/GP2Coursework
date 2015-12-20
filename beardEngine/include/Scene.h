@@ -16,6 +16,8 @@
 #include "Window.h"
 #include "ViewFrustumCulling.h"
 #include <map>
+#include "Cube.h"
+#include "CubeTexture.h"
 
 class Editor;
 
