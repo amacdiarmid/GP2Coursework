@@ -30,6 +30,11 @@ void Renderer::render()
 {
 	glUseProgram(owner->getShader()->getShader());
 
+	if (!owner->getTexture()->getTex2D())
+	{
+		glDepthMask(GL_FALSE);
+	}
+
 	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{
@@ -80,6 +85,12 @@ void Renderer::render()
 	glBindVertexArray(owner->getModel()->getVAO());
 	//begin drawing triangle 
 	glDrawElements(GL_TRIANGLES, owner->getModel()->getMesh()->getNumIndices(), GL_UNSIGNED_INT, 0);
+
+	if (!owner->getTexture()->getTex2D())
+	{
+		glDepthMask(GL_TRUE);
+	}
+
 }
 
 string Renderer::getType()

@@ -57,6 +57,13 @@ GLuint loadCubeMap(const string& filenamePosZ, const string& filenameNegZ, const
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_GENERATE_MIPMAP, GL_TRUE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
 	loadCubeMapFace(filenamePosX, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
 	loadCubeMapFace(filenameNegX, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
 	loadCubeMapFace(filenamePosY, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
@@ -64,12 +71,6 @@ GLuint loadCubeMap(const string& filenamePosZ, const string& filenameNegZ, const
 	loadCubeMapFace(filenamePosZ, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
 	loadCubeMapFace(filenameNegZ, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_GENERATE_MIPMAP, GL_TRUE);
 
 	return textureID;
 }
