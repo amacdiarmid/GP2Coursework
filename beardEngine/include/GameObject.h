@@ -50,6 +50,7 @@ public:
 	bool getActive(){ return active; };
 	bool getWorld(){ return world; };
 	PlayerController *getInput(){ return input; };
+	mat4 getModelMatrix(){ return modelMatrix; }
 
 	//setters
 	void setScale(vec3 tempScale){ size = tempScale; };
@@ -64,6 +65,7 @@ public:
 	void setActive(bool tempBool){ active = tempBool; };
 	void setInput(PlayerController *tempPlayer){ input = tempPlayer; };
 
+
 private:
 	string name;
 	GameObject *parent;
@@ -76,6 +78,7 @@ private:
 	Shader *shader;
 	PlayerController *input;
 	mat4 MVP;
+	mat4 modelMatrix;
 
 	//the distance from the parent world position
 	vec3 localPos = vec3(0.0f, 0.0f, 0.0f);

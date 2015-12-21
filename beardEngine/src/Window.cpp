@@ -7,6 +7,8 @@ IkeyboardListener *keyboard;
 
 void createWindow(string gameName)
 {
+	GLenum err = GL_NO_ERROR;
+
 	ChangeWorkingDirectory();
 
 	initSDL2();
@@ -18,6 +20,7 @@ void createWindow(string gameName)
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	//create a window 
+
 	window = SDL_CreateWindow(gameName.c_str(), //window title
 		SDL_WINDOWPOS_CENTERED, // x position centered
 		SDL_WINDOWPOS_CENTERED, //y position centered
@@ -35,7 +38,7 @@ void createWindow(string gameName)
 	//set our viewport
 	setViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	GLenum err = GL_NO_ERROR;
+
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{
 		//Process/log the error.
@@ -60,7 +63,7 @@ void destroyWindow()
 }
 
 void windowLoop()
-		{
-	//call swap so that our GL back buffer is displayed
-	SDL_GL_SwapWindow(window);
+{
+		//call swap so that our GL back buffer is displayed
+		SDL_GL_SwapWindow(window);
 }
