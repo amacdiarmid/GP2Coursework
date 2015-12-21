@@ -35,6 +35,7 @@ public:
 	void updateCamera();
 	positionToFrustrum isInFrustrum(float radius, vec3 objectPos);
 	positionToFrustrum pointInFrustrum(vec3 point);
+	vec3 getCamPos() { return camPos; }
 private:
 	PlayerController* player;
 	vec3 camPos;

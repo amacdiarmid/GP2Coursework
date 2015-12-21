@@ -35,9 +35,9 @@
                         <world>1</world>
                         <active>1</active>
                         <model>teapot</model>
-                        <texture>sun</texture>
-                        <shader>main</shader>
-                        <localPos x="0" y="0" z="-25"/>
+                        <texture>gray</texture>
+                        <shader>shadowMap</shader>
+                        <localPos x="20" y="0" z="-25"/>
                         <scale x="1" y="1" z="1"/>
                         <rotation x="0" y="0" z="0"/>
                         <components>
@@ -51,8 +51,8 @@
                                     <active>1</active>
                                     <model>teapot</model>
                                     <texture>earth</texture>
-                                    <shader>main</shader>
-                                    <localPos x="20" y="-20" z="-20"/>
+                                    <shader>shadowMap</shader>
+                                    <localPos x="0" y="-10" z="10"/>
                                     <scale x="1" y="1" z="1"/>
                                     <rotation x="0" y="0" z="0"/>
                                     <components>
@@ -65,9 +65,9 @@
                                                 <world>1</world>
                                                 <active>1</active>
                                                 <model>teapot</model>
-                                                <texture>moon</texture>
-                                                <shader>main</shader>
-                                                <localPos x="-40" y="40" z="0"/>
+                                                <texture>gray</texture>
+                                                <shader>shadowMap</shader>
+                                                <localPos x="0" y="-30" z="10"/>
                                                 <scale x="1" y="1" z="1"/>
                                                 <rotation x="0" y="0" z="0"/>
                                                 <components>
