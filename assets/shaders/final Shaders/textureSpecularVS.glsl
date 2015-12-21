@@ -17,8 +17,8 @@ void main()
     gl_Position = MVP * vec4(vertexPosition, 1.0f);
     FragPos = vec3(model * vec4(vertexPosition, 1.0f));
   //  Normal = mat3(transpose(inverse(model))) * vertexNormal;  
-   // Normal = normalize(model * vec4(vertexNormal, 0.0f)).xyz;
-	Normal = vertexNormal;
+    Normal = normalize(model * vec4(vertexNormal, 1)).xyz;
+	//Normal = model *vec4(vertexNormal, 1);
 	cameraDirectionOut = normalize(viewPos - FragPos);
     TexCoords = vertexTexCoords;
 } 

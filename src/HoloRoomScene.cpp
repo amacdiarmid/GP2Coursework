@@ -45,7 +45,7 @@ void HoloRoomScene::render()
 
 	//Matrices
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, &input->getMVPmatrix()[0][0]);
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, &ModelMatrix[0][0]);
+//	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, &ModelMatrix[0][0]);
 	glUniform3f(glGetUniformLocation(shaders["textureSpecular"]->getShader(), "viewPos"), input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{
@@ -286,7 +286,7 @@ void HoloRoomScene::createScene()
 	//gLightAmbientCoeLoc = glGetUniformLocation(currentShader, "light.ambientCoefficient");
 	//cameraPosLoc = glGetUniformLocation(currentShader, "cameraPosition");
 	////viewLocation = glGetUniformLocation(currentShader, "V");
-	modelLocation = glGetUniformLocation(currentShader, "model");
+	//modelLocation = glGetUniformLocation(currentShader, "model");
 	////depthBiasLocation = glGetUniformLocation(currentShader, "DepthBiasMVP");
 	////shadowMapLocation = glGetUniformLocation(currentShader, "shadowMap");
 	////lightLocation = glGetUniformLocation(currentShader, "LightInvDirection");

@@ -46,5 +46,6 @@ float diffuseTerm = dot(Normal, lightDir);
    // float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
   //  vec3 specular = light.specular * (spec * material.specular); 
         
-    color = vec4(ambient, 1.0f);  
+   // color = vec4(ambient + diffuse + specular, 1.0f);  
+color = vec4(Normal, 1);
 } 
