@@ -297,7 +297,7 @@ void HoloRoomScene::createScene()
 
 
 	light.position = vec3(0.0f,-10, 22.0f);
-	light.ambient = vec3(0.1f, 0.1f, 0.1f);
+	light.ambient = vec3(0.6f, 0.6f, 0.6f);
 	light.diffuse = vec3(0.9f, 0.9f, 0.9f);
 	light.specular = vec3(0.5f, 1.0f, 1.0f);
 	
