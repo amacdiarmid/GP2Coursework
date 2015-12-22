@@ -20,9 +20,8 @@ public:
 	void cleanUp();
 
 private:
-	GLuint textureMap;
 	string name;
-
+	GLuint textureMap;
 };
 
 #endif

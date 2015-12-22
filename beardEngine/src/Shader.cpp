@@ -137,6 +137,27 @@ void Shader::createShader()
 
 }
 
+GLuint Shader::create1DTexture(float *pData, int width)
+{
+	GLuint texture1d;
+	glActiveTexture(GL_TEXTURE2);
+	glGenTextures(1, &texture1d);
+	glBindTexture(GL_TEXTURE_1D, texture1d);
+	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, width, 0, GL_RGB, GL_FLOAT, pData);
+	return texture1d;
+}
+
+void Shader::createToonTexture(float *pData, int width)
+{
+	toonTextureMap = create1DTexture(pData, width);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+}
+
 GLuint Shader::getShader()
 {
 	return finalShader;

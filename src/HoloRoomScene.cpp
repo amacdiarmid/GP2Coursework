@@ -129,6 +129,19 @@ void HoloRoomScene::createScene()
 	shaders["main"]->attatchFragmentShader("/textureFS.glsl");
 	shaders["main"]->createShader();
 
+	//shaders.insert(pair<string, Shader*>("toonOutline", new ToonMaterial("toonOutline")));
+	//shaders["toonOutline"]->attatchVertexShader("/toonOutlineVS.glsl");
+	//shaders["toonOutline"]->attatchFragmentShader("/toonOutlineFS.glsl");
+	//shaders["toonOutline"]->createShader();
+
+
+	float textureData[8] = { 0.2f, 0.2f, 0.5f, 0.5f, 0.7f, 0.7f, 1.0f, 1.0f };
+	shaders.insert(pair<string, Shader*>("toonMaterial", new Shader("toonMaterial")));
+	shaders["toonMaterial"]->attatchVertexShader("/specularVS.glsl");
+	shaders["toonMaterial"]->attatchFragmentShader("/toonSpecularFS.glsl");
+	shaders["toonMaterial"]->createToonTexture(textureData, 4);
+	shaders["toonMaterial"]->createShader();
+
 	//create player/debug cam
 	input = new PlayerController();
 	fustrum = new Fustrum(input);
@@ -149,7 +162,7 @@ void HoloRoomScene::createScene()
 	//david do stuff here
 
 	//main room
-	worldObject->addChild(new GameObject("room", worldObject, objects["holoRoom"], textures["wall"], shaders["main"]));	//creating object
+	worldObject->addChild(new GameObject("room", worldObject, objects["holoRoom"], textures["wall"], shaders["toonMaterial"]));	//creating object
 	worldObject->getChild("room")->addComponent(RENDER_COMPONENT);	//adding render comp
 	worldObject->getChild("room")->changePosition(vec3(0, -25, 0));	//changing position
 

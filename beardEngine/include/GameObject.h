@@ -23,6 +23,8 @@ public:
 	GameObject(string tempName, GameObject *tempParent, PlayerController *tempInput);
 	//create node
 	GameObject(string tempName, GameObject *tempParent);
+	//create texture
+	GameObject(string tempName, Texture *tempTexture);
 
 	~GameObject();
 
