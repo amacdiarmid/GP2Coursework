@@ -25,7 +25,7 @@ void HoloRoomScene::render()
 	glClearColor(0.0f, 0.0f, 0.5f, 0.5f);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, 1024, 768);
+	glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 	//clear the color and depth buffer
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -502,7 +502,7 @@ Shader *HoloRoomScene::getShader(string command)
 
 void HoloRoomScene::onKeyDown(SDL_Keycode key)
 {
-	cout << "Key down " << key << endl;
+	//cout << "Key down " << key << endl;
 	fustrum->updateCamera();
 	switch (key)
 	{
@@ -563,7 +563,7 @@ void HoloRoomScene::onKeyDown(SDL_Keycode key)
 
 void HoloRoomScene::onkeyUp(SDL_Keycode key)
 {
-	cout << "Key up " << key << endl;
+	//cout << "Key up " << key << endl;
 }
 
 void HoloRoomScene::mouseMove(SDL_MouseMotionEvent motion)
