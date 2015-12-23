@@ -31,11 +31,10 @@ public:
 	GLuint getShader();
 	string getName();
 	void cleanUp();
-	GLuint ShaderProgram;
 
-
-private:
+protected:
 	string name;
+	GLuint ShaderProgram;
 	GLuint vertexShader = 0;
 	GLuint fragmentShader = 0;
 	GLuint finalShader = 0;

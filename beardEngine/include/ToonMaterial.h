@@ -2,6 +2,7 @@
 #define _TOONMATERIAL_H
 
 #include "Shader.h"
+#include "Common.h"
 
 class ToonMaterial : public Shader
 {
@@ -11,6 +12,9 @@ public:
 
 	void bind();
 	void unbind();
+
+private:
+
 };
 
 

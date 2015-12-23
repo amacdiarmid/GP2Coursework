@@ -16,6 +16,7 @@
 #include "Window.h"
 #include "ViewFrustumCulling.h"
 #include <map>
+#include "OutlineMaterial.h"
 #include "ToonMaterial.h"
 
 class Editor;

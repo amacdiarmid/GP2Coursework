@@ -35,6 +35,20 @@ void HoloRoomScene::render()
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
+
+	GLint lightDirectionLocation = glGetUniformLocation(shaders["toonMaterial"]->getShader(), "lightDirection");
+	glUniform3f(lightDirectionLocation, 0.0f, 0.0f, 1.0f);
+
+	GLint diffMatColourLocation = glGetUniformLocation(shaders["toonMaterial"]->getShader(), "diffuseMaterialColour");
+	glUniform4f(diffMatColourLocation, 0.7f, 0.7f, 0.7f, 1.0f);
+
+	GLint specMatColourLocation = glGetUniformLocation(shaders["toonMaterial"]->getShader(), "specularMaterialColour");
+	glUniform4f(specMatColourLocation, 1.0f,1.0f,1.0f,1.0f);
+
+	GLint specPowerLocation = glGetUniformLocation(shaders["toonMaterial"]->getShader(), "specularPower");
+	glUniform1f(specPowerLocation, 5.0f);
+
+
 	worldObject->render(fustrum);
 
 	/*
@@ -129,10 +143,10 @@ void HoloRoomScene::createScene()
 	shaders["main"]->attatchFragmentShader("/textureFS.glsl");
 	shaders["main"]->createShader();
 
-	//shaders.insert(pair<string, Shader*>("toonOutline", new ToonMaterial("toonOutline")));
-	//shaders["toonOutline"]->attatchVertexShader("/toonOutlineVS.glsl");
-	//shaders["toonOutline"]->attatchFragmentShader("/toonOutlineFS.glsl");
-	//shaders["toonOutline"]->createShader();
+	shaders.insert(pair<string, Shader*>("toonOutline", new OutlineMaterial("toonOutline")));
+	shaders["toonOutline"]->attatchVertexShader("/toonOutlineVS.glsl");
+	shaders["toonOutline"]->attatchFragmentShader("/toonOutlineFS.glsl");
+	shaders["toonOutline"]->createShader();
 
 
 	float textureData[8] = { 0.2f, 0.2f, 0.5f, 0.5f, 0.7f, 0.7f, 1.0f, 1.0f };
@@ -176,7 +190,7 @@ void HoloRoomScene::createScene()
 	tempObj->setPosition(vec3(0, 0, 0));
 	tempObj->setActive(false);
 	
-	tempObj->addChild(new GameObject("sun", tempObj, objects["teapot"], textures["sun"], shaders["main"]));	//creating object
+	tempObj->addChild(new GameObject("sun", tempObj, objects["teapot"], textures["sun"], shaders["toonMaterial"]));	//creating object
 	tempObj->getChild("sun")->addComponent(RENDER_COMPONENT);	//adding render comp
 	tempObj->getChild("sun")->setPosition(vec3(0, 25, 0));	//changing postiion
 	tempObj->getChild("sun")->setRotation(vec3(0, 0, 0));	//change rotaion

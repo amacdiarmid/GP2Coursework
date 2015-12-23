@@ -5,6 +5,11 @@ OutlineMaterial::OutlineMaterial()
 
 }
 
+OutlineMaterial::OutlineMaterial(string tempName)
+{
+	name = tempName;
+}
+
 OutlineMaterial::~OutlineMaterial()
 {
 

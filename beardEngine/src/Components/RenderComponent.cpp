@@ -44,6 +44,11 @@ void Renderer::render()
 	glBindTexture(GL_TEXTURE_2D, *owner->getTexture()->getTexture());
 	glUniform1i(texture0Location, 0);
 
+	GLint toonShadeLocation = glGetUniformLocation(owner->getShader()->getShader(), "toonShade");
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_1D, *owner->getTexture()->getTexture());
+	glUniform1i(toonShadeLocation, 1);
+
 	glBindVertexArray(owner->getModel()->getVAO());
 	//begin drawing triangle 
 	glDrawElements(GL_TRIANGLES, owner->getModel()->getMesh()->getNumIndices(), GL_UNSIGNED_INT, 0);

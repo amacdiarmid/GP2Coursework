@@ -1,6 +1,6 @@
 #version 130
 
-in vec4 worldNormal;
+in vec3 worldNormal;
 in vec3 cameraDirectionOut;
 
 uniform vec3 lightDirection;
@@ -14,7 +14,7 @@ out vec4 FragColour;
 void main()
 {
 	vec3 lightDirectionNormalized = normalize(lightDirection);
-	float diffuseTerm = max(dot(worldNormal, lightDirectionNormalized)0.0f);
+	float diffuseTerm = max(dot(worldNormal, lightDirectionNormalized), 0.0f);
 	vec3 halfWayVec = normalize(cameraDirectionOut + lightDirectionNormalized);
 	float specularTerm = pow(max(dot(worldNormal, halfWayVec), 0.0f), specularPower);
 

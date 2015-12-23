@@ -143,7 +143,7 @@ GLuint Shader::create1DTexture(float *pData, int width)
 	glActiveTexture(GL_TEXTURE2);
 	glGenTextures(1, &texture1d);
 	glBindTexture(GL_TEXTURE_1D, texture1d);
-	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, width, 0, GL_RGB, GL_FLOAT, pData);
+	glTexImage1D(GL_TEXTURE_1D, 0, GL_RGB, width, 0, GL_RGB, GL_FLOAT, pData);	
 	return texture1d;
 }
 
