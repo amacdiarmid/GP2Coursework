@@ -222,20 +222,11 @@ void HoloRoomScene::createScene()
 	worldObject->addChild(new GameObject("player", worldObject, input));
 	worldObject->getChild("player")->addComponent(INPUT_COMPONENT);
 
-	//main room
-	worldObject->addChild(new GameObject("room", worldObject, objects["holoRoom"], textures["wall"], shaders["main"]));	//creating object
-	worldObject->getChild("room")->addComponent(RENDER_COMPONENT);	//adding render comp
-	worldObject->getChild("room")->changePosition(vec3(0, -25, 0));	//changing position
-
-	//empty room node
-	worldObject->addChild(new GameObject("emptyRoomNode", worldObject));	//creating node
-	worldObject->getChild("emptyRoomNode")->setActive(true);
-
 	//teapot room node done
 	worldObject->addChild(new GameObject("teapotRoomNode", worldObject));	//creating node
 	tempObj = worldObject->getChild("teapotRoomNode"); //setting temp object for easy access
 	tempObj->setPosition(vec3(0, 0, 0));
-	tempObj->setActive(false);
+	tempObj->setActive(true);
 	
 	tempObj->addChild(new GameObject("sun", tempObj, objects["teapot"], textures["sun"], shaders["main"]));	//creating object
 	tempObj->getChild("sun")->addComponent(RENDER_COMPONENT);	//adding render comp
@@ -529,29 +520,19 @@ void HoloRoomScene::onKeyDown(SDL_Keycode key)
 		//set world object to active or not
 		break;
 	case SDLK_1:
-		cout << "set empty room" << endl;
-		worldObject->getChild("emptyRoomNode")->setActive(true);
-		worldObject->getChild("teapotRoomNode")->setActive(false);
-		worldObject->getChild("apolloRoomNode")->setActive(false);
-		worldObject->getChild("walkerNode")->setActive(false);
-		break;
-	case SDLK_2:
 		cout << "set teapot room" << endl;
-		worldObject->getChild("emptyRoomNode")->setActive(false);
 		worldObject->getChild("teapotRoomNode")->setActive(true);
 		worldObject->getChild("apolloRoomNode")->setActive(false);
 		worldObject->getChild("walkerNode")->setActive(false);
 		break;
-	case SDLK_3:
-		cout << "set old room" << endl;
-		worldObject->getChild("emptyRoomNode")->setActive(false);
+	case SDLK_2:
+		cout << "set apollo room" << endl;
 		worldObject->getChild("teapotRoomNode")->setActive(false);
 		worldObject->getChild("apolloRoomNode")->setActive(true);
 		worldObject->getChild("walkerNode")->setActive(false);
 		break;
-	case SDLK_4:
-		cout << "set scifi room" << endl;
-		worldObject->getChild("emptyRoomNode")->setActive(false);
+	case SDLK_3:
+		cout << "set walker room" << endl;
 		worldObject->getChild("teapotRoomNode")->setActive(false);
 		worldObject->getChild("apolloRoomNode")->setActive(false);
 		worldObject->getChild("walkerNode")->setActive(true);
