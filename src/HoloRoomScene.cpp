@@ -1,6 +1,6 @@
 #include "HoloRoomScene.h"
 #include "Editor.h"
-
+#include "OpenGL.h"
 
 HoloRoomScene::HoloRoomScene()
 {
@@ -21,6 +21,7 @@ HoloRoomScene::~HoloRoomScene()
 
 void HoloRoomScene::render()
 {
+
 	//set the clear colour background 
 	glClearColor(0.0f, 0.0f, 0.5f, 0.5f);
 
@@ -39,31 +40,72 @@ void HoloRoomScene::render()
 	//glCullFace(GL_BACK);
 
 
-	glUseProgram(shaders["shadowMap"]->getShader());
+	glUseProgram(shaders["textureSpecular"]->getShader());
 	update();
 
-	materialShininess++;
+	//Matrices
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, &input->getMVPmatrix()[0][0]);
+//	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, &ModelMatrix[0][0]);
+	glUniform3f(glGetUniformLocation(shaders["textureSpecular"]->getShader(), "viewPos"), input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
+	//while ((err = glGetError()) != GL_NO_ERROR)
+	//{
+	//	//Process/log the error.
+	//	cout << "error in rendering scene " << err << endl;
+	//}
+
+	//light properties
+	glUniform3fv(glGetUniformLocation(shaders["textureSpecular"]->getShader(), "light.position"),1, value_ptr(light.position));
+	glUniform3fv(glGetUniformLocation(shaders["textureSpecular"]->getShader(), "light.ambient"), 1, value_ptr(light.ambient) );
+	glUniform3fv(glGetUniformLocation(shaders["textureSpecular"]->getShader(), "light.diffuse"), 1, value_ptr(light.diffuse));
+	glUniform3fv(glGetUniformLocation(shaders["textureSpecular"]->getShader(), "light.specular"), 1, value_ptr(light.specular));
+
+	/*
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in rendering scene " << err << endl;
+	}
+	*/
+
+	//Material properties
+	glUniform1f(glGetUniformLocation(shaders["textureSpecular"]->getShader(), "material.shininess"), material.shininess);
+	//while ((err = glGetError()) != GL_NO_ERROR)
+	//{
+	//	//Process/log the error.
+	//	cout << "error in rendering scene " << err << endl;
+	//}
+	glUniform3fv(textureLocationSpecular, 1, value_ptr(material.specular));
+
+	//Bind diffuse map
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, diffuseMap);
+
+
+
+	//Bind specular map
+	//glActiveTexture(GL_TEXTURE1);
+//	glBindTexture(GL_TEXTURE_2D, *textures["specularMap"]->getTexture());
+
 	//glUniformMatrix4fv(viewLocation, 1, GL_FALSE, &input->GetViewMatrix()[0][0]);
-	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, &ModelMatrix[0][0]);
+
 	//glUniformMatrix4fv(depthBiasLocation, 1, GL_FALSE, &depthBias[0][0]);
 	//glUniform3f(lightLocation, lightInvDir.x, lightInvDir.y, lightInvDir.z);
 	//glm::vec3 lightPos = glm::vec3(4, 4, 4);
 	//glUniform3f(lightId, lightPos.x, lightPos.y, lightPos.z);
-	glUniform1f(materialShininessLoc, materialShininess);
+	/*glUniform1f(materialShininessLoc, materialShininess);
 	glUniform3f(materialSPecularLoc, materialSpecularColor.x, materialSpecularColor.y, materialSpecularColor.z);
 	glUniform3f(gLightPosLoc, gLight.position.x, gLight.position.y, gLight.position.z);
 	glUniform3f(gLightIntensitiesLoc, gLight.intensities.x, gLight.intensities.y, gLight.intensities.z);
 	glUniform1f(gLightAttenuationLoc, gLight.attenuation);
 	glUniform1f(gLightAmbientCoeLoc, gLight.ambientCoefficient);
-	glUniform3f(cameraPosLoc, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
+	glUniform3f(cameraPosLoc, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);*/
 
 	//GLint cameraPosLocation = glGetUniformLocation(shaders["sky"]->getShader(), "cameraPosition");
 	//glUniform3f(cameraPosLocation, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
 
 	glActiveTexture(GL_TEXTURE0);
 
-	glUniform1i(textureSamplerLocation, 0);
+	//glUniform1i(textureSamplerLocation, 0);
 	//glActiveTexture(GL_TEXTURE1);
 	//glBindTexture(GL_TEXTURE_2D, depthTexture);
 	//glUniform1i(shadowMapLocation, 1);
@@ -160,7 +202,7 @@ void HoloRoomScene::createScene()
 	//create objects
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
 	objects["teapot"]->createBuffer("/utah-teapot.FBX");
-	
+
 	objects.insert(pair<string, Object*>("teapotRoom", new Object("teapotRoom")));
 	objects["teapotRoom"]->createBuffer("/TheTeapotRoom.FBX");
 	objects.insert(pair<string, Object*>("walkerRoom", new Object("walkerRoom")));
@@ -184,6 +226,23 @@ void HoloRoomScene::createScene()
 	textures["walkerRoom"]->createTexture("/walkerRoom.jpg");
 	textures.insert(pair<string, Texture*>("LanderRoom", new Texture("LanderRoom")));
 	textures["LanderRoom"]->createTexture("/bakedlander.png");
+	textures.insert(pair<string, Texture*>("earth", new Texture("earth")));
+	textures["earth"]->createTexture("/EarthTexture.png");
+	textures.insert(pair<string, Texture*>("moon", new Texture("moon")));
+	textures["moon"]->createTexture("/MoonTexture.png");
+	textures.insert(pair<string, Texture*>("gray", new Texture("gray")));
+	textures["gray"]->createTexture("/gray.png");
+	//Diffuse map will be the normal texture for the model
+	//Specular map will be used for specular highlights on the model
+	//We seperate these so that if we have objects made of different materials,
+	//they have different specular levels. 
+	material.diffuseTexture = new Texture("diffuseMap");
+	textures.insert(pair<string, Texture*>("diffuseMap", material.diffuseTexture));
+	textures["diffuseMap"]->createTexture("/SunTexture.png"); //replace texture
+	//material.specularTexture = new Texture("specularMap");
+	//textures.insert(pair<string, Texture*>("specularMap", material.specularTexture));
+	//textures["specularMap"]->createTexture("/SunTexture.png"); //replace texture
+
 
 	//create shaders
 	Shader * s = new Shader("main");
@@ -191,6 +250,12 @@ void HoloRoomScene::createScene()
 	s->attatchFragmentShader("/textureFS.glsl");
 	s->createShader();
 	shaders.insert(pair<string, Shader*>("main", s));
+	
+	s = new Shader("textureSpecular");
+	s->attatchVertexShader("/final Shaders/textureSpecularVS.glsl");
+	s->attatchFragmentShader("/final Shaders/textureSpecularFS.glsl");
+	s->createShader();
+	shaders.insert(pair<string, Shader*>("textureSpecular", s));
 
 	//Shadow Shaders
 	s = new Shader("firstPassDepth");
@@ -249,7 +314,7 @@ void HoloRoomScene::createScene()
 	tempObj = worldObject->getChild("teapotRoomNode"); //setting temp object for easy access
 	tempObj->setPosition(vec3(0, 0, 0));
 	tempObj->setActive(true);
-	
+
 	tempObj->addChild(new GameObject("sun", tempObj, objects["teapot"], textures["sun"], shaders["main"]));	//creating object
 	tempObj->getChild("sun")->addComponent(RENDER_COMPONENT);	//adding render comp
 	tempObj->getChild("sun")->setPosition(vec3(0, 25, 0));	//changing postiion
@@ -306,30 +371,49 @@ void HoloRoomScene::createScene()
 
 	//ShadowFramebuffer();
 	//BuildQuad();
-	materialShininess = 100;
-	gLight.position = glm::vec3(10, 30, 10);
-	gLight.intensities = glm::vec3(0.2, 0, 0); //white
-	gLight.attenuation = 0.2f;
-	gLight.ambientCoefficient = 0.605f;
+	//materialShininess = 100;
+	//gLight.position = glm::vec3(10, 30, 10);
+	//gLight.intensities = glm::vec3(0.2, 0, 0); //white
+	//gLight.attenuation = 0.2f;
+	//gLight.ambientCoefficient = 0.605f;
 
-	GLuint currentShader = shaders["shadowMap"]->getShader();
 
-	textureSamplerLocation = glGetUniformLocation(currentShader, "texture0");
+
+	GLuint currentShader = shaders["textureSpecular"]->getShader();
+
+	//textureSamplerLocation = glGetUniformLocation(currentShader, "texture0");
 	MVPLocation = glGetUniformLocation(currentShader, "MVP");
-	materialShininessLoc = glGetUniformLocation(currentShader, "materialShininess");
-	materialSPecularLoc = glGetUniformLocation(currentShader, "materialSpecularColor");
-	gLightPosLoc = glGetUniformLocation(currentShader, "light.position");
-	gLightIntensitiesLoc = glGetUniformLocation(currentShader, "light.intensities");
-	gLightAttenuationLoc = glGetUniformLocation(currentShader, "light.attenuation");
-	gLightAmbientCoeLoc = glGetUniformLocation(currentShader, "light.ambientCoefficient");
-	cameraPosLoc = glGetUniformLocation(currentShader, "cameraPosition");
-	//viewLocation = glGetUniformLocation(currentShader, "V");
-	modelLocation = glGetUniformLocation(currentShader, "M");
-	//depthBiasLocation = glGetUniformLocation(currentShader, "DepthBiasMVP");
-	//shadowMapLocation = glGetUniformLocation(currentShader, "shadowMap");
-	//lightLocation = glGetUniformLocation(currentShader, "LightInvDirection");
-	//lightId = glGetUniformLocation(currentShader, "LightPosition_worldspace");
+	//materialShininessLoc = glGetUniformLocation(currentShader, "materialShininess");
+	//materialSPecularLoc = glGetUniformLocation(currentShader, "materialSpecularColor");
+	//gLightPosLoc = glGetUniformLocation(currentShader, "light.position");
+	//gLightIntensitiesLoc = glGetUniformLocation(currentShader, "light.intensities");
+	//gLightAttenuationLoc = glGetUniformLocation(currentShader, "light.attenuation");
+	//gLightAmbientCoeLoc = glGetUniformLocation(currentShader, "light.ambientCoefficient");
+	//cameraPosLoc = glGetUniformLocation(currentShader, "cameraPosition");
+	////viewLocation = glGetUniformLocation(currentShader, "V");
+	//modelLocation = glGetUniformLocation(currentShader, "model");
+	////depthBiasLocation = glGetUniformLocation(currentShader, "DepthBiasMVP");
+	////shadowMapLocation = glGetUniformLocation(currentShader, "shadowMap");
+	////lightLocation = glGetUniformLocation(currentShader, "LightInvDirection");
+	////lightId = glGetUniformLocation(currentShader, "LightPosition_worldspace");
+	textureLocationDiffuse = glGetUniformLocation(currentShader, "material.diffuse");
+	textureLocationSpecular = glGetUniformLocation(currentShader, "material.specular");
+	
 
+
+	light.position = vec3(0.0f,-10, 22.0f);
+	light.ambient = vec3(0.6f, 0.6f, 0.6f);
+	light.diffuse = vec3(0.9f, 0.9f, 0.9f);
+	light.specular = vec3(0.5f, 1.0f, 1.0f);
+	
+
+	material.shininess = 100000;
+	material.specular = vec3(1.0f, 1.0f, 1.0f);
+
+	glUseProgram(shaders["textureSpecular"]->getShader());
+	glUniform1i(textureLocationSpecular, 1);
+	glUniform1i(textureLocationDiffuse, 0);
+	
 }
 
 void HoloRoomScene::ShadowFramebuffer()

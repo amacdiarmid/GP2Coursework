@@ -2,13 +2,14 @@
 #define _HOLOROOMSCENE_H
 
 #include "Scene.h"
+#include "LightSource.h"
 
-struct Light {
-	glm::vec3 position;
-	glm::vec3 intensities; //a.k.a. the color of the light
-	float attenuation;
-	float ambientCoefficient;
-};
+//struct Light {
+//	glm::vec3 position;
+//	glm::vec3 intensities; //a.k.a. the color of the light
+//	float attenuation;
+//	float ambientCoefficient;
+//};
 
 class HoloRoomScene : public IkeyboardListener, public Scene 
 {
@@ -85,7 +86,15 @@ private:
 
 	float materialShininess = 100;
 	vec3 materialSpecularColor = vec3(0.3f, 0.3f, 0.3f);
-	Light gLight;
+	
+	Light light;
+	Material material;
+	GLenum 	err = GL_NO_ERROR;
+	GLuint textureLocationDiffuse;
+	GLuint textureLocationSpecular;
+
+	GLuint diffuseMap;
+
 	GLuint materialShininessLoc;
 	GLuint materialSPecularLoc;
 	GLuint gLightPosLoc;
@@ -94,6 +103,17 @@ private:
 	GLuint gLightAmbientCoeLoc;
 	GLuint cameraPosLoc;
 
+
+
+	vec3 lightDirection = vec3(0.0f, 0.0f, 1.0f);
+	vec4 ambientMaterialColor = vec4(0.3f, 0.3f, 0.3f, 1.0f);
+	vec4 ambientLightColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	vec4 diffuseMaterialColor = vec4(0.3f, 0.3f, 0.3f, 1.0f);
+	vec4 diffuseLightColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	vec3 cameraPosition = vec3(15.0f, 50.0f, 50.0f);
+	vec4 specularMaterialColor = vec4(0.3f, 0.3f, 0.3f, 1.0f);
+	GLfloat specularPower = 100;
+	vec4 specularLightColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
 	CubeTexture* skyMaterial;
 	//woo we're the best
 

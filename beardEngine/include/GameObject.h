@@ -26,7 +26,7 @@ public:
 	GameObject(string tempName, GameObject *tempParent);
 	//create texture
 	GameObject(string tempName, Texture *tempTexture);
-
+	
 	~GameObject();
 
 	//in .cpp
@@ -53,6 +53,7 @@ public:
 	bool getActive(){ return active; };
 	bool getWorld(){ return world; };
 	PlayerController *getInput(){ return input; };
+	mat4 getModelMatrix(){ return modelMatrix; }
 	Scene *getCurScene(){ return curScene; };
 	MeshData getMesh(){ return mesh; };
 	bool getForceRender(){ return forceRender; }
@@ -72,6 +73,7 @@ public:
 	void setScene(Scene *tempScene){ curScene = tempScene; };
 	void setForceRender(bool tempBool){ forceRender = tempBool; }
 
+
 private:
 	string name;
 	GameObject *parent;
@@ -84,6 +86,7 @@ private:
 	Shader *shader;
 	PlayerController *input;
 	mat4 MVP;
+	mat4 modelMatrix;
 	MeshData mesh;
 	bool forceRender = false;
 
