@@ -1,4 +1,4 @@
-#version 150
+#version 330 core
 
 in vec3 vertexPosition;
 in vec3 vertexNormal;
@@ -9,13 +9,13 @@ out vec3 cameraDirectionOut;
 uniform mat4 MVP;
 uniform mat4 Model;
 
-uniform vec3 cameraPosition;
+uniform vec3 viewPos;
 
 void main()
 {
 	worldNormal = normalize(Model*vec4(vertexNormal, 0.0f)).xyz;
 	vec3 worldPos = (Model*vec4(vertexPosition, 1.0)).xyz;
-	cameraDirectionOut = normalize(cameraPosition - worldPos);
+	cameraDirectionOut = normalize(viewPos - worldPos);
 
 	gl_Position = MVP * vec4(vertexPosition, 1.0);
 }

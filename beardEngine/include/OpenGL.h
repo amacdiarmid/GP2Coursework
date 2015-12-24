@@ -5,4 +5,5 @@ void initOpenGL();
 
 void setViewport(int width, int height);
 
+
 #endif

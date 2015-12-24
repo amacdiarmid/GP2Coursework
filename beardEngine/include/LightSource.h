@@ -2,21 +2,22 @@
 #define _LIGHTSOURCE_
 
 #include "Common.h"
+#include "Texture.h"
 
 
-
-class LightSource
+struct Light 
 {
-	
-private:
-	GLenum lightID = GL_LIGHT0;
-	vec4 ambient = vec4(0.0, 0.0, 0.0, 1.0);
-	vec4 diffuse = vec4(1.0, 1.0, 1.0, 1.0);
-public:
-	LightSource();
-	~LightSource();
-	void Activate();
-	void Deactivate();
+	vec3 position;
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+};
+
+struct Material
+{
+	Texture *diffuseTexture;
+	vec3 specular;
+	float shininess;
 };
 
 #endif

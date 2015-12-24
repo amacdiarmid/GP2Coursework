@@ -41,3 +41,5 @@ void setViewport(int width, int height)
 	//set up viewport
 	glViewport(0, 0, (GLsizei)width, (GLsizei)height);
 }
+
+ 
