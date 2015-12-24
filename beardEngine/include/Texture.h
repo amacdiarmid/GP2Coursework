@@ -16,7 +16,7 @@ public:
 	~Texture();
 
 	void createTexture(string texturePath);
-	GLuint *getTexture();
+	GLuint getTexture();
 	string getName();
 	void cleanUp();
 	bool getTex2D(){ return tex2D; }

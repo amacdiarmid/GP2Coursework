@@ -58,6 +58,15 @@ void HoloRoomScene::render()
 	glUniform1f(gLightAmbientCoeLoc, gLight.ambientCoefficient);
 	glUniform3f(cameraPosLoc, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
 
+
+	GLint cubeTexLocation = glGetUniformLocation(shaders["sky"]->getShader(), "cubeTexture");
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, skyMaterial->getTexture());
+	glUniform1i(cubeTexLocation, 1);
+
+	GLint cameraPosLocation = glGetUniformLocation(shaders["sky"]->getShader(), "cameraPosition");
+	glUniform3f(cameraPosLocation, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
+
 	glActiveTexture(GL_TEXTURE0);
 
 	glUniform1i(textureSamplerLocation, 0);

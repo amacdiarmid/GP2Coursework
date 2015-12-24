@@ -118,9 +118,9 @@ void Texture::cleanUp()
 	glDeleteTextures(1, &textureMap);
 }
 
-GLuint *Texture::getTexture()
+GLuint Texture::getTexture()
 {
-	return &textureMap;
+	return textureMap;
 }
 
 string Texture::getName()
