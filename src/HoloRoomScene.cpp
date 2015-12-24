@@ -58,14 +58,8 @@ void HoloRoomScene::render()
 	glUniform1f(gLightAmbientCoeLoc, gLight.ambientCoefficient);
 	glUniform3f(cameraPosLoc, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
 
-
-	GLint cubeTexLocation = glGetUniformLocation(shaders["sky"]->getShader(), "cubeTexture");
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_CUBE_MAP, skyMaterial->getTexture());
-	glUniform1i(cubeTexLocation, 1);
-
-	GLint cameraPosLocation = glGetUniformLocation(shaders["sky"]->getShader(), "cameraPosition");
-	glUniform3f(cameraPosLocation, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
+	//GLint cameraPosLocation = glGetUniformLocation(shaders["sky"]->getShader(), "cameraPosition");
+	//glUniform3f(cameraPosLocation, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
 
 	glActiveTexture(GL_TEXTURE0);
 
@@ -150,9 +144,6 @@ void HoloRoomScene::createScene()
 	skyMaterial->loadSkyBoxTextures(skyBoxFront, skyBoxBack, skyBoxLeft, skyBoxRight, skyBoxTop, skyBoxBottom);
 
 	//create objects
-	objects.insert(pair<string, Object*>("lander", new Object("lander")));
-	objects["lander"]->createBuffer("/lander.FBX");
-	
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
 	objects["teapot"]->createBuffer("/utah-teapot.FBX");
 
@@ -160,6 +151,8 @@ void HoloRoomScene::createScene()
 	objects["teapotRoom"]->createBuffer("/TheTeapotRoom.FBX");
 	objects.insert(pair<string, Object*>("walkerRoom", new Object("walkerRoom")));
 	objects["walkerRoom"]->createBuffer("/TheWalkerRoom.FBX");
+	objects.insert(pair<string, Object*>("LanderRoom", new Object("LanderRoom")));
+	objects["LanderRoom"]->createBuffer("/TheLanderRoom.FBX");
 	
 	objects.insert(pair<string, Object*>("cubeMesh", new Cube("cubeMesh")));
 	objects["cubeMesh"]->createBuffer();
@@ -175,6 +168,8 @@ void HoloRoomScene::createScene()
 	textures["teapotRoom"]->createTexture("/teapotRoom.jpg");
 	textures.insert(pair<string, Texture*>("walkerRoom", new Texture("walkerRoom")));
 	textures["walkerRoom"]->createTexture("/walkerRoom.jpg");
+	textures.insert(pair<string, Texture*>("LanderRoom", new Texture("LanderRoom")));
+	textures["LanderRoom"]->createTexture("/bakedlander.png");
 
 	//create shaders
 	Shader * s = new Shader("main");
@@ -255,11 +250,11 @@ void HoloRoomScene::createScene()
 	tempObj = worldObject->getChild("apolloRoomNode"); //setting temp object for easy access
 	tempObj->setActive(false);
 
-	tempObj->addChild(new GameObject("lander", tempObj, objects["lander"], textures["lander"], shaders["main"]));	//creating object
-	tempObj->getChild("lander")->addComponent(RENDER_COMPONENT);	//adding render comp
-	tempObj->getChild("lander")->setPosition(vec3(0, -5, 0));	//changing postiion
-	tempObj->getChild("lander")->setRotation(vec3(0, 0, 0));	//change rotaion
-	tempObj->getChild("lander")->setScale(vec3(1, 1, 1));	//change scele
+	tempObj->addChild(new GameObject("LanderRoom", tempObj, objects["LanderRoom"], textures["LanderRoom"], shaders["main"]));	//creating object
+	tempObj->getChild("LanderRoom")->addComponent(RENDER_COMPONENT);	//adding render comp
+	tempObj->getChild("LanderRoom")->setPosition(vec3(0, -25, 0));	//changing postiion
+	tempObj->getChild("LanderRoom")->setRotation(vec3(0, 0, 0));	//change rotaion
+	tempObj->getChild("LanderRoom")->setScale(vec3(1, 1, 1));	//change scele
 
 	//walker room node
 	worldObject->addChild(new GameObject("walkerNode", worldObject));	//creating node
@@ -526,7 +521,10 @@ void HoloRoomScene::onKeyDown(SDL_Keycode key)
 		}
 		break;
 	case SDLK_m:
-		//set world object to active or not
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		break;
+	case SDLK_n:
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		break;
 	case SDLK_1:
 		cout << "set teapot room" << endl;

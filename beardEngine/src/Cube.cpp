@@ -129,7 +129,7 @@ void Cube::createBuffer()
 		while ((err = glGetError()) != GL_NO_ERROR)
 		{
 			//Process/log the error.
-			cout << "error in creating object buffer " << err << endl;
+			cout << "error in creating object buffer for cube" << err << endl;
 		}
 
 };

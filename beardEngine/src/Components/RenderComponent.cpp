@@ -34,16 +34,22 @@ void Renderer::render()
 		owner->getCurScene()->setActiveShader(owner->getShader()->getShader());
 	}
 
+	GLenum err = GL_NO_ERROR;
+	while ((err = glGetError()) != GL_NO_ERROR)
+	{
+		//Process/log the error.
+		cout << "error in changing shader " << err << endl;
+	}
+
 	if (!owner->getTexture()->getTex2D())
 	{
 		glDepthMask(GL_FALSE);
 	}
 
-	GLenum err = GL_NO_ERROR;
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{
 		//Process/log the error.
-		cout << "error in creating object buffer " << err << endl;
+		cout << "error in enabling depth mask " << err << endl;
 	}
 
 	//get the uniform loaction for the MVP
@@ -54,8 +60,9 @@ void Renderer::render()
 	while ((err = glGetError()) != GL_NO_ERROR)
 	{
 		//Process/log the error.
-		cout << "error in creating object buffer " << err << endl;
+		cout << "error in assigning mvp " << err << endl;
 	}
+	
 	if (owner->getTexture()->getTex2D())
 	{
 		//get the uniform for the texture coords
@@ -68,8 +75,15 @@ void Renderer::render()
 		while ((err = glGetError()) != GL_NO_ERROR)
 		{
 			//Process/log the error.
-			cout << "error in updating scene " << err << endl;
+			cout << "error in assigning texture" << err << endl;
 		}
+	}
+	else
+	{
+		GLint cubeTexLocation = glGetUniformLocation(owner->getShader()->getShader(), "cubeTexture");
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_CUBE_MAP, owner->getTexture()->getTexture());
+		glUniform1i(cubeTexLocation, 1);
 	}
 
 	glBindVertexArray(owner->getModel()->getVAO());
