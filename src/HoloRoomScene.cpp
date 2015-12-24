@@ -70,6 +70,20 @@ void HoloRoomScene::render()
 
 	glDepthMask(GL_TRUE);
 	
+
+	GLint lightDirectionLocation = glGetUniformLocation(shaders["toonMaterial"]->getShader(), "lightDirection");
+	glUniform3f(lightDirectionLocation, 0.0f, 0.0f, 1.0f);
+
+	GLint diffMatColourLocation = glGetUniformLocation(shaders["toonMaterial"]->getShader(), "diffuseMaterialColour");
+	glUniform4f(diffMatColourLocation, 0.7f, 0.7f, 0.7f, 1.0f);
+
+	GLint specMatColourLocation = glGetUniformLocation(shaders["toonMaterial"]->getShader(), "specularMaterialColour");
+	glUniform4f(specMatColourLocation, 1.0f,1.0f,1.0f,1.0f);
+
+	GLint specPowerLocation = glGetUniformLocation(shaders["toonMaterial"]->getShader(), "specularPower");
+	glUniform1f(specPowerLocation, 5.0f);
+
+
 	worldObject->render(fustrum);
 
 	/*
@@ -146,14 +160,14 @@ void HoloRoomScene::createScene()
 	//create objects
 	objects.insert(pair<string, Object*>("teapot", new Object("teapot")));
 	objects["teapot"]->createBuffer("/utah-teapot.FBX");
-
+	
 	objects.insert(pair<string, Object*>("teapotRoom", new Object("teapotRoom")));
 	objects["teapotRoom"]->createBuffer("/TheTeapotRoom.FBX");
 	objects.insert(pair<string, Object*>("walkerRoom", new Object("walkerRoom")));
 	objects["walkerRoom"]->createBuffer("/TheWalkerRoom.FBX");
 	objects.insert(pair<string, Object*>("LanderRoom", new Object("LanderRoom")));
 	objects["LanderRoom"]->createBuffer("/TheLanderRoom.FBX");
-	
+
 	objects.insert(pair<string, Object*>("cubeMesh", new Cube("cubeMesh")));
 	objects["cubeMesh"]->createBuffer();
 
@@ -177,7 +191,7 @@ void HoloRoomScene::createScene()
 	s->attatchFragmentShader("/textureFS.glsl");
 	s->createShader();
 	shaders.insert(pair<string, Shader*>("main", s));
-	
+
 	//Shadow Shaders
 	s = new Shader("firstPassDepth");
 	s->attatchVertexShader("/DepthVS.glsl");
@@ -204,11 +218,15 @@ void HoloRoomScene::createScene()
 	shaders.insert(pair<string, Shader*>("textureShadow", s));*/
 
 
+	shaders.insert(pair<string, Shader*>("toonMaterial", new Shader("toonMaterial")));
+	shaders["toonMaterial"]->attatchVertexShader("/specularVS.glsl");
+	shaders["toonMaterial"]->attatchFragmentShader("/toonSpecularFS.glsl");
+	shaders["toonMaterial"]->createShader();
+
 	shaders.insert(pair<string, Shader*>("sky", new Shader("sky")));
 	shaders["sky"]->attatchVertexShader("/skyboxVS.glsl");
 	shaders["sky"]->attatchFragmentShader("/skyboxFS.glsl");
 	shaders["sky"]->createShader();
-
 
 	//create player/debug cam
 	input = new PlayerController();
@@ -266,7 +284,7 @@ void HoloRoomScene::createScene()
 	tempObj->getChild("walkerRoom")->setPosition(vec3(0, -25, 0));	//changing postiion
 	tempObj->getChild("walkerRoom")->setRotation(vec3(0, 0, 0));	//change rotaion
 	tempObj->getChild("walkerRoom")->setScale(vec3(3, 3, 3));	//change scele
-	
+
 	//set skybox
 	worldObject->addChild(new GameObject("skybox", worldObject, objects["cubeMesh"], skyMaterial, shaders["sky"]));
 	worldObject->getChild("skybox")->addComponent(RENDER_COMPONENT);
@@ -311,7 +329,7 @@ void HoloRoomScene::createScene()
 	//shadowMapLocation = glGetUniformLocation(currentShader, "shadowMap");
 	//lightLocation = glGetUniformLocation(currentShader, "LightInvDirection");
 	//lightId = glGetUniformLocation(currentShader, "LightPosition_worldspace");
-	
+
 }
 
 void HoloRoomScene::ShadowFramebuffer()

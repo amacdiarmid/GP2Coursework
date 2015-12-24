@@ -34,34 +34,14 @@ void Renderer::render()
 		owner->getCurScene()->setActiveShader(owner->getShader()->getShader());
 	}
 
-	GLenum err = GL_NO_ERROR;
-	while ((err = glGetError()) != GL_NO_ERROR)
-	{
-		//Process/log the error.
-		cout << "error in changing shader " << err << endl;
-	}
-
 	if (!owner->getTexture()->getTex2D())
 	{
 		glDepthMask(GL_FALSE);
 	}
 
-	while ((err = glGetError()) != GL_NO_ERROR)
-	{
-		//Process/log the error.
-		cout << "error in enabling depth mask " << err << endl;
-	}
-
 	//get the uniform loaction for the MVP
 	GLint MVPLocation = glGetUniformLocation(owner->getShader()->getShader(), "MVP");
 	glUniformMatrix4fv(MVPLocation, 1, GL_FALSE, value_ptr(MVP));
-
-	err = GL_NO_ERROR;
-	while ((err = glGetError()) != GL_NO_ERROR)
-	{
-		//Process/log the error.
-		cout << "error in assigning mvp " << err << endl;
-	}
 	
 	if (owner->getTexture()->getTex2D())
 	{
@@ -71,12 +51,6 @@ void Renderer::render()
 		glBindTexture(GL_TEXTURE_2D, owner->getTexture()->getTexture());
 		glUniform1i(texture0Location, 0);
 		
-		err = GL_NO_ERROR;
-		while ((err = glGetError()) != GL_NO_ERROR)
-		{
-			//Process/log the error.
-			cout << "error in assigning texture" << err << endl;
-		}
 	}
 	else
 	{
@@ -85,6 +59,11 @@ void Renderer::render()
 		glBindTexture(GL_TEXTURE_CUBE_MAP, owner->getTexture()->getTexture());
 		glUniform1i(cubeTexLocation, 1);
 	}
+
+	GLint toonShadeLocation = glGetUniformLocation(owner->getShader()->getShader(), "toonShade");
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_1D, owner->getTexture()->getTexture());
+	glUniform1i(toonShadeLocation, 1);
 
 	glBindVertexArray(owner->getModel()->getVAO());
 	//begin drawing triangle 

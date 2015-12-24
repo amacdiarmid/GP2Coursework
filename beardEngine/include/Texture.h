@@ -20,12 +20,11 @@ public:
 	string getName();
 	void cleanUp();
 	bool getTex2D(){ return tex2D; }
-	
+
 protected:
 	GLuint textureMap;
 	string name;
 	bool tex2D;
-
 };
 
 #endif

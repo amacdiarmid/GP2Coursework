@@ -18,6 +18,8 @@
 #include <map>
 #include "Cube.h"
 #include "CubeTexture.h"
+#include "OutlineMaterial.h"
+#include "ToonMaterial.h"
 
 class Editor;
 

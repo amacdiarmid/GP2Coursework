@@ -21,20 +21,24 @@ public:
 	Shader();
 	Shader(string tempName);
 	~Shader();
-
+	virtual void bind(){glUseProgram(ShaderProgram);};
+	virtual void unbind(){};
 	void attatchVertexShader(string shaderPath);
 	void attatchFragmentShader(string shaderPath);
 	void createShader();
+	GLuint create1DTexture(float *pData, int width);
+	void createToonTexture(float *pData, int width);
 	GLuint getShader();
 	string getName();
 	void cleanUp();
 
-private:
+protected:
 	string name;
+	GLuint ShaderProgram;
 	GLuint vertexShader = 0;
 	GLuint fragmentShader = 0;
 	GLuint finalShader = 0;
-
+	GLuint toonTextureMap = 0;
 };
 
 #endif
