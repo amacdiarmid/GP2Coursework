@@ -5,11 +5,13 @@ Alexander MacDiarmid - S1307325
 	Engine architect
 	View Fustrum Culling
 	world editor
-David Stuart -
+	
+David Stuart - S1313657
 	input controls
 	enviroment mapping 
 	toon shading
-Ricardo Borras -
+	
+Ricardo Borras - S13140840
 	lights 
 	backed shadows 
 	shadow mapping 
@@ -23,6 +25,8 @@ controls:
 	4 - memorial room
 	p - debug mode/fly camera
 	l - (while in debug mode) access the editor 
+	m - enable wireframe modles
+	n - disable wireframe models
 	
 editor commands (some may have broken)
 	assignObjectName - give new object a name
