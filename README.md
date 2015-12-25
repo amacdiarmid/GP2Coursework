@@ -11,7 +11,7 @@ David Stuart - S1313657
 	enviroment mapping 
 	toon shading
 	
-Ricardo Borras - S13140840
+Ricardo Barros - S13140840
 	lights 
 	backed shadows 
 	shadow mapping 
@@ -25,8 +25,11 @@ controls:
 	4 - memorial room
 	p - debug mode/fly camera
 	l - (while in debug mode) access the editor 
-	m - enable wireframe modles
+	m - enable wireframe modles (with post processing this will not have the desired effect)
 	n - disable wireframe models
+	space - Toggle Sepia filter
+	Q - Decrease Sepia factor
+	E - Increase sepia factor
 	
 editor commands (some may have broken)
 	assignObjectName - give new object a name

@@ -62,7 +62,7 @@ void HoloRoomScene::render()
 	//GLint cameraPosLocation = glGetUniformLocation(shaders["sky"]->getShader(), "cameraPosition");
 	//glUniform3f(cameraPosLocation, input->getWorldPoint().x, input->getWorldPoint().y, input->getWorldPoint().z);
 
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE1);
 
 	glUniform1i(textureSamplerLocation, 0);
 	//glActiveTexture(GL_TEXTURE1);
