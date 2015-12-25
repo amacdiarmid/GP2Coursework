@@ -1,3 +1,4 @@
+//author david
 #include "CubeTexture.h"
 
 GLuint loadCubeMapFace(const string& filename, GLenum face)

@@ -1,3 +1,4 @@
+//aurhor david for cube mapping, ric for light/shadows/postprocessing, alex for scene graph, sceneloop structure
 #ifndef _HOLOROOMSCENE_H
 #define _HOLOROOMSCENE_H
 

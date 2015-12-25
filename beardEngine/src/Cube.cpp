@@ -1,3 +1,4 @@
+//author David 
 #include "Cube.h"
 
 Cube::Cube(string tempName)

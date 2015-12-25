@@ -1,3 +1,4 @@
+//author alex
 #ifndef _OpenGL_H
 #define _OpenGL_H
 

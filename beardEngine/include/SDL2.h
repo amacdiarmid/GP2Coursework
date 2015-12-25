@@ -1,3 +1,4 @@
+//author alex
 #ifndef _SDL2_H
 #define _SDL2_H
 

@@ -1,3 +1,4 @@
+//aurhor david for cube mapping, ric for light/shadows/postprocessing, alex for scene graph, sceneloop structure
 #include "HoloRoomScene.h"
 #include "Editor.h"
 #include "OpenGL.h"

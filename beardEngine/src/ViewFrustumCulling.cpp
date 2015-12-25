@@ -1,3 +1,4 @@
+//author alex
 #include "ViewFrustumCulling.h"
 
 Fustrum::Fustrum()

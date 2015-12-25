@@ -1,3 +1,4 @@
+//author alex
 #include "Object.h"
 
 Object::Object()

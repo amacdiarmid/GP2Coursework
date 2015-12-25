@@ -1,3 +1,4 @@
+//author alex
 #include "Common.h"
 #include "SDL2.h"
 

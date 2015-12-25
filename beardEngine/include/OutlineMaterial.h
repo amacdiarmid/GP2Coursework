@@ -1,3 +1,4 @@
+//author david
 #ifndef _OUTLINEMATERIAL_H
 #define _OUTLINEMATERIAL_H
 

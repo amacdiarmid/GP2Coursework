@@ -1,3 +1,4 @@
+//authod lab code
 #include "OpenGL.h"
 #include "Common.h"
 

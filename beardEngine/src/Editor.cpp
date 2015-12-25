@@ -1,3 +1,4 @@
+//author alex
 #include "Editor.h"
 #include "Scene.h"
 

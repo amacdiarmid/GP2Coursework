@@ -1,3 +1,4 @@
+//author alex
 #include "Common.h"
 #include "Window.h"
 

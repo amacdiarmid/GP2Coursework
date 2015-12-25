@@ -1,3 +1,4 @@
+//author alex
 #ifndef _RENDERCOMPONENT_H
 #define _RENDERCOMPONENT_H
 

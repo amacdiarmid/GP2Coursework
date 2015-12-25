@@ -1,3 +1,4 @@
+//authour david
 #ifndef _INPUTCOMPONENT_H
 #define _INPUTCOMPONENT_H
 

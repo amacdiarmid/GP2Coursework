@@ -1,3 +1,4 @@
+//author ric
 #include "Common.h"
 #include "InputManager.h"
 

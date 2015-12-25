@@ -1,3 +1,4 @@
+//author alex
 #include "GameObject.h"
 #include "Components\InputComponent.h"
 

@@ -1,3 +1,4 @@
+//author david 
 #include "OutlineMaterial.h"
 
 OutlineMaterial::OutlineMaterial()

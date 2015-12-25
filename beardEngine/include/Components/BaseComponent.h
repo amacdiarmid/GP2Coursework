@@ -1,3 +1,4 @@
+//authour alex
 #ifndef _BASECOMPONENT_H
 #define _BASECOMPONENT_H
 

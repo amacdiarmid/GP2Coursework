@@ -1,3 +1,4 @@
+//authour david 
 #ifndef _CUBETEXTURE_H
 #define _CUBETEXTURE_H
 

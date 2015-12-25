@@ -1,3 +1,4 @@
+//author lab code
 #ifndef _TEXTURE_H
 #define _TEXTURE_H
 

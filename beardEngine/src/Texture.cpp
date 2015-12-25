@@ -1,3 +1,4 @@
+//authod lab code
 #include "Texture.h"
 
 GLuint loadTextureFromFile(const string& filename)

@@ -1,3 +1,4 @@
+//author alex
 #include "GP2CourseWorkGame.h"
 #include "Scene.h"
 

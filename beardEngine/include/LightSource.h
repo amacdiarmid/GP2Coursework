@@ -1,3 +1,4 @@
+//authour ric
 #ifndef _LIGHTSOURCE_
 #define _LIGHTSOURCE_
 

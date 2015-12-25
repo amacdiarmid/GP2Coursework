@@ -1,3 +1,4 @@
+//author alex
 #include "Components\RenderComponent.h"
 #include "GameObject.h"
 

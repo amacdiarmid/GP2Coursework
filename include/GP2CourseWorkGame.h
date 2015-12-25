@@ -1,3 +1,4 @@
+//authour alex
 #ifndef _GP2COURSEWORKGAME_H
 #define _GP2COURSEWORKGAME_H
 
